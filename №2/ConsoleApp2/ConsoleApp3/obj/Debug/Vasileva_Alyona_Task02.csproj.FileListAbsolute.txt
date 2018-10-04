@@ -1,0 +1,10 @@
+F:\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.exe.config
+F:\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.exe
+F:\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.pdb
+F:\ConsoleApp3\ConsoleApp3\obj\Debug\Vasileva_Alyona_Task02.csprojAssemblyReference.cache
+F:\ConsoleApp3\ConsoleApp3\obj\Debug\Vasileva_Alyona_Task02.csproj.CoreCompileInputs.cache
+F:\ConsoleApp3\ConsoleApp3\obj\Debug\ConsoleApp3.exe
+F:\ConsoleApp3\ConsoleApp3\obj\Debug\ConsoleApp3.pdb
+E:\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.exe.config
+E:\ConsoleApp3\ConsoleApp3\obj\Debug\ConsoleApp3.exe
+E:\ConsoleApp3\ConsoleApp3\obj\Debug\ConsoleApp3.pdb

@@ -1,0 +1,14 @@
+C:\Users\мыш\source\repos\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.exe.config
+C:\Users\мыш\source\repos\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.exe
+C:\Users\мыш\source\repos\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.pdb
+C:\Users\мыш\source\repos\ConsoleApp3\ConsoleApp3\obj\Debug\Task3.csprojAssemblyReference.cache
+C:\Users\мыш\source\repos\ConsoleApp3\ConsoleApp3\obj\Debug\Task3.csproj.CoreCompileInputs.cache
+C:\Users\мыш\source\repos\ConsoleApp3\ConsoleApp3\obj\Debug\ConsoleApp3.exe
+C:\Users\мыш\source\repos\ConsoleApp3\ConsoleApp3\obj\Debug\ConsoleApp3.pdb
+E:\c#\№3\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.exe.config
+E:\c#\№3\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.exe
+E:\c#\№3\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.pdb
+E:\c#\№3\ConsoleApp3\ConsoleApp3\obj\Debug\Task3.csprojAssemblyReference.cache
+E:\c#\№3\ConsoleApp3\ConsoleApp3\obj\Debug\Task3.csproj.CoreCompileInputs.cache
+E:\c#\№3\ConsoleApp3\ConsoleApp3\obj\Debug\ConsoleApp3.exe
+E:\c#\№3\ConsoleApp3\ConsoleApp3\obj\Debug\ConsoleApp3.pdb
