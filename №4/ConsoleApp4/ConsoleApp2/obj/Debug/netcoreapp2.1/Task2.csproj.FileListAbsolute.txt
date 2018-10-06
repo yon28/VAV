@@ -1,0 +1,11 @@
+I:\VAV\№4\ConsoleApp4\ConsoleApp2\bin\Debug\netcoreapp2.1\Task2.deps.json
+I:\VAV\№4\ConsoleApp4\ConsoleApp2\bin\Debug\netcoreapp2.1\Task2.runtimeconfig.json
+I:\VAV\№4\ConsoleApp4\ConsoleApp2\bin\Debug\netcoreapp2.1\Task2.runtimeconfig.dev.json
+I:\VAV\№4\ConsoleApp4\ConsoleApp2\bin\Debug\netcoreapp2.1\Task2.dll
+I:\VAV\№4\ConsoleApp4\ConsoleApp2\bin\Debug\netcoreapp2.1\Task2.pdb
+I:\VAV\№4\ConsoleApp4\ConsoleApp2\obj\Debug\netcoreapp2.1\Task2.csprojAssemblyReference.cache
+I:\VAV\№4\ConsoleApp4\ConsoleApp2\obj\Debug\netcoreapp2.1\Task2.csproj.CoreCompileInputs.cache
+I:\VAV\№4\ConsoleApp4\ConsoleApp2\obj\Debug\netcoreapp2.1\Task2.AssemblyInfoInputs.cache
+I:\VAV\№4\ConsoleApp4\ConsoleApp2\obj\Debug\netcoreapp2.1\Task2.AssemblyInfo.cs
+I:\VAV\№4\ConsoleApp4\ConsoleApp2\obj\Debug\netcoreapp2.1\Task2.dll
+I:\VAV\№4\ConsoleApp4\ConsoleApp2\obj\Debug\netcoreapp2.1\Task2.pdb
