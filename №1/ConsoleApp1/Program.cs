@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using System.Text.RegularExpressions;
 namespace keywords
+
 {
     class Program
     {
@@ -11,56 +12,19 @@ namespace keywords
         {
             Console.WriteLine("Введи адрес файла.");
             string adres = Console.ReadLine();
-            //  adres = "../../Program.cs";
+            adres = "../../Program.cs";
             if (Error(adres))
             {
-                var AllWord = N1_Get(adres);
-                var Vybor = N2_Table(AllWord);
-                N3_Top5(Vybor);
+                var AllWord = GetWithoutComment(adres);
+                var Current = Find(AllWord);
+                SetTop5(Current);
             }
 
         }
 
-        static SortedDictionary<string, int> N1_Get(string adres)
+        static SortedDictionary<string, int> Find(SortedDictionary<string, int> AllWord)
         {
-            var AllWord = new SortedDictionary<string, int>();
-            var f = 1;
-            foreach (var line in File.ReadLines(adres))
-            {
-                string x = line;
-                if (x.Replace(" ", "").Replace("\t", "").StartsWith("//"))
-                    x = "";
-                if (x.Replace(" ","").Replace("\t", "").StartsWith("/*")& x.EndsWith("*/"))
-                   x = "";
-                if (x.Replace(" ", "").Replace("\t", "").StartsWith("/*"))
-                {
-                    x = "";
-                    f = 0;
-                }
-                if (x.EndsWith("*/"))
-                {
-                    x = "";
-                    f = 1;
-                }
-                if (f==0)
-                    x = "";
-                if (f == 1)
-                {
-                    foreach (var word in x.Split(' ', '.', ';', ',', '(', ')', '[', ']', '<', '>',
-                    '+', '-', '}', '{', '/', '*', '=').Skip(1))
-                    {
-                        var count = 0;
-                        AllWord.TryGetValue(word, out count);
-                        AllWord[word] = count + 1;
-                    }
-                }
-            }
-            return AllWord;
-        }
-
-        static SortedDictionary<string, int> N2_Table(SortedDictionary<string, int> AllWord)
-        {
-            string[] b =
+            string[] AllKeywords =
             { " as", "abstract", "add", "alias", "ascending", "async", "await", "base", "bool",
                 "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal",
                 "default", "delegate", "descending", "do", "double", "dynamic", "else", "enum", "event", "explicit",
@@ -72,14 +36,21 @@ namespace keywords
                 "typeof","uint","ulong","unchecked","unsafe","ushort","using","usingstatic","value","var","virtual",
                 "void","volatile","when","where","while","yield"
             };
-            Console.WriteLine("Ключевые слова в отсортированном виде в таблице");
-            var Vybor = new SortedDictionary<string, int>();
+            var Current = new SortedDictionary<string, int>();
             foreach (var i in AllWord)
-                foreach (var j in b)
+                foreach (var j in AllKeywords)
                     if (i.Key == j)
-                        Vybor[i.Key] = i.Value;
+                        Current[i.Key] = i.Value;
+            Write(Current);
+            return Current;
+        }
+
+
+        static SortedDictionary<string, int> Write(SortedDictionary<string, int> Current)
+        {
             int sum = 0;
-            foreach (var i in Vybor)
+            Console.WriteLine("Ключевые слова в отсортированном виде в таблице");
+            foreach (var i in Current)
             {
                 Console.WriteLine("{0} {1}", i.Key, i.Value);
                 sum = sum + i.Value;
@@ -88,14 +59,15 @@ namespace keywords
             Console.WriteLine("Количество ключевых слов ");
             Console.WriteLine(sum);
             Console.WriteLine(" ");
-            return Vybor;
-        }
+            return Current;
+        } 
+        
 
-        static void N3_Top5(SortedDictionary<string, int> Vybor)
+            static void SetTop5(SortedDictionary<string, int> Current)
         {
             Console.WriteLine("TOP5 наиболее часто встречающихся ключевых слов");
             var count = 1;
-            var Sort= Vybor.OrderByDescending(k => k.Value);
+            var Sort= Current.OrderByDescending(k => k.Value);
             foreach (var i in Sort)
                 if (count <= 5)
                 {
@@ -116,10 +88,58 @@ namespace keywords
             }
             return true;
         }
+
+        static SortedDictionary<string, int> GetWithoutComment(string adres)
+        {
+            var AllWord = new SortedDictionary<string, int>();
+            var f = 1;
+            string str = "";
+            foreach (var line in File.ReadLines(adres))
+            {
+                string currentLine = line;   
+                if (currentLine.Contains("/*") & currentLine.Contains("*/")) { }
+                if (currentLine.Contains("/*") & !currentLine.Contains("*/")) { f = 0; str = str + currentLine;  }
+                if (!currentLine.Contains("/*") & !currentLine.Contains("*/") & f == 0) { str = str + currentLine;  }
+                if (!currentLine.Contains("/*") & currentLine.Contains("*/") & f == 0)
+                {
+                    f = 1;
+                    currentLine = str + currentLine;
+                }
+                if (f == 1)
+                {
+                    str = "";
+                    if (currentLine.Contains("/*") | currentLine.Contains("*/"))
+                    {
+                        Console.WriteLine(currentLine);
+                        Regex regex = new Regex(@"/\*.*\*/");
+                        currentLine = regex.Replace(currentLine, " ");
+
+                    }
+                    if (currentLine.Contains("//")) currentLine = DelComment(currentLine);
+                    foreach (var word in currentLine.Split(' ', '.', ';', ',', '(', ')', '[', ']', '<', '>',
+                    '+', '-', '}', '{', '/', '*', '=').Skip(1))
+                    {
+                        var count = 0;
+                        AllWord.TryGetValue(word, out count);
+                        AllWord[word] = count + 1;
+                    }
+                   
+                } 
+
+            }
+            return AllWord;
+        }
+
+        static string DelComment(string currentLine)
+        {
+            Regex regex = new Regex(@"//.*");
+            currentLine = regex.Replace(currentLine, " ");
+            return currentLine;
+        }
     }
 
-
+    /*  string 
+ string  */
+    /*  string  string  */  // string
 }
-// N5_Komment
-// Считается,что комментарий должен быть выделен в отдельные строки
 
