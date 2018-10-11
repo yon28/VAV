@@ -33,16 +33,12 @@ namespace ConsoleApp4
             if (b)
                 for (int i = 0; i < N; i++)
                 {
-                    {
                         str += "*";
-                    }
                 }
             else
                 for (int i = 0; i < N; i++)
                 {
-                    {
                         sb.Append("*");
-                    }
                 }
             DateTime aftertime = DateTime.Now; //Stopwatch.ElapsedTicks;
             TimeSpan time = aftertime - beforetime;

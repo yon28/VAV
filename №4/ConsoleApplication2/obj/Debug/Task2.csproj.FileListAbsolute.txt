@@ -1,7 +1,0 @@
-E:\VAV\№4\ConsoleApplication2\obj\Debug\Task2.csprojAssemblyReference.cache
-E:\VAV\№4\ConsoleApplication2\obj\Debug\Task2.csproj.CoreCompileInputs.cache
-E:\VAV\№4\ConsoleApplication2\bin\Debug\ConsoleApplication2.exe.config
-E:\VAV\№4\ConsoleApplication2\bin\Debug\ConsoleApplication2.exe
-E:\VAV\№4\ConsoleApplication2\bin\Debug\ConsoleApplication2.pdb
-E:\VAV\№4\ConsoleApplication2\obj\Debug\ConsoleApplication2.exe
-E:\VAV\№4\ConsoleApplication2\obj\Debug\ConsoleApplication2.pdb

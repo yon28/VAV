@@ -10,11 +10,11 @@ namespace ConsoleApp6
         {
             Console.WriteLine("Введи число: ");
             string str = Console.ReadLine();
-            if (Check_Ordinary(str))
+            if (CheckOrdinary(str))
             {
                 Console.WriteLine("Это число в обычной нотации.");
             }
-            else if (Check_Sinse(str))
+            else if (CheckSinse(str))
             {
                 Console.WriteLine("Это число в научной нотации.");
             }
@@ -26,14 +26,14 @@ namespace ConsoleApp6
             Console.ReadLine();
         }
 
-        static bool Check_Ordinary(string str)
+        static bool CheckOrdinary(string str)
         {
             Regex regex = new Regex(@"^-?\d*([\.,\,]\d)?\d*$");
             bool b = regex.IsMatch(str);
             return b;
         }
 
-        static bool Check_Sinse(string str)
+        static bool CheckSinse(string str)
         {
             Regex regex = new Regex(@"^-?\d([\.,\,]\d)?\d*[e,е]-?\d*$");    //5.75e-5
             //ненормализованная форма (@"^-?\d*(...
