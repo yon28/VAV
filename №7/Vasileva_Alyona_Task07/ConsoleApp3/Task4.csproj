@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2B4DB1BD-D344-4D2C-A04E-1B002F47416E}</ProjectGuid>
+    <ProjectGuid>{504D6C14-D2CC-49F6-A0E2-999B853AF947}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Task2</RootNamespace>
-    <AssemblyName>Task2</AssemblyName>
+    <RootNamespace>ConsoleApp3</RootNamespace>
+    <AssemblyName>ConsoleApp3</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj">
-      <Project>{ee20eb68-2acc-4ad3-9b53-e21ce3e90514}</Project>
+      <Project>{0852fd6f-b45d-44ae-a466-36043b266738}</Project>
       <Name>ClassLibrary1</Name>
     </ProjectReference>
   </ItemGroup>

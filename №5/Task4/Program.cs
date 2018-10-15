@@ -69,7 +69,7 @@ namespace Task4
         }
     }
 
- /*   class Program
+    class Program
     {
         public static void Main(string[] args)
         {
@@ -81,7 +81,7 @@ namespace Task4
             Console.WriteLine("Результат сложения: " + result);
             Console.ReadLine();
         }
-    }*/
+    } 
 }
 
 

@@ -1,23 +1,20 @@
 ﻿using System;
 
-
 namespace Task2
-    class Round
+{
+    public class Round
     {
-        private double radius;
-
         public double X0
         {
             get;
             private set;
         }
-
         public double Y0
         {
             get;
             private set;
         }
-
+        private double radius;
         public double Radius
         {
             get => radius;
@@ -33,21 +30,16 @@ namespace Task2
                 }
             }
         }
-
         // Свойства, позволяющие узнать длину окружности и площадь круга.
-
         public double Circle() => 2 * Math.PI * radius;
         public double Square() => 3.14 * radius * radius;
-
         // Круг с указанными координатами центра, радиусом. 
-
         public Round(double x0, double y0, double radius)
         {
             X0 = x0;
             Y0 = y0;
             Radius = radius;
         }
-
         public static Round operator +(Round c1, Round c2)
         {
             // если один круг не содержит другой
@@ -57,5 +49,25 @@ namespace Task2
             double r = (c1.radius + c2.radius + hypotenuse) / 2;
             return new Round(x, y, r);
         }
+    }
+
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            Round roundBig = new Round(2, 3, 1);
+            Round round2 = new Round(3, 4, 2);
+            Round sum = roundBig + round2;
+            Console.WriteLine("Площадь первого круга: " + roundBig.Square());
+            Console.WriteLine("Площадь второго  круг: " + round2.Square());            
+            Console.ReadLine();
+            /*
+            // перегрузка (др. кол-во параметров. через 
+            // перекрытие  (new ставить)
+            // virtual в базовом, overite в наследнике
+            // $"{lastName} { firstName}"  склеивает
+            */
+        }
+
     }
 }

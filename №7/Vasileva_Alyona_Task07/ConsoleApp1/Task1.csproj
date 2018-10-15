@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2B4DB1BD-D344-4D2C-A04E-1B002F47416E}</ProjectGuid>
+    <ProjectGuid>{5CA480C9-88EB-4EB5-A399-CD037B3453AA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Task2</RootNamespace>
-    <AssemblyName>Task2</AssemblyName>
+    <RootNamespace>ConsoleApp1</RootNamespace>
+    <AssemblyName>ConsoleApp1</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -50,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj">
-      <Project>{ee20eb68-2acc-4ad3-9b53-e21ce3e90514}</Project>
-      <Name>ClassLibrary1</Name>
+    <ProjectReference Include="..\Vasileva_Alyona_Task07\Vasileva_Alyona_Task07.csproj">
+      <Project>{f1bb6003-c38f-4d78-b7b4-8f1db4139465}</Project>
+      <Name>Vasileva_Alyona_Task07</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

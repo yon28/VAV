@@ -7,28 +7,7 @@ namespace ConsoleApp2
 
     class User
     {
-        //Поля:
-        public string lastName, firstName, middleName;
-        private DateTime birth;
-        private byte age;
-
-        //Свойства:
-        public string FirstName
-        {
-            get => firstName;
-            set                                 
-            {
-                if (value != String.Empty)
-                {
-                    firstName = value;
-                }
-                else
-                {
-                    throw new Exception("Пустые значения недопустимы!");
-                }
-            }
-        }
-
+        private string lastName;
         public string LastName
         {
             get => lastName;
@@ -44,32 +23,31 @@ namespace ConsoleApp2
                 }
             }
         }
-
-        public string MiddleName
-        { get; set; }
-
-        public byte Age
+        private string firstName;
+        public string FirstName
         {
-            get => age;
+            get => firstName;
             set
             {
-                if (value > 0)  
+                if (!string.IsNullOrWhiteSpace(value))
                 {
-                    age = value;
+                    firstName = value;
                 }
                 else
                 {
-                    throw new Exception("Неположительные значения недопустимы!");
+                    throw new Exception("Пустые значения недопустимы!");
                 }
             }
         }
-
+        public string MiddleName
+        { get; set; }
+        private DateTime birth;
         public DateTime Birth
         {
             get => birth;
             set
             {
-                if (DateTime.Now > birth)  
+                if (DateTime.Now > birth)
                 {
                     birth = value;
                 }
@@ -79,16 +57,31 @@ namespace ConsoleApp2
                 }
             }
         }
-       
+      //  private byte age;
+        public byte Age
+        {
+            get => Convert.ToByte(DateTime.Now.Year - birth.Year);
+            /*set
+            {
+                if (value > 0)
+                {
+                    age = value;
+                }
+                else
+                {
+                    throw new Exception("Неположительные значения недопустимы!");
+                }
+            }*/
+        }
         //Методы:
-            
-        public User(string lastName, string firstName, string middleName, DateTime birth, byte age)
+
+        public User(string lastName, string firstName, string middleName, DateTime birth/*, byte age*/)
         {
             LastName = lastName;
             FirstName = firstName;
             MiddleName = middleName;
             Birth = birth;
-            Age = age;  
+        //    Age = age;  
         }
 
         public override string ToString()
@@ -103,10 +96,10 @@ namespace ConsoleApp2
         public static void Main(string[] args)
         {
             User[] users = new User[2];
-            users[0] = new User("Alyona", "Vasileva", "Valerevna", DateTime.Now, 35);   //
-         //   users[1] = AddUser();
-        //    Write(users);
-         //   Console.ReadLine();
+            users[0] = new User("Alyona", "Vasileva", "Valerevna", DateTime.Now/*, 35*/);   //
+            users[1] = AddUser();
+           Write(users);
+            Console.ReadLine();
         }
 
 	public static User AddUser()
@@ -119,10 +112,12 @@ namespace ConsoleApp2
             Console.Write("Введи отчество:  ");
             string mName = Console.ReadLine();
             Console.Write("Дату рождения (формат ##.##.####):  ");
-            DateTime birthDay = DateTime.Parse(string.Format("d", Console.ReadLine()));  //
-            Console.Write("Возраст (целое количество лет):  ");
-            byte age_ = Convert.ToByte(Console.ReadLine()); 
-            User user = new User(lName, fName, mName, birthDay, age_);
+            var inpput = Console.ReadLine();
+            DateTime birthDay = DateTime.Parse(inpput);
+      /*      Console.Write("Возраст (целое количество лет):  ");
+            byte age_ = Convert.ToByte(Console.ReadLine()); */
+
+            User user = new User(lName, fName, mName, birthDay/*, age_*/);
             return user;
         }
 

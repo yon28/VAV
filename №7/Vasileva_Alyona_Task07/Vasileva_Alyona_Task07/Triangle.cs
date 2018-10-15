@@ -1,10 +1,9 @@
 ﻿using System;
 
 
-namespace Task3
+namespace Vasileva_Alyona_Task07
 {
-
-    public class Triangle
+    public class Triangle : Figure
     {
         private double a, b, c;
         double P, S;
@@ -48,7 +47,7 @@ namespace Task3
             }
         }
         //Сумма длин двух сторон треугольника всегда превышает длину третьей стороны! 
-        private bool ValidateTriangle(double a , double b, double c)
+        private bool ValidateTriangle(double a, double b, double c)
         {
             if ((a + b > c) & (b + c > a) & (a + c > b))
             {
@@ -59,7 +58,7 @@ namespace Task3
                 return false;
             }
         }
-       public Triangle(int a, int b, int c)
+        public Triangle(int a, int b, int c)
         {
             if (ValidateTriangle(a, b, c))
             {
@@ -72,30 +71,23 @@ namespace Task3
                 throw new Exception("В треугольнике сумма длин двух сторон всегда превышает длину третьей стороны!");
             }
         }
-        public double getP()
+        public double Length()
         {
             P = A + B + C;
             return P;
         }
-        public double getS()
+        public double Area()
         {
             double p;
             p = P / 2;
             S = Math.Sqrt(p * (p - A) * (p - B) * (p - C));
             return S;
         }
-    }
-
-    class Program
-    {
-        public static void Main(string[] args)
+        public virtual string Draw()
         {
-            Triangle triangle = new Triangle(3, 2, 4);
-            Console.WriteLine("Дан треугольник с длинами сторон: " + triangle.A + ", " + triangle.B + ", " + triangle.C);
-            Console.WriteLine("Периметр: " + triangle.getP());
-            Console.WriteLine("Площадь: " + triangle.getS());
-            Console.ReadLine();
+            return "Нарисовал треугольник";
         }
+        public override string ToString() => string.Format("Треугольник. Длины сторон: {0}, {1}, {2}; периметр  {3}, площадь  {4}",
+                A , B, C, Length(), Area());
     }
-
 }
