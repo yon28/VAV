@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    public class Obstacle : Obj
+    public  abstract class Obstacle : Obj
     {
+        //не перемещаются
+        
+
     }
 }

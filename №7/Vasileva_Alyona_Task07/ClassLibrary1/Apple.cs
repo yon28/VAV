@@ -8,5 +8,7 @@ namespace ClassLibrary1
 {
     public class Apple : Bonus
     {
+        public override string Move()
+        => "Яблоко: исчезает при встрече с героем, поднимает характеристики на 1";
     }
 }

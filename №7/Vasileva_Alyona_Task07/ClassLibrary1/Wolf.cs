@@ -8,5 +8,7 @@ namespace ClassLibrary1
 {
     public class Wolf:Monster
     {
+        public override string Move()
+        => "Волк: исчезает при встрече с героем, наносит урон 2";
     }
 }

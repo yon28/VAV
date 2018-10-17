@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Vasileva_Alyona_Task07
 {
-    public class Figure
+    public class Figure 
     {
+        public virtual string Draw()
+        {
+            return "это фигура";
+        }
+
+
     }
 }

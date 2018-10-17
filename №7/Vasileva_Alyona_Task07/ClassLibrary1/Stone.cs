@@ -8,5 +8,7 @@ namespace ClassLibrary1
 {
     public class Stone :Obstacle
     {
+        public override string Move()
+    => "Камень: мешает перемещаться";
     }
 }

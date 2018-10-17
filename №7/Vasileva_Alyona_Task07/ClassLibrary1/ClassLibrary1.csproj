@@ -44,8 +44,10 @@
     <Compile Include="Apple.cs" />
     <Compile Include="Bear.cs" />
     <Compile Include="Bonus.cs" />
+    <Compile Include="Canvas.cs" />
     <Compile Include="Cherry.cs" />
     <Compile Include="Field.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="Monster.cs" />
     <Compile Include="Obj.cs" />

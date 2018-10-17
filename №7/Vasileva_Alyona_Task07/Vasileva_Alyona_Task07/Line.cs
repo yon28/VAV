@@ -24,7 +24,7 @@ namespace Vasileva_Alyona_Task07
             get;
             private set;
         }
-         public double Length() => Math.Sqrt((X1-X2)* (X1 - X2) + (Y1 - Y2) * (Y1 - Y2));
+        public double Length() => Math.Sqrt((X1-X2)* (X1 - X2) + (Y1 - Y2) * (Y1 - Y2));
 
         public Line(double x1, double y1, double x2, double y2)
         {

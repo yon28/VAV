@@ -45,30 +45,36 @@ namespace Task2
         {
             return "Нарисовал круг";
         }
-        public static Ring operator -(Round c1, Round c2)
+     /*   public static Ring operator -(Round c1, Round c2)
         {
             if (c1.Radius - c2.Radius < 0)
             {
                 throw new Exception("Радиус внешнего круга меньше радиуса внутреннего круга!");
             }
             return new Ring(c1, c2) { RadiusBig = c1.Radius, RadiusSmall = c2.Radius };
-        }
+        }*/
         public override string ToString() => string.Format("Координаты центра: {0} , {1};  Радиус: {2} ; Длина окружности {3}; Площадь: {4}",
                  X0, Y0, Radius, Circle(), Square());
     }
 
-    public class Ring
+    public class Ring 
     {
-        public Ring(Round roundBig, Round roundSmall) //Агрегирование
+
+        public int InnerR;
+
+        public Ring(double x0, double y0, double radiusBig, double radiusSmall)
         {
-            if (Validate(roundBig.Radius, roundSmall.Radius))
+            if (Validate(radiusBig, radiusSmall))
             {
-                X0 = roundBig.X0;
-                Y0 = roundBig.Y0;
-                RadiusBig = roundBig.Radius;
-                RadiusSmall = roundSmall.Radius;
+                X0 = x0;
+                Y0 = y0;
+                RadiusBig = radiusBig;
+                RadiusSmall = radiusSmall;
             }
+            Round roundBig = new Round(X0,Y0, RadiusBig);
+            Round roundSmall = new Round(X0, Y0, RadiusSmall);
         }
+
         public double X0
         {
             get;
@@ -100,16 +106,18 @@ namespace Task2
                 throw new Exception("Радиус внешнего круга должен быть больше радиуса внутреннего круга!");
             }
         }
-        public double Circle() => 2 * Math.PI * (RadiusBig + RadiusSmall);
-        public double Square() => 3.14 * (RadiusBig - RadiusSmall) * (RadiusBig - RadiusSmall);
+        public double Length() => 2 * Math.PI * (RadiusBig + RadiusSmall);
+        public double Area() => 3.14 * (RadiusBig - RadiusSmall) * (RadiusBig - RadiusSmall);
         public static string Draw()
         {
             return "Нарисовал кольцо";
         }
         public override string ToString()
-       => string.Format("Координаты центра: {0} , {1};  Радиусы: {2} , {3}; Длина граничной линии: {4}; Площадь: {5}",
-                 X0, Y0, RadiusBig, RadiusSmall, Circle(), Square());
+       => string.Format("Кольцо. Координаты центра: {0} , {1};  Радиусы: {2} , {3}; Длина граничной линии: {4}; Площадь: {5}",
+                 X0, Y0, RadiusBig, RadiusSmall, Length(), Area());
     }
+
+
 
     class Program
     {
@@ -117,7 +125,7 @@ namespace Task2
         {
             Round roundBig = new Round(2, 3, 2);
             Round roundSmall = new Round(3, 4, 1);
-            Ring ring = new Ring(roundBig, roundSmall);
+            Ring ring = new Ring(2, 3, 2, 1);
             Console.WriteLine(Ring.Draw());
             Console.WriteLine(ring.ToString());
             Console.ReadLine();

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
@@ -29,7 +25,7 @@ namespace ClassLibrary1
         public int X
         {
             get => x;
-            private set
+            protected set
             {
                 //if (value <Field.Width) 
                 {
@@ -41,7 +37,7 @@ namespace ClassLibrary1
         public int Y
         {
             get => y;
-            private set
+            protected set
             {
                 //if (value <Field.Height) 
                 {
@@ -49,6 +45,13 @@ namespace ClassLibrary1
                 }
             }
         }
+        int dx;
+        int dy;
+
+        public abstract string Move();
+
+
+
 
     }
 }

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    public class Monster : Personage
+    public abstract class Monster : Personage
     {
-        //исчезают при встрече с героем
+         //исчезают при встрече с героем
+       
+
     }
 }

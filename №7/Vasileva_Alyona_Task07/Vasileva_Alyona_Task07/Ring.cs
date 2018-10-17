@@ -12,9 +12,7 @@ namespace Vasileva_Alyona_Task07
         }
 
 
-
-
-        public Ring(Round roundBig, Round roundSmall) //Агрегирование
+     /*   public Ring(Round roundBig, Round roundSmall) //Агрегирование
         {
             if (Validate(roundBig.Radius, roundSmall.Radius))
             {
@@ -23,7 +21,7 @@ namespace Vasileva_Alyona_Task07
                 RadiusBig = roundBig.Radius;
                 RadiusSmall = roundSmall.Radius;
             }
-        }
+        }*/
 
         public Ring(double x0, double y0, double radiusBig, double radiusSmall)
         {
@@ -34,6 +32,8 @@ namespace Vasileva_Alyona_Task07
                 RadiusBig = radiusBig;
                 RadiusSmall = radiusSmall;
             }
+            Round roundBig = new Round(X0,Y0, RadiusBig);
+            Round roundSmall = new Round(X0, Y0, RadiusSmall);
         }
 
         public double X0

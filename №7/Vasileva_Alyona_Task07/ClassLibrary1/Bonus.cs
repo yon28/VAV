@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    public class Bonus: Obj
+    public abstract class Bonus: Obj
     {
-        //исчезают при встрече с героем
+       
+
+        // Игрок может  поднять характеристики при встрече с бонусом
+       
     }
 }

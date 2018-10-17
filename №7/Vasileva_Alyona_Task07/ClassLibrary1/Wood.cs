@@ -8,5 +8,7 @@ namespace ClassLibrary1
 {
     public class Wood : Obstacle
     {
+        public override string Move()
+       => "Дерево: мешает перемещаться";
     }
 }

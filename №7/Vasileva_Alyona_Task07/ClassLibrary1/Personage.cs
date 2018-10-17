@@ -8,8 +8,16 @@ namespace ClassLibrary1
 {
     public abstract class Personage: Obj // Могут передвигаться по полю, но обходят препятствия
     {
-        int MoveX(int dx) => X + dx;
-        int MoveY(int dy) => Y + dy;
+        int dx;
+        int dy;
+
+        public abstract class Obstacle : Obj
+        { }
+        /* {
+             X = X + dx;
+             Y = Y + dy;
+         }*/
+
 
     }
 }

@@ -20,37 +20,37 @@ namespace DemoApplication
     }
 
 
-    public class GeomProgression : ISeries, IIndexable
+    public class ArifmProgression : ISeries, IIndexable
     {
         double start, step;
-        int Index;
+        private int ind;
 
-        public GeomProgression(double start, double step)
+        public ArifmProgression(double start, double step)
         {
             this.start = start;
             this.step = step;
-            this.Index = 1;
+            this.ind = 1;
         }
 
         public double Current()
         {
-            return start * Math.Pow(step, Index - 1);
+            return start * Math.Pow(step, ind - 1);
         }
         public double this[int index]
         {
             get
             {
-                return start * Math.Pow(step, index - 1);
+                return start + step* (index - 1);
             }
         }
         public bool Next()
         {
-            Index++;
+            ind++;
             return true;
         }
         public void Reset()
         {
-            Index = 1;
+            ind = 1;
         }
     }
 
@@ -91,7 +91,7 @@ namespace DemoApplication
     {
         public static void Main(string[] args)
         {
-            ISeries progression = new GeomProgression(2, 2);
+            ISeries progression = new ArifmProgression(2, 2);
             Console.WriteLine("Прогрессия:");
             PrintSeries(progression);
 

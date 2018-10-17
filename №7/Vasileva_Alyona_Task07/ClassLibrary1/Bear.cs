@@ -8,5 +8,7 @@ namespace ClassLibrary1
 {
     public class Bear : Monster
     {
+        public override string Move()
+        => "Медведь: исчезает при встрече с героем, наносит урон 3";
     }
 }

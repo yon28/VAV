@@ -8,5 +8,7 @@ namespace ClassLibrary1
 {
     public class Cherry : Bonus
     {
+        public override string Move()
+        => "Вишня: исчезает при встрече с героем, поднимает характеристики на 1";
     }
 }

@@ -11,7 +11,8 @@ namespace DemoApplication
 
     public class GeomProgression : ISeries
     {
-        double start, step;
+        double start;
+        double step;
         int Index;
 
         public GeomProgression(double start, double step)

@@ -7,14 +7,11 @@ namespace ConsoleApp2
     {
         public static void Main(string[] args)
         {
-            Polymorphism.DemoMain();
-            Console.ReadLine();
+            Figure[] fig = Generate();
+            Write(fig);
         }
-    }
 
-    public class Polymorphism
-    {
-        public static void DemoMain()
+        public static Figure[] Generate()
         {
             Figure[] fig = new Figure[10];
             Random randomGenerator = new Random();
@@ -24,62 +21,41 @@ namespace ConsoleApp2
                 switch (randomGenerator.Next(6))
                 {
                     case 0:
-                        fig[i] = new Rectangle(10, 10);
+                        fig[i] = new Rectangle(randomGenerator.Next(6)+1, randomGenerator.Next(6)+1);
                         break;
                     case 1:
-                        fig[i] = new Round(10, 10, 1);
+                        fig[i] = new Round(randomGenerator.Next(6), randomGenerator.Next(6), randomGenerator.Next(6)+1);
                         break;
                     case 2:
-                        fig[i] = new Ring(10, 10, 5, 1);
+                        fig[i] = new Ring(randomGenerator.Next(6), randomGenerator.Next(6), randomGenerator.Next(6)*7+1, randomGenerator.Next(2)+1);
                         break;
                     case 3:
-                        fig[i] = new Triangle(10, 10, 6);
+                        int side = randomGenerator.Next(6);
+                        fig[i] = new Triangle(side, side, randomGenerator.Next(2));
                         break;
                     case 4:
-                        fig[i] = new Circle(10, 10, 1);
+                        fig[i] = new Circle(randomGenerator.Next(6), randomGenerator.Next(6), randomGenerator.Next(6)+1);
                         break;
                     case 5:
-                        fig[i] = new Line(10, 10, 1,1);
+                        fig[i] = new Line(randomGenerator.Next(6), randomGenerator.Next(6), randomGenerator.Next(6), randomGenerator.Next(6));
                         break;
                 }
             }
+            return fig;
 
+        }
+        public static void Write(Figure[] fig)
+        {
+            Canvas canvas = new Canvas();
             for (int i = 0; i < fig.Length; i++)
             {
-                string str;
+                /*fig[i].Draw();
+                string str = fig[i].ToString();
+                Console.WriteLine(str);*/
 
-                if (fig[i] is Rectangle)
-                {
-                    str = ((Rectangle)fig[i]).ToString();
-                }
-                else if (fig[i] is Triangle)
-                {
-                    str = ((Triangle)fig[i]).ToString();
-                }
-                else if (fig[i] is Ring)
-                {
-                    str = ((Ring)fig[i]).ToString();
-                }
-                else if (fig[i] is Round)
-                {
-                    str = ((Round)fig[i]).ToString();
-                }
-                else if (fig[i] is Circle)
-                {
-                    str = ((Circle)fig[i]).ToString();
-                }
-                else if (fig[i] is Line)
-                {
-                    str = ((Line)fig[i]).ToString();
-                }
-                else
-                {
-                    str = "";
-                }
-
-                Console.WriteLine(str);
+                canvas.ConsolePrint(fig[i]);
             }
-
+            Console.ReadLine();
         }
     }
 }
