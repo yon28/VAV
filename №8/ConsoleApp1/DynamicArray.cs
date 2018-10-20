@@ -3,31 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-namespace Task1
+namespace Task1 //Обобщения
 {
-    public class DynamicArray<Arr> : IEnumerable<Arr> where Arr : new()  //Представляет собой массив с запасом
+    public class DynamicArray<Type> : IEnumerable<Type> where Type : new()  //Ограничение с конструктором
     {
-        Arr[] arr;
+        Type[] arr;
 
-        public DynamicArray() //Конструктор без параметров,создается массив емкостью 8 элементов.  
+        public DynamicArray()
         {
-            arr = new Arr[8];
+            arr = new Type[8];
             Length = 0;
         }
-        public DynamicArray(int num) // Конструктор с 1 целочисленным параметром, создается массив заданной емкости.  
+        public DynamicArray(int count)
         {
-            arr = new Arr[num];
+            arr = new Type[count];
             Length = 0;
         }
-        public DynamicArray(Arr[] arr)//Конструктор, который в качестве параметра принимает массив
+        public DynamicArray(Type[] arr)
         {
-            this.arr = new Arr[arr.Length];
+            this.arr = new Type[arr.Length];
             for (int i = 0; i < arr.Length; i++)
             {
                 this.arr[i] = arr[i];
             }
         }
-        int length; //Length – получение длины заполненной части массива
+
+        int length;
         public int Length
         {
             get => length;
@@ -43,31 +44,12 @@ namespace Task1
                 }
             }
         }
-        public void Add(Arr newElement)// Метод, добавляющий в конец массива один элемент.                           
-        {
-            if (Length < arr.Length)
-            {
-                arr[Length] = newElement;
-            }
-            else  //При нехватке места для добавления элемента емкость массива должна расширяться в 2 раза.
-            {
-                Arr[] temp = new Arr[Length];
-                arr.CopyTo(temp, 0);
-                arr = new Arr[arr.Length * 2];
-                temp.CopyTo(arr, 0);
-                arr[temp.Length] = newElement;
-            }
-            Length++;
-        }
 
-        public void AddRange(Arr[] elements) //Метод, добавляющий в конец массива содержимое переданного массива
+        public void AddRange(Type[] elements) // добавляющий содержимое переданного массива
         {
             if (elements.Length > (Capacity - Length))
             {
-                Arr[] temp = new Arr[Length];
-                arr.CopyTo(temp, 0);
-                arr = new Arr[Length + elements.Length];
-                temp.CopyTo(arr, 0);
+                Expand(elements.Length);
                 elements.CopyTo(arr, Length);
             }
             else
@@ -78,11 +60,12 @@ namespace Task1
             Length = elements.Length + Length;
         }
 
-        public int Capacity //Capacity – получение реальной ёмкости массива
+        public int Capacity // реальная ёмкость массива
         {
             get => arr.Length;
         }
-        public Arr this[int i]   //При необходимости расширения массива делать это только один раз вне зависимости от числа элементов в добавляемой коллекции
+
+        public Type this[int i]   //Индексатор
         {
             get => arr[i];
             set
@@ -95,46 +78,74 @@ namespace Task1
             }
         }
 
-        public bool Remove(int number) //Метод, удаляющий из коллекции указанный элемент.
+        public bool RemoveNumber(int number) 
         {
-            if (number < Length)
+            if (number <= Length)
             {
                 Array.Copy(arr, number + 1, arr, number, Length - number);
-                arr[Length] = default(Arr);
+                arr[Length] = default(Type);
                 Length--;
-                return true;
+                return true;// если удаление прошло успешно
             }
             else
             {
-                return false; //Метод должен возвращать true, если удаление прошло успешно и false в противном случае.
+                return false;
             }
         }
-        public void Insert(Arr element, int number) //Метод Insert, позволяющий добавить элемент в произвольную позицию массива 
+
+        public bool Remove(Type element) //удаляет последний элемент, равный заданному 
+        {
+            int number=-1;
+            for (int i = 0; i <= Length; i++)
+            {
+                if (arr[i].Equals(element))
+                {
+                    number = i;
+                }
+            }
+            if (number !=-1)
+            {
+                return RemoveNumber(number);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void Insert(Type element, int number) //добавить элемент в указанную позицию
         {
             if (number > Length)
             {
                 throw new ArgumentOutOfRangeException("Выход за границы массива");
             }
-            Arr[] temp = new Arr[Capacity];
-            if (Length < Capacity)
-            {
-                Array.Copy(arr, number, arr, number + 1, Length - number);
-                arr[number] = element;
-                Length++;
-            }
             else
             {
-                arr.CopyTo(temp, 0);
-                arr = new Arr[Capacity + 1];
-                Array.Copy(temp, 0, arr, 0, number);
-                Array.Copy(temp, number, arr, number + 1, Length - number);
+                if (Length == Capacity)
+                {
+                    Expand(1);
+                }
+                Array.Copy(arr, number, arr, number + 1, Length - number);
                 arr[number] = element;
                 Length++;
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()=> GetEnumerator(); //Индексатор, позволяющий работать с элементом с указанным номером
-        public IEnumerator<Arr> GetEnumerator()=>new DynamicArrayEnum<Arr>(arr, Length);
+        public void Expand( int elementsLength)
+        {
+            Type[] temp = new Type[Length];
+            arr.CopyTo(temp, 0);
+            arr = new Type[Length + elementsLength]; //+++
+            temp.CopyTo(arr, 0);
+        }
+
+        public void Add(Type newElement)
+        {
+            Insert(newElement, Length);
+        }
+        //Получаем перечислитель, устанавливаемый в начало коллекции
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator(); 
+        public IEnumerator<Type> GetEnumerator() => new DynamicArrayEnum<Type>(arr, Length);
 
     }
 }

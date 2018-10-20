@@ -9,24 +9,25 @@ namespace Task1
     {
         public Arr[] dynArr;
         int i = -1;
+        // Реализуем интерфейс IEnumerable
+        object IEnumerator.Current
+        {
+            get => Current;
+        }
+        // Реализуем интерфейс IEnumerator
         int length;
         public DynamicArrayEnum(Arr[] arr, int length)
         {
             dynArr = arr;
             this.length = length;
         }
-
-        object IEnumerator.Current
-        {
-            get => Current;
-        }
-        public Arr Current
-        {
-            get => dynArr[i]; 
-        }
-
         public bool MoveNext()
         {
+            if (i == dynArr.Length - 1)
+            {
+                Reset();
+                return false;
+            }
             i++;
             return (i < length);
         }
@@ -35,7 +36,11 @@ namespace Task1
         {
             i = -1;
         }
-
+        public Arr Current
+        {
+            get => dynArr[i];
+        }
+        
         public void Dispose()
         {
             dynArr = null;

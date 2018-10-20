@@ -9,24 +9,34 @@ namespace Task1
         {
             DynamicArray<int> array = new DynamicArray<int>();
             Random randomGenerator = new Random();
-            Console.WriteLine("Сформирован произвольный массив");
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
                 array.Add(randomGenerator.Next(6000));
             }
+            Console.WriteLine("Сформирован произвольный массив:");
             Write(array);
-            Console.WriteLine("Capacity: " + array.Capacity + ", Length: " + array.Length  );
             array.Insert(randomGenerator.Next(6000), 3);
-            array.Remove(randomGenerator.Next(2));
-            Console.ReadLine();
+            Console.WriteLine("Вставлен новый элемент на позицию с номером 3: ");
+            Write(array);
+            array.RemoveNumber(4);
+            Console.WriteLine("Удалён элемент с позиции с номером 4: ");
+            Write(array);
+            array.Insert(6000, 1);
+            Console.WriteLine("Вставлен новый элемент на позицию с номером 1: ");
+            Write(array);
+            array.Remove(6000);
+            Console.WriteLine("Удалён элемент 6000: ");
+            Write(array);
+            Console.Read();
         }
 
-        public static void Write(DynamicArray<int> array)
+        public static void Write<Type>(DynamicArray<Type> array) where Type : new()
         {
             foreach (var element in array)
             {
-                Console.WriteLine(element);
+                Console.Write(element+ " ");
             }
+            Console.WriteLine();
             Console.WriteLine();
         }
     }
