@@ -59,9 +59,6 @@ namespace Task2
 
     public class Ring 
     {
-
-        public int InnerR;
-
         public Ring(double x0, double y0, double radiusBig, double radiusSmall)
         {
             if (Validate(radiusBig, radiusSmall))
@@ -113,11 +110,9 @@ namespace Task2
             return "Нарисовал кольцо";
         }
         public override string ToString()
-       => string.Format("Кольцо. Координаты центра: {0} , {1};  Радиусы: {2} , {3}; Длина граничной линии: {4}; Площадь: {5}",
+       => string.Format("Кольцо. Координаты центра: {0}, {1};  Радиусы: {2}, {3}; Длина граничной линии: {4}; Площадь: {5}",
                  X0, Y0, RadiusBig, RadiusSmall, Length(), Area());
     }
-
-
 
     class Program
     {
@@ -125,7 +120,7 @@ namespace Task2
         {
             Round roundBig = new Round(2, 3, 2);
             Round roundSmall = new Round(3, 4, 1);
-            Ring ring = new Ring(2, 3, 2, 1);
+            Ring ring = new Ring(2, 3, 2, -1);
             Console.WriteLine(Ring.Draw());
             Console.WriteLine(ring.ToString());
             Console.ReadLine();
@@ -136,8 +131,6 @@ namespace Task2
             // $"{lastName} { firstName}"  склеивает
             */
         }
-
     }
-
 }
 

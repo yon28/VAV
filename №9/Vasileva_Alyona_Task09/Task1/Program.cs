@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,20 +21,30 @@ namespace Task1
             Console.WriteLine("В кругу: ");
             MyList.Write(list);
             Console.WriteLine();
-            MyList.RemoveEachSecondItem(list);
+            RemoveEachSecondItem(list);
 
             Console.WriteLine();
-           Console.WriteLine("Вторым способом:");
+            Console.WriteLine("Вторым способом:");
             // Создадим связный список
             LinkedList<string> link = new LinkedList<string>();
             MyLinkedList.GenerateList(link);
             MyLinkedList.Write(link);
-            MyLinkedList.RemoveEachSecondItem(link);
+            
+            RemoveEachSecondItem( link);
+
             Console.ReadLine();
             Console.ReadLine();
         }
 
+        public static void RemoveEachSecondItem(LinkedList<string> list) 
+        {
+            MyLinkedList.RemoveEachSecondItem(list);
+        }
 
+        public static void RemoveEachSecondItem(List<string> list) 
+        {
+            MyList.RemoveEachSecondItem(list);
+        }
     }
 
 }

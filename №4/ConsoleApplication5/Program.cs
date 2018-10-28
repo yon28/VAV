@@ -17,7 +17,9 @@ namespace ConsoleApp5
 
         static string Replace(string str)
         {
-            Regex regex = new Regex(@"<.[^<>]*>");
+            // Regex regex = new Regex(@"<.[^<>]*>");
+            // второй способ    <.*?>    - "ленивый" квантор
+            Regex regex = new Regex("<.*?>");
             str = regex.Replace(str, "_ ");
             return str;
         }

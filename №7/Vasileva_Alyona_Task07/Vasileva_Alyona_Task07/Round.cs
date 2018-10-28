@@ -15,7 +15,7 @@ namespace Vasileva_Alyona_Task07
             return "Нарисовал круг";
         }
        
-        public override string ToString() => string.Format("Круг. Координаты центра: {0} , {1};  Радиус: {2} ; Длина окружности {3}; Площадь: {4}",
+        public override string ToString() => string.Format("Круг. Координаты центра: {0}, {1};  Радиус: {2}; Длина окружности {3}; Площадь: {4}",
                  X0, Y0, Radius, Length(), Area());
     }
 }

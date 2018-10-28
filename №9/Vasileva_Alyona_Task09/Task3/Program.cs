@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace keywords
@@ -52,14 +51,15 @@ namespace keywords
     
         static SortedDictionary<string, int> Create(string adres)
         {
-            var AllWord = new SortedDictionary<string, int>();
+            var AllWord = new SortedDictionary<string, int>(StringComparer.OrdinalIgnoreCase);
             foreach (var line in File.ReadLines(adres))
             {
                 foreach (string word in Splited(line))
                 {
                     var count = 0;
                     AllWord.TryGetValue(word.ToLower(), out count);
-                    AllWord[word.ToLower()] = count + 1;
+                    // AllWord[word.ToLower()] = count + 1;
+                    AllWord[word] = count + 1;
                 }
             }
             return AllWord;

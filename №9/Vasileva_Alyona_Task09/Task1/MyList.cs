@@ -34,19 +34,21 @@ namespace Task1
             }
             Console.WriteLine();
         }
+        public static void RemoveEachSecondItem(List<string> link)
 
-        public static void RemoveEachSecondItem(List<string> list)
         {
             bool b = false;
-            while (list.Count != 1)
+            while (link.Count != 1)
             {
-                for (int i = 0; i < list.Count; i++)
+                for (int i = 0; i < link.Count; i++)
                 {
-                    if (b) list.RemoveAt(i--);
+                    if (b) link.RemoveAt(i--);
                     b = !b;
                 }
-                Write(list);
+               Write(link);
             }
+
         }
+
     }
 }

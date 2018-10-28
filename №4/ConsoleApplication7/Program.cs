@@ -21,10 +21,10 @@ namespace ConsoleApp7
             Console.ReadLine();
         }
         //другие культуры не смотреть. Словесное описние 7 вечера тоже не считать. 
-        //Пробелами время быть выделено не обязано.
+        //Границей слова время быть выделено обязано?
         static int Counting_time(string str)
         {
-            Regex regex = new Regex(@"\b(([0,1]?\d)|(2[0-3])):[0-5]\d");
+            Regex regex = new Regex(@"\b(([0,1]?\d)|(2[0-3])):[0-5]\d\b");
             int sum = regex.Matches(str).Count;
             return sum;
         }

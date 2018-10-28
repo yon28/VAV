@@ -8,33 +8,29 @@ namespace DemoApplication
         bool Next();
         void Reset();
     }
-
     public class GeomProgression : ISeries
     {
         double start;
         double step;
-        int Index;
-
+        int index;
         public GeomProgression(double start, double step)
         {
             this.start = start;
             this.step = step;
-            this.Index = 1;
+            index = 1;
         }
-
         public double Current()
         {
-            return start * Math.Pow(step, Index - 1);
+            return start * Math.Pow(step, index - 1);
         }
-       
         public bool Next()
         {
-            Index++;
+            index++;
             return true;
         }
         public void Reset()
         {
-            Index = 1;
+            index = 1;
         }
     }
 
@@ -47,11 +43,10 @@ namespace DemoApplication
             PrintSeries(progression);
             Console.ReadLine();
         }
-
         static void PrintSeries(ISeries series)
         {
             series.Reset();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++) //Десять элементов
             {
                 Console.WriteLine(series.Current());
                 series.Next();

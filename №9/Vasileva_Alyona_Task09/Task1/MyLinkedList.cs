@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-    class MyLinkedList
+    class MyLinkedList 
     {
             public static void GenerateList(LinkedList<string> link)
             {
-                // Добавим несколько элементов
+
+            // Добавим несколько элементов
                 link.AddLast("1. Алексей");
                 link.AddLast("2. Борис");
                 link.AddLast("3. Виктор");
@@ -39,28 +40,27 @@ namespace Task1
             Console.WriteLine();
 
         }
-      /*  public static void WriteDown(LinkedList<string> link)
-        {
-            Console.WriteLine("Элементы коллекции в обратном направлении: ");
-            LinkedListNode<string> node;
-            for (node = link.Last; node != null; node = node.Previous)
-            {
-                Console.Write(node.Value + "  ");
-            }
-            Console.WriteLine();
-            Console.ReadLine();
-        }*/
+        /*  public static void WriteDown(LinkedList<string> link)
+          {
+              Console.WriteLine("Элементы коллекции в обратном направлении: ");
+              LinkedListNode<string> node;
+              for (node = link.Last; node != null; node = node.Previous)
+              {
+                  Console.Write(node.Value + "  ");
+              }
+              Console.WriteLine();
+              Console.ReadLine();
+          }*/
 
         //> При использовании LinkedList<T> не обращаться к элементам напрямую по индексу.
 
-        
         public static void RemoveEachSecondItem(LinkedList<string> link)
         {
             LinkedListNode<string> node = link.First;
             while (link.Count != 1)
             {
                 Console.Write(node.Value + "  ");
-                node = node.Next; 
+                node = node.Next;
                 if (node == null)
                 {
                     node = link.First;

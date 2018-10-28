@@ -37,7 +37,7 @@ namespace Vasileva_Alyona_Task07
         {
             return "Нарисовал линию";
         }
-        public override string ToString() => string.Format("Линия. Координаты начала: {0} , {1};  Координаты конца: {2}, {3}; Длина отрезка: {4}",
+        public override string ToString() => string.Format("Линия. Координаты начала: {0}, {1};  Координаты конца: {2}, {3}; Длина отрезка: {4}",
                  X1, Y1, X2, Y2, Length());
     }
 }

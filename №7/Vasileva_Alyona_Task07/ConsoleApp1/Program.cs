@@ -27,7 +27,7 @@ namespace ConsoleApp2
                         fig[i] = new Round(randomGenerator.Next(6), randomGenerator.Next(6), randomGenerator.Next(6)+1);
                         break;
                     case 2:
-                        fig[i] = new Ring(randomGenerator.Next(6), randomGenerator.Next(6), randomGenerator.Next(6)*7+1, randomGenerator.Next(2)+1);
+                        fig[i] = new Ring(randomGenerator.Next(6), randomGenerator.Next(6), randomGenerator.Next(6)*7+1, 1);
                         break;
                     case 3:
                         int side = randomGenerator.Next(6);
@@ -42,7 +42,6 @@ namespace ConsoleApp2
                 }
             }
             return fig;
-
         }
         public static void Write(Figure[] fig)
         {

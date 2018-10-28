@@ -36,7 +36,6 @@ namespace ConsoleApp3
                     // Console.WriteLine("U: {0:U}", now);
                 }
             }
-
             Console.WriteLine();
             Console.WriteLine("Форматы отображения числовых данных: разделитель групп разрядов");
             int a = 1234567890;
@@ -47,15 +46,11 @@ namespace ConsoleApp3
             double n = 9876543.21;
             Console.WriteLine(n.ToString("N", ci));
             Console.WriteLine();
-            //   
             //CultureInfo.InvariantCulture
             // CultureInfo.InstalledUICulture
             // "C3" - три символа после запятой
             // после CultureInfo точку и смотреть 
             //DateTime.Parse
-
-
-
         }
     }
 }

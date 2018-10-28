@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Task1 //Обобщения
 {
-    public class DynamicArray<Type> : IEnumerable<Type> where Type : new()  //Ограничение с конструктором
+    public class DynamicArray<Type> : IEnumerable<Type> where Type : new()  //Ограничение: с конструктором
     {
         Type[] arr;
 
@@ -145,7 +145,8 @@ namespace Task1 //Обобщения
         }
         //Получаем перечислитель, устанавливаемый в начало коллекции
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator(); 
-        public IEnumerator<Type> GetEnumerator() => new DynamicArrayEnum<Type>(arr, Length);
+        public IEnumerator<Type> GetEnumerator() => new DynamicArrayEnum<Type>(arr, Length);                                            //др. сп. array.GetEnumerator();
+						//др. сп. for ... yield return array[i]
 
     }
 }

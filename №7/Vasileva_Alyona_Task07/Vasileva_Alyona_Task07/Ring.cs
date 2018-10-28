@@ -74,7 +74,7 @@ namespace Vasileva_Alyona_Task07
             return "Нарисовал кольцо";
         }
         public override string ToString()
-       => string.Format("Кольцо. Координаты центра: {0} , {1};  Радиусы: {2} , {3}; Длина граничной линии: {4}; Площадь: {5}",
+       => string.Format("Кольцо. Координаты центра: {0}, {1};  Радиусы: {2}, {3}; Длина граничной линии: {4}; Площадь: {5}",
                  X0, Y0, RadiusBig, RadiusSmall, Length(), Area());
     }
 }

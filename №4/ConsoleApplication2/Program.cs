@@ -11,7 +11,6 @@ namespace ConsoleApp1
             string str = Console.ReadLine();
             Regex regex = new Regex(@"\W");
             string[] words = regex.Split(str);
-
             int sum = 0;
             foreach (var word in words)
             {
@@ -21,7 +20,7 @@ namespace ConsoleApp1
             Console.ReadLine();
         }
         //https://docs.microsoft.com
-        //Cплитить через регулярки, а не массив раздел символов /w или /W
+        //Cплитить через регулярки, а не массив раздел символов. /w или /W
         
     }
 }

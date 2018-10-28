@@ -6,31 +6,20 @@ namespace Vasileva_Alyona_Task07
     {
         void Print(Figure figure);
     }
-
     public class Canvas : IPrint
     {
-        public Canvas()
-        {
-            
-        }
-
         public void ConsolePrint(Figure figure)
         {
             Console.WriteLine(figure.ToString());
             Console.ReadLine();
         }
-
         public void FilePrint(Figure figure)
         {
             System.IO.File.WriteAllText("output.txt", figure.ToString());
         }
-
         public  void Print(Figure figure)
         {
             ConsolePrint(figure);
         }
-      
-    }
-
-
+     }
 }

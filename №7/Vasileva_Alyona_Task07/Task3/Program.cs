@@ -1,6 +1,4 @@
 ﻿using System;
-
-
 namespace DemoApplication
 {
     public interface ISeries
@@ -9,38 +7,29 @@ namespace DemoApplication
         bool Next();
         void Reset();
     }
-
     public interface IIndexable
     {
         double this[int index] { get; }
     }
-
-    interface IIndexableSeries : ISeries, IIndexable
-    {
-    }
-
-
     public class ArifmProgression : ISeries, IIndexable
     {
         double start, step;
         private int ind;
-
         public ArifmProgression(double start, double step)
         {
             this.start = start;
             this.step = step;
-            this.ind = 1;
+            ind = 1;
         }
-
         public double Current()
         {
-            return start * Math.Pow(step, ind - 1);
+            return start + step * (ind - 1);
         }
-        public double this[int index]
+        public double this[int ind]
         {
             get
             {
-                return start + step* (index - 1);
+                return start + step* (ind - 1);
             }
         }
         public bool Next()
@@ -53,39 +42,33 @@ namespace DemoApplication
             ind = 1;
         }
     }
-
     public class List : ISeries, IIndexable
     {
         private double[] series;
-        private int Index;
+        private int index;
         public List(double[] series)
         {
             this.series = series;
-            Index = 0;
+            index = 0;
         }
         public double Current()
         {
-            return series[Index];
+            return series[index];
         }
         public bool Next()
         {
-            Index = Index < series.Length - 1 ? Index + 1 : 0;
+            index = index < series.Length - 1 ? index + 1 : 0;
             return true;
         }
         public void Reset()
         {
-            Index = 0;
+            index = 0;
         }
-
-        public double this[int index]
+        public double this[int index]  //для реализации  IIndexable
         {
             get { return series[index]; }
         }
     }
-
-
-
-
 
     public static class InterfacesDemo
     {
@@ -100,7 +83,6 @@ namespace DemoApplication
             PrintSeries(list);
             Console.ReadLine();
         }
-
         static void PrintSeries(ISeries series)
         {
             series.Reset();
@@ -111,5 +93,4 @@ namespace DemoApplication
             }
         }
     }
-
 }

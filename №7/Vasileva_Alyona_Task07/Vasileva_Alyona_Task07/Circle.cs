@@ -43,7 +43,7 @@ namespace Vasileva_Alyona_Task07
         {
             return "Нарисовал окружность";
         }
-        public override string ToString() => string.Format("Окружность. Координаты центра: {0} , {1};  Радиус: {2} ; Длина окружности {3}",
+        public override string ToString() => string.Format("Окружность. Координаты центра: {0}, {1};  Радиус: {2}; Длина окружности {3}",
                  X0, Y0, Radius, Length());
     }
 }
