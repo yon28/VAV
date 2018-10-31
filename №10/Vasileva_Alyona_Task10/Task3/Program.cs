@@ -2,44 +2,52 @@
 using Task1;
 using System.Threading;
 
-
 namespace Task3
 {
     /*Написать модуль сортировки, включающий в себя: 
+•	Метод сортировки из задания 1; 
 •	Метод, позволяющий запустить в сортировку в отдельном потоке выполнения; 
 •	Событие, сигнализирующее о завершении сортировки. 
-
-Продемонстрировать работу модуля в многопоточном режиме.
+    Продемонстрировать работу модуля в многопоточном режиме.
 */
     public class Program
     {
         static void Main(string[] args)
         {
-            string[] Arr = Task_1.Create();
+            string[] arr = MyArray.Create();
             Console.WriteLine("Сформирован массив: ");
-            Task_1.Write(Arr);
-            //Task_1.Sorted(Arr);
-            MyClass myClass = new MyClass();
-            myClass.SortingFinish += Task_1.Write;
-            Thread t1 = new Thread(new ParameterizedThreadStart(myClass.Method));
-            t1.Start();
-            Console.WriteLine("Отсортированный массив: ");
-            Task_1.Write(Arr);
+            MyArray.Write(arr);
+            SortingModule sortingModule = new SortingModule();
+            sortingModule.CreateThread(arr);
+
+            string[] arr1 = MyArray.Create();
+            Console.WriteLine("Сформирован массив: ");
+            MyArray.Write(arr1);
+            Console.WriteLine("Отсортированные массивы: ");
+            SortingModule sortingModule1 = new SortingModule();
+            sortingModule1.CreateThread(arr1);
             Console.Read();
         }
     }
 
-    public class MyClass
+    public class SortingModule
     {
-        public delegate void MyDelegate(string[] arr);
-        public event MyDelegate SortingFinish;
-        public void Method(object x)
+        public delegate void Event(string[] arr);
+        public event Event SortingFinish;
+
+        public void Sort(string[] arr)
         {
-            string[] arr = (string[])x;
-            Task_1.Sorted(arr);
+            var my = new MyArray();
+            MyArray.SortMin(arr, my.compare);
             SortingFinish?.Invoke(arr);
         }
-    }
+        public void CreateThread(string[] arr)
+        {
+            SortingFinish += MyArray.Write;
+            Thread th = new Thread(() => Sort(arr));
+            th.Start();
+        }
+      }
 }
 
 

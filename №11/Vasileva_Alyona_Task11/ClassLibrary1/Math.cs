@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClassLibrary1
+﻿namespace ClassLibrary1
 {
-    public static class Class1
+    public static class Math
     {
         //Реализовать библиотеку, содержащую математические функции: факториал и возведение в степень. 
         //Библиотека должна создаваться в отдельном проекте с типом «Class Library».

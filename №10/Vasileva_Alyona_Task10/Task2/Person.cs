@@ -11,16 +11,45 @@ namespace Task2
    1. Приветствие сотрудника, пришедшего на работу 
    (принимает в качестве аргументов объект сотрудника и время его прихода)
    2. Прощание с ним (принимает только объект сотрудника)*/
-   
-    public class User
-    {
 
-        private string lastName;
-        public User(string lastName)
+    /* Вызов процедуры приветствия/прощания производить через групповые делегаты. 
+    Факт прихода и ухода сотрудника отслеживается через генерируемые им события. 
+    Событие прихода описывается делегатом, передающим в числе параметров 
+     наследника EventArgs, явно содержащего поле с временем прихода.*/
+
+    public class Person: EventArgs
+    {
+        public event ECome Come;
+        public delegate string ECome(Person user, DateTime Arrival);
+        public void OnCome()
         {
-            LastName = lastName;
+            if (Come != null)
+            {
+                Come?.Invoke(this, DateTime.Now);
+            }
+        }
+        public event ELeft Left;
+        public delegate string ELeft(Person user);
+        public void OnLeft()
+        {
+            if (Left != null)
+            {
+                Left?.Invoke(this);
+            }
         }
 
+        private string lastName;
+        public Person(string lastName, DateTime arrival)
+        {
+            LastName = lastName;
+            Arrival = arrival;
+        }
+        public DateTime Arrival
+        {
+            get;
+            set;
+        }
+ 
         public string LastName
         {
             get
@@ -40,7 +69,7 @@ namespace Task2
             }
         }
 
-        public string SayHi(User user, DateTime time)
+        public string SayHi(Person user, DateTime time)
         {
             string str;
             if (time.Hour < 12)
@@ -53,16 +82,14 @@ namespace Task2
             {
                 str = "Добрый вечер, ";
             }
-            Console.WriteLine(string.Format(str + user.LastName +", - сказал " + LastName));
+            Console.WriteLine(string.Format(str + user.LastName + ", - сказал " + LastName));
             return string.Format(str + user.LastName + ", - сказал " + LastName);
         }
 
-        public string SayGoodbye(User user)
-        { 
+        public string SayGoodbye(Person user)
+        {
             Console.WriteLine(string.Format("До свидания, " + user.LastName + ", - сказал " + LastName));
             return string.Format("До свидания, " + user.LastName + ", - сказал " + LastName);
         }
-
-     
     }
 }

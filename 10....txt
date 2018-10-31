@@ -1,15 +1,27 @@
+
+16.11, птн 8:30-10:30
+19.11, пн 15:30-17:00
+20.11, вт 15:30-17:00
+21.11, ср 15:30-17:00
+22.11, четв 8:30-10:30, 15:30-17:00
+
+
+
+
+
+
+
+
+
+
+
 https://professorweb.ru/my/csharp/charp_theory/level12/12_19.php
+ http://dotnetcourses.azurewebsites.net/Home/Tasks
 
-
-10. Обзор SOLID и шаблонов проектирования
-a) Принципы SOLID;
-b) Single responsibility;
-c) Interface segregation;
-d) DRY;
-e) Антипаттерны: Copy and paste, Spaghetti, Hard
-code, Blob, Magic numbers/strings;
-f) Паттерны: Builder, Decorator, Strategy, Factory;
-
+10. Делегаты и события
+a) Делегаты: что, зачем и как;
+b) Основы многопоточности;
+c) События;
 
 11. Основы технологии .NET
 a) Ключевые понятия;
@@ -20,10 +32,14 @@ e) Использование IDisposable;
 f) Методы сравнения объектов;
 
 
-12. Делегаты и события
-a) Делегаты: что, зачем и как;
-b) Основы многопоточности;
-c) События;
+12. Обзор SOLID и шаблонов проектирования
+a) Принципы SOLID;
+b) Single responsibility;
+c) Interface segregation;
+d) DRY;
+e) Антипаттерны: Copy and paste, Spaghetti, Hard
+code, Blob, Magic numbers/strings;
+f) Паттерны: Builder, Decorator, Strategy, Factory;
 
 
 13. Модель исключений

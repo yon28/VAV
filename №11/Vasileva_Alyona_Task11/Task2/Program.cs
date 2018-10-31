@@ -4,6 +4,9 @@ using System.Threading;
 
 namespace Task2
 {
+     /*Задание 2
+        Модифицировать класс Employee, чтобы он реализовывал интерфейс IEquatable<Employee>*/
+   
     class Program
     {
         public static void Main(string[] args)
@@ -27,10 +30,7 @@ namespace Task2
             Console.Write("Дату рождения (формат ##.##.####):  ");
             var inpput = Console.ReadLine();
             DateTime birthDay = DateTime.Parse(inpput);
-            /*      Console.Write("Возраст (целое количество лет):  ");
-                  byte age_ = Convert.ToByte(Console.ReadLine()); */
-
-            User user = new User(lName, fName, mName, birthDay/*, age_*/);
+            User user = new User(lName, fName, mName, birthDay);
             return user;
         }
 

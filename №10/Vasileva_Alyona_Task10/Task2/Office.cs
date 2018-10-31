@@ -2,9 +2,9 @@
 {
     public class Office
     {
-        EventArgs.ECome Come;
-        EventArgs.ELeft Left;
-        public void AddUser(EventArgs user)
+        Person.ECome Come;
+        Person.ELeft Left;
+        public void AddUser(Person user)
         {
             if (user != null)
             {
@@ -13,8 +13,9 @@
             Come += user.SayHi;
             Left += user.SayGoodbye;
         }
-        public void LeftUser(EventArgs user)
+        public void LeftUser(Person user)
         {
+            Come -= user.SayHi;
             Left -= user.SayGoodbye;
             if (user != null)
             {

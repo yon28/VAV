@@ -7,7 +7,7 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            List<EventArgs> users = Create();
+            List<Person> users = Create();
             var office = new Office();
             foreach (var user in users)
             {
@@ -21,14 +21,14 @@ namespace Task2
             }
             Console.ReadLine();
         }
-        static List<EventArgs> Create()
+        static List<Person> Create()
         {
-            List<EventArgs> users = new List<EventArgs>
+            List<Person> users = new List<Person>
             {
-               new EventArgs("Александр", DateTime.Now),
-               new EventArgs("Борис", DateTime.Now),
-               new EventArgs("Валерий", DateTime.Now),
-               new EventArgs("Геннадий", DateTime.Now)
+               new Person("Александр", DateTime.Now),
+               new Person("Борис", DateTime.Now),
+               new Person("Валерий", DateTime.Now),
+               new Person("Геннадий", DateTime.Now)
             };
             return users;
         }
