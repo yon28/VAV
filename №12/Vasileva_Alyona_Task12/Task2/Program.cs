@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using System.Xml;
 
 namespace Task2
 {
@@ -23,140 +22,108 @@ namespace Task2
 после чего все текстовые файлы должны принять вид, соответствующий указанному времени. 
  */
         //DirectoryInfo dir = new DirectoryInfo("../../..");
-        private const string pathForLog = @"C:\temp.xml";
+        private const string pathForLog = @"C:\test2";
         private static string pathToCatalog;
         static void Main()
         {
-            Console.WriteLine("Введите путь к каталогу: ");
+            Console.OutputEncoding = Encoding.UTF8;
+            FileSystemWatcher watcher;
+            DirectoryInfo dirForLog = new DirectoryInfo(pathForLog);
+            dirForLog.Create();
+            Console.WriteLine("Path. Введите путь к каталогу: ");
             pathToCatalog = Console.ReadLine();
             if (!Directory.Exists(pathToCatalog))
             {
-                Console.WriteLine("Не удалось найти директорию. ");
-                Console.ReadLine();
+                Console.WriteLine("Where? Не удалось найти директорию. ");
+                Console.ReadKey();
             }
             else
             {
                 DirectoryInfo dir = new DirectoryInfo(pathToCatalog);
                 dir.Create();
-                Console.WriteLine("Каталог под контролем...");
+                Console.WriteLine("Ok. Каталог под контролем...");
                 Console.WriteLine("Установить режим наблюдения(1) или осуществить откат изменений(2)?");
                 string ch = Console.ReadLine();
                 if (ch == "1")
                 {
-                    Console.WriteLine("Режим наблюдения установлен...");
-                    FileSystemWatcher watcher = new FileSystemWatcher(dir.FullName);
-                    XmlTextWriter xmlWriter = new XmlTextWriter(pathForLog, Encoding.UTF8);//
-                    xmlWriter.WriteStartDocument();
-                    xmlWriter.WriteStartElement("Program");
-                    xmlWriter.WriteEndElement();
-                    xmlWriter.Close();
-
-                    watcher.Changed += OnChanged;
-                    watcher.Created += OnCreated;
-                    watcher.Deleted += OnDeleted;
-                    watcher.Renamed += OnRenamed;
+                    Console.WriteLine("Ok1. Режим наблюдения установлен. Чтобы выйти из него, нажмите любую клавишу.");
+                    watcher = new FileSystemWatcher(dir.FullName);
+                    watcher.Filter = "*.txt";
+                    watcher.Created += new FileSystemEventHandler(OnChanged);
+                    watcher.Renamed += new RenamedEventHandler(OnRenamed);
+                    watcher.Changed += new FileSystemEventHandler(OnChanged);
+                    watcher.Deleted += new FileSystemEventHandler(OnChanged);
+                 //   var watcherStruct = watcher.WaitForChanged(WatcherChangeTypes.All);
+                    watcher.EnableRaisingEvents = true;
                 }
                 if (ch == "2")
                 {
-                    Console.WriteLine("Будет осуществлён откат изменений...");
-                    Info(dir);
-                    Console.WriteLine();
-                    Console.WriteLine("Введите время (дату и время), на которые должен быть осуществлен откат.");
-                    var inpput = Console.ReadLine();
-                    DateTime date = DateTime.Parse(inpput);
-                    //
+                    Console.WriteLine("Ok2. Будет осуществлён откат изменений...");
+                 // Info(dir);
+                    Recoil();
                 }
-                Console.ReadLine();
+                Console.ReadKey();
             }
         }
 
         private static void Info(DirectoryInfo dir)
         {
             FileInfo[] files = dir.GetFiles("*.txt", SearchOption.AllDirectories);
-            Console.WriteLine($"Найдено {files.Length} файл(а/ов):");
+            Console.WriteLine($"Find. Найдено {files.Length} файл(а/ов):");
             foreach (FileInfo f in files)
             {
-                Console.WriteLine($"файл: { f.Name}, время создания: {f.CreationTime}, время последнего изменения: {f.LastWriteTime}," +
-                    $"имя {f.Name}, полный путь {f.FullName}");
+                Console.WriteLine($"файл: { f.Name}, время создания: {f.CreationTime}, время последнего изменения: {f.LastWriteTime}");
             }
-        }
-
-        private static void OnRenamed(object sender, RenamedEventArgs e)
-        {
-            Recording("Renamed", e);
-        }
-        private static void OnDeleted(object sender, FileSystemEventArgs e)
-        {
-            Recording("Deleted", e);
-        }
-        private static void OnCreated(object sender, FileSystemEventArgs e)
-        {
-            Recording("Created", e);
         }
         private static void OnChanged(object sender, FileSystemEventArgs e)
         {
-            Recording("Changed", e);
+            Console.WriteLine("Copy. Создана идентичная структура папок. Скопированы все файлы.");
+            DateTime t = DateTime.Now;
+            string pathDate = pathForLog + "\\" + t.ToString().Replace(":", "+");
+            DirectoryInfo dirDate = new DirectoryInfo(pathDate);
+            dirDate.Create();
+            foreach (string dirPath in Directory.GetDirectories(pathToCatalog, "*", SearchOption.AllDirectories))
+            {
+                Directory.CreateDirectory(dirPath.Replace(pathToCatalog, pathDate));
+            }
+            foreach (string newPath in Directory.GetFiles(pathToCatalog, "*.*", SearchOption.AllDirectories))
+            {
+                File.Copy(newPath, newPath.Replace(pathToCatalog, pathDate), true);  
+            }
+        }
+        private static void OnRenamed(object sender, RenamedEventArgs e)
+        {
+            OnChanged(sender, e);
         }
 
-        public static void Recording(string eventName, FileSystemEventArgs e)
+
+
+        private static void Recoil()
         {
-            string changeType = e.ChangeType.ToString();
-            string fullPath = e.FullPath;
-            string name = e.Name;
-            string oldName = "";
-            Console.WriteLine(eventName);
-
-            var doc = new XmlDocument();
-            doc.Load(pathForLog);
-            var el = doc.CreateElement(eventName);
-            doc.DocumentElement.AppendChild(el);
-            var attribute = doc.CreateAttribute("DateTime");
-            attribute.Value = DateTime.Now.ToString();
-            el.Attributes.Append(attribute);
-
-            if (oldName != "")
+            foreach (string dirPath in Directory.GetDirectories(pathForLog, "*", SearchOption.AllDirectories))
             {
-                XmlNode subE1 = doc.CreateElement("OldName");
-                subE1.InnerText = oldName;
-                el.AppendChild(subE1);
+                Console.WriteLine(dirPath.ToString().Replace(pathForLog.ToString(),"").Replace("+", ":"));
             }
-            if (name != "")
+            Console.WriteLine("Time. Введите время (дату и время), на которые должен быть осуществлен откат.");
+            var inpput = Console.ReadLine();
+            DateTime date = DateTime.Parse(inpput);
+            DateTime t = date;
+            string pathDate = pathForLog + "\\" + t.ToString().Replace(":", "+");
+            DirectoryInfo dirDate = new DirectoryInfo(pathDate);//
+            dirDate.Create();
+            foreach (string oldPath in Directory.GetFiles(pathToCatalog, "*.*", SearchOption.AllDirectories))
             {
-                XmlNode subE2 = doc.CreateElement("NewName");
-                subE2.InnerText = name;
-                el.AppendChild(subE2);
+                File.Delete(oldPath);
             }
-            if (fullPath != "")
+            foreach (string dirPath in Directory.GetDirectories(pathDate, "*", SearchOption.AllDirectories))//
             {
-                XmlNode subE3 = doc.CreateElement("FullPath");
-                subE3.InnerText = fullPath;
-                el.AppendChild(subE3);
-                if (Directory.Exists(fullPath))
-                {
-                    var elFullPath = doc.CreateElement(eventName);
-                    doc.DocumentElement.AppendChild(elFullPath);
-
-                    XmlNode subE3_1 = doc.CreateElement("CreationTime");
-                    subE3_1.InnerText = Directory.GetCreationTime(fullPath).ToString();
-                    elFullPath.AppendChild(subE3_1);
-                    XmlNode subE3_2 = doc.CreateElement("LastAccessTime");
-                    subE3_2.InnerText = Directory.GetLastAccessTime(fullPath).ToString();
-                    elFullPath.AppendChild(subE3_2);
-                    XmlNode subE3_3 = doc.CreateElement("LastWriteTime");
-                    subE3_3.InnerText = Directory.GetLastWriteTime(fullPath).ToString();
-                    elFullPath.AppendChild(subE3_3);
-                    XmlNode subE3_4 = doc.CreateElement("LogicalDrives");
-                    subE3_4.InnerText = Directory.GetLogicalDrives().ToString();
-                    elFullPath.AppendChild(subE3_4);
-                }
+                Directory.CreateDirectory(dirPath.Replace( pathDate, pathToCatalog));//
             }
-            if (changeType != "")
+            foreach (string newPath in Directory.GetFiles(pathDate, "*.*", SearchOption.AllDirectories))//
             {
-                XmlNode subE4 = doc.CreateElement("ChangeType");
-                subE4.InnerText = changeType;
-                el.AppendChild(subE4);
+                File.Copy(newPath, newPath.Replace( pathDate, pathToCatalog), true); //
             }
-            doc.Save(pathForLog);
+            Console.WriteLine("Откат осуществлён.");
         }
     }
 }

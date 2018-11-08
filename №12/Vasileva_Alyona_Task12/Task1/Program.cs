@@ -19,7 +19,7 @@ namespace Task1
             for (int i = 0; i < lines.Length; i++)
             {
                 int a;
-                int.TryParse(lines[i], out a);
+                int.TryParse(lines[i], out a); //
                 lines[i] = (a * a).ToString() + "\n";
             }
             File.WriteAllLines(filePath, lines, Encoding.Default);

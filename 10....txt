@@ -1,20 +1,4 @@
 
-16.11, птн 8:30-10:30
-19.11, пн 15:30-17:00
-20.11, вт 15:30-17:00
-21.11, ср 15:30-17:00
-22.11, четв 8:30-10:30, 15:30-17:00
-
-
-
-
-
-
-
-
-
-
-
 https://professorweb.ru/my/csharp/charp_theory/level12/12_19.php
  http://dotnetcourses.azurewebsites.net/Home/Tasks
 
