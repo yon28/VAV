@@ -16,21 +16,21 @@ namespace Department.DAL
                 LastName = "Иванов ",
                 FirstName = "И.И.",
                 Birth = 1990,
-                RewardE = ""
+                Rewards = "Награда1"
             });
             Add(new Employee()
             {
                 LastName = "Петров ",
                 FirstName = "И.И.",
                 Birth = 1991,
-                RewardE = ""
+                Rewards = null
             });
             Add(new Employee()
             {
                 LastName = "Никитин ",
                 FirstName = "И.И.",
                 Birth = 1992,
-                RewardE = ""
+                Rewards = null
             });
 
             return GetList();

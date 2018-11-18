@@ -145,8 +145,6 @@
             // chRewards
             // 
             this.chRewards.FormattingEnabled = true;
-            this.chRewards.Items.AddRange(new object[] {
-            "dgvTitle"});
             this.chRewards.Location = new System.Drawing.Point(124, 98);
             this.chRewards.Name = "chRewards";
             this.chRewards.Size = new System.Drawing.Size(120, 84);

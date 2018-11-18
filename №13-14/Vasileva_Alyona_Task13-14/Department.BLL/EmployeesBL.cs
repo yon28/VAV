@@ -21,29 +21,29 @@ namespace Department.BLL
             return employeesDAO.InitList();
         }
         //
-        //Наградить 
-        public IEnumerable<Employee> SortEmployeesByFullNameAsc()
+     
+        public IEnumerable<Employee> SortEmployeesByLastNameAsc()
 		{
 			return (from s in GetList()
 						orderby s.LastName ascending
 						select s);
 		}
 
-		public IEnumerable<Employee> SortEmployeesByFullNameDesc()
+		public IEnumerable<Employee> SortEmployeesByLastNameDesc()
 		{
 			return (from s in GetList()
 						orderby s.LastName descending
 						select s).ToList();
 		}
 
-		public void Add(string lastName, string firstName, int birth, string rewardE)
+		public void Add(string lastName, string firstName, int birth, string rewardS)
 		{
 			Employee employee = new Employee
 			{
                 FirstName = firstName,
                 LastName = lastName,
                 Birth = birth,
-                RewardE = rewardE
+                Rewards = rewardS
             };
 
 			this.Add(employee);
@@ -57,14 +57,14 @@ namespace Department.BLL
 			employeesDAO.Add(employee);
 		}
 
-        public void Remove(string lastName, string firstName, int birth, string rewardE)
+        public void Remove(string lastName, string firstName, int birth, string rewardS)
         {
             Employee employee = new Employee
             {
                 FirstName = firstName,
                 LastName = lastName,
                 Birth = birth,
-                RewardE = rewardE
+                Rewards = rewardS
             };
 
             this.Remove(employee);

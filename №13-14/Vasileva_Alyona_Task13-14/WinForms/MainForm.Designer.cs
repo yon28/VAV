@@ -32,135 +32,137 @@ namespace WinForms
 		{
             this.components = new System.ComponentModel.Container();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             this.ctlFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctlFileRegister = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctlFileEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctlFileRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctlFileRewardRegister = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctlFileRewardEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctlFileRewardRemove = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlEmployee = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlRegister = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlRemove = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlRewards = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlRewardRegister = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlRewardEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlRewardRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.ctlHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.ctlHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctlContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctlContextRegister = new System.Windows.Forms.ToolStripMenuItem();
             this.ctlContextEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.ctlContextRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctlStatusPanel = new System.Windows.Forms.StatusStrip();
-            this.ctlProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.ctlContextRegisterReward = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlContextEditReward = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlContextRemoveReward = new System.Windows.Forms.ToolStripMenuItem();
             this.splashTimer = new System.Windows.Forms.Timer(this.components);
             this.ctlRewardPage = new System.Windows.Forms.TabPage();
             this.dgvRewards = new System.Windows.Forms.DataGridView();
+            this.dgvTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ctlContextMenuReward = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctlEmployeePage = new System.Windows.Forms.TabPage();
-            this.ctlEmployees = new System.Windows.Forms.DataGridView();
-            this.ctlTab = new System.Windows.Forms.TabControl();
+            this.dgvEmployees = new System.Windows.Forms.DataGridView();
             this.dgvID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ctlContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.dgvFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvBirth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvAge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvReward = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ctlTab = new System.Windows.Forms.TabControl();
             this.mainMenu.SuspendLayout();
-            this.ctlContextMenu.SuspendLayout();
-            this.ctlStatusPanel.SuspendLayout();
             this.ctlRewardPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRewards)).BeginInit();
+            this.ctlContextMenuReward.SuspendLayout();
             this.ctlEmployeePage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ctlEmployees)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
+            this.ctlContextMenu.SuspendLayout();
             this.ctlTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenu
             // 
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem7,
             this.ctlFile,
-            this.toolStripMenuItem2,
+            this.ctlEmployee,
+            this.ctlRewards,
             this.ctlHelp});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Size = new System.Drawing.Size(659, 24);
             this.mainMenu.TabIndex = 0;
             // 
-            // toolStripMenuItem7
-            // 
-            this.toolStripMenuItem7.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem11});
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(48, 20);
-            this.toolStripMenuItem7.Text = "Файл";
-            // 
-            // toolStripMenuItem11
-            // 
-            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(108, 22);
-            this.toolStripMenuItem11.Text = "Выход";
-            this.toolStripMenuItem11.Click += new System.EventHandler(this.Exit_Click);
-            // 
             // ctlFile
             // 
             this.ctlFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ctlFileRegister,
-            this.ctlFileEdit,
-            this.ctlFileRemove});
+            this.ctlExit});
             this.ctlFile.Name = "ctlFile";
-            this.ctlFile.Size = new System.Drawing.Size(97, 20);
-            this.ctlFile.Text = "Пользователи";
+            this.ctlFile.Size = new System.Drawing.Size(48, 20);
+            this.ctlFile.Text = "Файл";
             // 
-            // ctlFileRegister
+            // ctlExit
             // 
-            this.ctlFileRegister.Name = "ctlFileRegister";
-            this.ctlFileRegister.Size = new System.Drawing.Size(183, 22);
-            this.ctlFileRegister.Text = "Зарегистрировать...";
-            this.ctlFileRegister.Click += new System.EventHandler(this.FileRegister_Click);
+            this.ctlExit.Name = "ctlExit";
+            this.ctlExit.Size = new System.Drawing.Size(108, 22);
+            this.ctlExit.Text = "Выход";
+            this.ctlExit.Click += new System.EventHandler(this.Exit_Click);
             // 
-            // ctlFileEdit
+            // ctlEmployee
             // 
-            this.ctlFileEdit.Name = "ctlFileEdit";
-            this.ctlFileEdit.Size = new System.Drawing.Size(183, 22);
-            this.ctlFileEdit.Text = "Редактировать..";
-            this.ctlFileEdit.Click += new System.EventHandler(this.FileEdit_Click);
+            this.ctlEmployee.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctlRegister,
+            this.ctlEdit,
+            this.ctlRemove});
+            this.ctlEmployee.Name = "ctlEmployee";
+            this.ctlEmployee.Size = new System.Drawing.Size(97, 20);
+            this.ctlEmployee.Text = "Пользователи";
             // 
-            // ctlFileRemove
+            // ctlRegister
             // 
-            this.ctlFileRemove.Name = "ctlFileRemove";
-            this.ctlFileRemove.Size = new System.Drawing.Size(183, 22);
-            this.ctlFileRemove.Text = "Удалить";
-            this.ctlFileRemove.Click += new System.EventHandler(this.FileRemove_Click);
+            this.ctlRegister.Name = "ctlRegister";
+            this.ctlRegister.Size = new System.Drawing.Size(183, 22);
+            this.ctlRegister.Text = "Зарегистрировать...";
+            this.ctlRegister.Click += new System.EventHandler(this.FileRegister_Click);
             // 
-            // toolStripMenuItem2
+            // ctlEdit
             // 
-            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ctlFileRewardRegister,
-            this.ctlFileRewardEdit,
-            this.ctlFileRewardRemove});
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(67, 20);
-            this.toolStripMenuItem2.Text = "Награды";
+            this.ctlEdit.Name = "ctlEdit";
+            this.ctlEdit.Size = new System.Drawing.Size(183, 22);
+            this.ctlEdit.Text = "Редактировать..";
+            this.ctlEdit.Click += new System.EventHandler(this.FileEdit_Click);
             // 
-            // ctlFileRewardRegister
+            // ctlRemove
             // 
-            this.ctlFileRewardRegister.Name = "ctlFileRewardRegister";
-            this.ctlFileRewardRegister.Size = new System.Drawing.Size(183, 22);
-            this.ctlFileRewardRegister.Text = "Зарегистрировать...";
-            this.ctlFileRewardRegister.Click += new System.EventHandler(this.FileRewardRegister_Click);
+            this.ctlRemove.Name = "ctlRemove";
+            this.ctlRemove.Size = new System.Drawing.Size(183, 22);
+            this.ctlRemove.Text = "Удалить";
+            this.ctlRemove.Click += new System.EventHandler(this.FileRemove_Click);
             // 
-            // ctlFileRewardEdit
+            // ctlRewards
             // 
-            this.ctlFileRewardEdit.Name = "ctlFileRewardEdit";
-            this.ctlFileRewardEdit.Size = new System.Drawing.Size(183, 22);
-            this.ctlFileRewardEdit.Text = "Редактировать..";
-            this.ctlFileRewardEdit.Click += new System.EventHandler(this.FileRewardEdit_Click);
+            this.ctlRewards.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctlRewardRegister,
+            this.ctlRewardEdit,
+            this.ctlRewardRemove});
+            this.ctlRewards.Name = "ctlRewards";
+            this.ctlRewards.Size = new System.Drawing.Size(67, 20);
+            this.ctlRewards.Text = "Награды";
             // 
-            // ctlFileRewardRemove
+            // ctlRewardRegister
             // 
-            this.ctlFileRewardRemove.Name = "ctlFileRewardRemove";
-            this.ctlFileRewardRemove.Size = new System.Drawing.Size(183, 22);
-            this.ctlFileRewardRemove.Text = "Удалить";
-            this.ctlFileRewardRemove.Click += new System.EventHandler(this.ctlFileRewardRemove_Click);
+            this.ctlRewardRegister.Name = "ctlRewardRegister";
+            this.ctlRewardRegister.Size = new System.Drawing.Size(183, 22);
+            this.ctlRewardRegister.Text = "Зарегистрировать...";
+            this.ctlRewardRegister.Click += new System.EventHandler(this.FileRewardRegister_Click);
+            // 
+            // ctlRewardEdit
+            // 
+            this.ctlRewardEdit.Name = "ctlRewardEdit";
+            this.ctlRewardEdit.Size = new System.Drawing.Size(183, 22);
+            this.ctlRewardEdit.Text = "Редактировать..";
+            this.ctlRewardEdit.Click += new System.EventHandler(this.FileRewardEdit_Click);
+            // 
+            // ctlRewardRemove
+            // 
+            this.ctlRewardRemove.Name = "ctlRewardRemove";
+            this.ctlRewardRemove.Size = new System.Drawing.Size(183, 22);
+            this.ctlRewardRemove.Text = "Удалить";
+            this.ctlRewardRemove.Click += new System.EventHandler(this.ctlFileRewardRemove_Click);
             // 
             // ctlHelp
             // 
@@ -175,15 +177,6 @@ namespace WinForms
             this.ctlHelpAbout.Name = "ctlHelpAbout";
             this.ctlHelpAbout.Size = new System.Drawing.Size(158, 22);
             this.ctlHelpAbout.Text = "О программе...";
-            // 
-            // ctlContextMenu
-            // 
-            this.ctlContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ctlContextRegister,
-            this.ctlContextEdit,
-            this.ctlContextRemove});
-            this.ctlContextMenu.Name = "ctlContextMenu";
-            this.ctlContextMenu.Size = new System.Drawing.Size(177, 70);
             // 
             // ctlContextRegister
             // 
@@ -206,22 +199,26 @@ namespace WinForms
             this.ctlContextRemove.Text = "Удалить";
             this.ctlContextRemove.Click += new System.EventHandler(this.ContextRemove_Click);
             // 
-            // ctlStatusPanel
+            // ctlContextRegisterReward
             // 
-            this.ctlStatusPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ctlProgressBar});
-            this.ctlStatusPanel.Location = new System.Drawing.Point(0, 361);
-            this.ctlStatusPanel.Name = "ctlStatusPanel";
-            this.ctlStatusPanel.Size = new System.Drawing.Size(659, 22);
-            this.ctlStatusPanel.TabIndex = 3;
-            this.ctlStatusPanel.Text = "statusStrip1";
+            this.ctlContextRegisterReward.Name = "ctlContextRegisterReward";
+            this.ctlContextRegisterReward.Size = new System.Drawing.Size(176, 22);
+            this.ctlContextRegisterReward.Text = "Зарегистрировать награду";
+            this.ctlContextRegisterReward.Click += new System.EventHandler(this.ContextRegisterReward_Click);
             // 
-            // ctlProgressBar
+            // ctlContextEditReward
             // 
-            this.ctlProgressBar.Maximum = 20;
-            this.ctlProgressBar.Name = "ctlProgressBar";
-            this.ctlProgressBar.Size = new System.Drawing.Size(100, 16);
-            this.ctlProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.ctlContextEditReward.Name = "ctlContextEditReward";
+            this.ctlContextEditReward.Size = new System.Drawing.Size(176, 22);
+            this.ctlContextEditReward.Text = "Редактировать награду";
+            this.ctlContextEditReward.Click += new System.EventHandler(this.ContextEditReward_Click);
+            // 
+            // ctlContextRemoveReward
+            // 
+            this.ctlContextRemoveReward.Name = "ctlContextRemoveReward";
+            this.ctlContextRemoveReward.Size = new System.Drawing.Size(176, 22);
+            this.ctlContextRemoveReward.Text = "Удалить награду";
+            this.ctlContextRemoveReward.Click += new System.EventHandler(this.ContextRemoveReward_Click);
             // 
             // splashTimer
             // 
@@ -235,7 +232,7 @@ namespace WinForms
             this.ctlRewardPage.Location = new System.Drawing.Point(4, 22);
             this.ctlRewardPage.Name = "ctlRewardPage";
             this.ctlRewardPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ctlRewardPage.Size = new System.Drawing.Size(651, 274);
+            this.ctlRewardPage.Size = new System.Drawing.Size(651, 210);
             this.ctlRewardPage.TabIndex = 1;
             this.ctlRewardPage.Text = "Награды";
             this.ctlRewardPage.UseVisualStyleBackColor = true;
@@ -249,37 +246,108 @@ namespace WinForms
             this.dgvRewards.Location = new System.Drawing.Point(3, 3);
             this.dgvRewards.Name = "dgvRewards";
             this.dgvRewards.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRewards.Size = new System.Drawing.Size(645, 268);
+            this.dgvRewards.Size = new System.Drawing.Size(645, 204);
             this.dgvRewards.TabIndex = 1;
+            this.dgvRewards.ColumnHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Rewards_ColumnClick);
+            this.dgvRewards.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvRewards_MouseClick);
+            // 
+            // dgvTitle
+            // 
+            this.dgvTitle.ContextMenuStrip = this.ctlContextMenuReward;
+            this.dgvTitle.DataPropertyName = "Title";
+            this.dgvTitle.HeaderText = "Title";
+            this.dgvTitle.Name = "dgvTitle";
+            this.dgvTitle.ReadOnly = true;
+            // 
+            // ctlContextMenuReward
+            // 
+            this.ctlContextMenuReward.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctlContextRegisterReward,
+            this.ctlContextEditReward,
+            this.ctlContextRemoveReward});
+            this.ctlContextMenuReward.Name = "ctlContextMenuReward";
+            this.ctlContextMenuReward.Size = new System.Drawing.Size(177, 70);
             // 
             // ctlEmployeePage
             // 
-            this.ctlEmployeePage.Controls.Add(this.ctlEmployees);
+            this.ctlEmployeePage.Controls.Add(this.dgvEmployees);
             this.ctlEmployeePage.Location = new System.Drawing.Point(4, 22);
             this.ctlEmployeePage.Name = "ctlEmployeePage";
             this.ctlEmployeePage.Padding = new System.Windows.Forms.Padding(3);
-            this.ctlEmployeePage.Size = new System.Drawing.Size(651, 274);
+            this.ctlEmployeePage.Size = new System.Drawing.Size(651, 210);
             this.ctlEmployeePage.TabIndex = 0;
             this.ctlEmployeePage.Text = "Пользователи";
             this.ctlEmployeePage.UseVisualStyleBackColor = true;
             // 
-            // ctlEmployees
+            // dgvEmployees
             // 
-            this.ctlEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ctlEmployees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEmployees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvID,
             this.dgvLastName,
             this.dgvFirstName,
             this.dgvBirth,
             this.dgvAge,
             this.dgvReward});
-            this.ctlEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctlEmployees.Location = new System.Drawing.Point(3, 3);
-            this.ctlEmployees.Name = "ctlEmployees";
-            this.ctlEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ctlEmployees.Size = new System.Drawing.Size(645, 268);
-            this.ctlEmployees.TabIndex = 0;
-            this.ctlEmployees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ctlEmployees_CellContentClick);
+            this.dgvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvEmployees.Location = new System.Drawing.Point(3, 3);
+            this.dgvEmployees.Name = "dgvEmployees";
+            this.dgvEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvEmployees.Size = new System.Drawing.Size(645, 204);
+            this.dgvEmployees.TabIndex = 0;
+            this.dgvEmployees.ColumnHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Employees_ColumnClick);
+            this.dgvEmployees.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvEmployees_MouseClick);
+            // 
+            // dgvID
+            // 
+            this.dgvID.DataPropertyName = "ID";
+            this.dgvID.HeaderText = "ID";
+            this.dgvID.Name = "dgvID";
+            this.dgvID.Visible = false;
+            // 
+            // dgvLastName
+            // 
+            this.dgvLastName.ContextMenuStrip = this.ctlContextMenu;
+            this.dgvLastName.DataPropertyName = "LastName";
+            this.dgvLastName.HeaderText = "Фамилия";
+            this.dgvLastName.Name = "dgvLastName";
+            // 
+            // ctlContextMenu
+            // 
+            this.ctlContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctlContextRegister,
+            this.ctlContextEdit,
+            this.ctlContextRemove});
+            this.ctlContextMenu.Name = "ctlContextMenu";
+            this.ctlContextMenu.Size = new System.Drawing.Size(177, 70);
+            // 
+            // dgvFirstName
+            // 
+            this.dgvFirstName.ContextMenuStrip = this.ctlContextMenu;
+            this.dgvFirstName.DataPropertyName = "FirstName";
+            this.dgvFirstName.HeaderText = "Имя";
+            this.dgvFirstName.Name = "dgvFirstName";
+            // 
+            // dgvBirth
+            // 
+            this.dgvBirth.ContextMenuStrip = this.ctlContextMenu;
+            this.dgvBirth.DataPropertyName = "Birth";
+            this.dgvBirth.HeaderText = "Дата рождения";
+            this.dgvBirth.Name = "dgvBirth";
+            // 
+            // dgvAge
+            // 
+            this.dgvAge.ContextMenuStrip = this.ctlContextMenu;
+            this.dgvAge.DataPropertyName = "Age";
+            this.dgvAge.HeaderText = "Возраст";
+            this.dgvAge.Name = "dgvAge";
+            // 
+            // dgvReward
+            // 
+            this.dgvReward.ContextMenuStrip = this.ctlContextMenuReward;
+            this.dgvReward.DataPropertyName = "Rewards";
+            this.dgvReward.HeaderText = "Награды";
+            this.dgvReward.Name = "dgvReward";
             // 
             // ctlTab
             // 
@@ -289,60 +357,15 @@ namespace WinForms
             this.ctlTab.Location = new System.Drawing.Point(0, 24);
             this.ctlTab.Name = "ctlTab";
             this.ctlTab.SelectedIndex = 0;
-            this.ctlTab.Size = new System.Drawing.Size(659, 300);
+            this.ctlTab.Size = new System.Drawing.Size(659, 236);
             this.ctlTab.TabIndex = 5;
-            // 
-            // dgvID
-            // 
-            this.dgvID.DataPropertyName = "IDNumber";
-            this.dgvID.HeaderText = "ID";
-            this.dgvID.Name = "dgvID";
-            this.dgvID.Visible = false;
-            // 
-            // dgvLastName
-            // 
-            this.dgvLastName.DataPropertyName = "LastName";
-            this.dgvLastName.HeaderText = "Фамилия";
-            this.dgvLastName.Name = "dgvLastName";
-            // 
-            // dgvFirstName
-            // 
-            this.dgvFirstName.DataPropertyName = "FirstName";
-            this.dgvFirstName.HeaderText = "Имя";
-            this.dgvFirstName.Name = "dgvFirstName";
-            // 
-            // dgvBirth
-            // 
-            this.dgvBirth.DataPropertyName = "Birth";
-            this.dgvBirth.HeaderText = "Дата рождения";
-            this.dgvBirth.Name = "dgvBirth";
-            // 
-            // dgvAge
-            // 
-            this.dgvAge.DataPropertyName = "Age";
-            this.dgvAge.HeaderText = "Возраст";
-            this.dgvAge.Name = "dgvAge";
-            // 
-            // dgvReward
-            // 
-            this.dgvReward.DataPropertyName = "RewardE";
-            this.dgvReward.HeaderText = "Награды";
-            this.dgvReward.Name = "dgvReward";
-            // 
-            // dgvTitle
-            // 
-            this.dgvTitle.DataPropertyName = "Title";
-            this.dgvTitle.HeaderText = "Title";
-            this.dgvTitle.Name = "dgvTitle";
-            this.dgvTitle.ReadOnly = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 383);
+            this.ClientSize = new System.Drawing.Size(659, 259);
             this.Controls.Add(this.ctlTab);
-            this.Controls.Add(this.ctlStatusPanel);
             this.Controls.Add(this.mainMenu);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MainMenuStrip = this.mainMenu;
@@ -353,54 +376,55 @@ namespace WinForms
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
-            this.ctlContextMenu.ResumeLayout(false);
-            this.ctlStatusPanel.ResumeLayout(false);
-            this.ctlStatusPanel.PerformLayout();
             this.ctlRewardPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRewards)).EndInit();
+            this.ctlContextMenuReward.ResumeLayout(false);
             this.ctlEmployeePage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ctlEmployees)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).EndInit();
+            this.ctlContextMenu.ResumeLayout(false);
             this.ctlTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
+        }
 
 
         #endregion
 
         private System.Windows.Forms.MenuStrip mainMenu;
-		private System.Windows.Forms.ToolStripMenuItem ctlFile;
+		private System.Windows.Forms.ToolStripMenuItem ctlEmployee;
 		private System.Windows.Forms.ToolStripMenuItem ctlHelp;
 		private System.Windows.Forms.ToolStripMenuItem ctlHelpAbout;
-		private System.Windows.Forms.StatusStrip ctlStatusPanel;
-		private System.Windows.Forms.ToolStripMenuItem ctlFileRegister;
-		private System.Windows.Forms.ToolStripMenuItem ctlFileEdit;
-		private System.Windows.Forms.ToolStripMenuItem ctlFileRemove;
+		private System.Windows.Forms.ToolStripMenuItem ctlRegister;
+		private System.Windows.Forms.ToolStripMenuItem ctlEdit;
+		private System.Windows.Forms.ToolStripMenuItem ctlRemove;
 		private System.Windows.Forms.ContextMenuStrip ctlContextMenu;
 		private System.Windows.Forms.ToolStripMenuItem ctlContextRegister;
 		private System.Windows.Forms.ToolStripMenuItem ctlContextRemove;
 		private System.Windows.Forms.ToolStripMenuItem ctlContextEdit;
 		private System.Windows.Forms.Timer splashTimer;
-		private System.Windows.Forms.ToolStripProgressBar ctlProgressBar;
         private System.Windows.Forms.TabPage ctlRewardPage;
         private System.Windows.Forms.TabPage ctlEmployeePage;
-        public System.Windows.Forms.DataGridView ctlEmployees;
+        public System.Windows.Forms.DataGridView dgvEmployees;
         private System.Windows.Forms.TabControl ctlTab;
         private System.Windows.Forms.DataGridView dgvRewards;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem11;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem ctlFileRewardRegister;
-        private System.Windows.Forms.ToolStripMenuItem ctlFileRewardEdit;
-        private System.Windows.Forms.ToolStripMenuItem ctlFileRewardRemove;
+        private System.Windows.Forms.ToolStripMenuItem ctlFile;
+        private System.Windows.Forms.ToolStripMenuItem ctlExit;
+        private System.Windows.Forms.ToolStripMenuItem ctlRewards;
+        private System.Windows.Forms.ToolStripMenuItem ctlRewardRegister;
+        private System.Windows.Forms.ToolStripMenuItem ctlRewardEdit;
+        private System.Windows.Forms.ToolStripMenuItem ctlRewardRemove;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvID;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvLastName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFirstName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvBirth;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvAge;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvReward;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvTitle;
+        private System.Windows.Forms.ContextMenuStrip ctlContextMenuReward;
+        private System.Windows.Forms.ToolStripMenuItem ctlContextRegisterReward;
+        private System.Windows.Forms.ToolStripMenuItem ctlContextRemoveReward;
+        private System.Windows.Forms.ToolStripMenuItem ctlContextEditReward;
     }
 }
 

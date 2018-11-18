@@ -39,7 +39,7 @@ namespace WinForms
 			}
 		}
 
-		public int IDNumber
+		public int ID
 		{
 			get
 			{
@@ -60,7 +60,7 @@ namespace WinForms
             this.lastName = employee.LastName;
             this.firstName = employee.FirstName;
 			this.birth = employee.Birth;
-			this.idNumber = employee.IDNumber;
+			this.idNumber = employee.ID;
             createNew = false;
 		}
 
@@ -70,9 +70,12 @@ namespace WinForms
             txtFirstName.Text = firstName;
 			txtBirst.Text = birth.ToString();
 
-			// cbYear.SelectedIndex = 0;
 
-			if (createNew == true)
+
+
+            // cbYear.SelectedIndex = 0;
+
+            if (createNew == true)
 			{
 				this.Text = "Регистрация нового пользователя";
 				btnOK.Text = "Создать";

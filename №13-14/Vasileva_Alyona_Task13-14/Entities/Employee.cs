@@ -35,8 +35,7 @@ namespace Entities
                       }
                   }
               }
-        private string rewardE;
-        public string RewardE
+        public string Rewards
         {
             get;
             set;
@@ -59,7 +58,7 @@ namespace Entities
                 }
             }
         }
-        public int IDNumber
+        public int ID
         {
             get => Math.Abs(GetHashCode());
         }
