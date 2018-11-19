@@ -1,6 +1,7 @@
 ﻿using Entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace Department.DAL
 {
@@ -11,6 +12,8 @@ namespace Department.DAL
 
         public IEnumerable<Employee> InitList()
         {
+            var connString = ConfigurationManager.AppSettings["dbConnection"];
+
             Add(new Employee()
             {
                 LastName = "Иванов ",
