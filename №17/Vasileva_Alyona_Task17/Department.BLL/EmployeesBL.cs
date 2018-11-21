@@ -13,8 +13,8 @@ namespace Department.BLL
 
 		public EmployeesBL()
 		{
-			//employeesDAO = new EmployeeDAO();
-            employeesDAO = new EmployeeDAOdb();
+			employeesDAO = new EmployeeDAO();
+            //employeesDAO = new EmployeeDAOdb();
         }
         public IEnumerable<Employee> InitList()
         {
@@ -36,7 +36,7 @@ namespace Department.BLL
 						select s).ToList();
 		}
 
-		public void Add(string lastName, string firstName, int birth, string rewardS)
+		public void Add(string lastName, string firstName, DateTime birth, string rewardS)
 		{
 			Employee employee = new Employee
 			{
@@ -57,7 +57,7 @@ namespace Department.BLL
 			employeesDAO.Add(employee);
 		}
 
-        public void Remove(string lastName, string firstName, int birth, string rewardS)
+        public void Remove(string lastName, string firstName, DateTime birth, string rewardS)
         {
             Employee employee = new Employee
             {

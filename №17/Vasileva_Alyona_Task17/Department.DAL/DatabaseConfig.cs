@@ -7,11 +7,8 @@ namespace Department.DAL
     {
         public static string GetConnectionString()
         {
-            string databaseName = ConfigurationManager.AppSettings["EmployeesAndRewards"];
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = databaseName;
-
-            return builder.ToString();
+            var connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+            return connectionString;
         }
     }
 }

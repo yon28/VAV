@@ -8,6 +8,6 @@ namespace Department.DAL
         void Add(Entities.Reward reward);
         System.Collections.Generic.IEnumerable<Entities.Reward> GetList();
         void Remove(Entities.Reward reward);
-        IEnumerable<Reward> InitList();
+        IEnumerable<Reward> InitListRewards();
     }
 }

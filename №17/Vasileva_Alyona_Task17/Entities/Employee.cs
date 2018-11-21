@@ -42,13 +42,13 @@ namespace Entities
         }
 
 
-        private int birth;
-        public int Birth
+        private DateTime birth;
+        public DateTime Birth
         {
             get => birth;
             set
             {
-                if (DateTime.Now.Year > birth)
+                if ((DateTime.Now.Year > birth.Year)|| (DateTime.Now.Month > birth.Month)|| (DateTime.Now.Day > birth.Day))
                 {
                     birth = value;
                 }
@@ -64,7 +64,7 @@ namespace Entities
         }
         public byte Age
         {
-            get => Convert.ToByte(DateTime.Now.Year - Birth);
+            get => Convert.ToByte(DateTime.Now.Year - Birth.Year);
         }
 
         public bool Equals(Employee other)

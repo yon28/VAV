@@ -7,7 +7,7 @@ namespace Department.DAL
     public class RewardDAO : IRewardDAO
     {
         private List<Reward> rewards = new List<Reward>();
-        public IEnumerable<Reward> InitList()
+        public IEnumerable<Reward> InitListRewards()
         {
             Add(new Reward()
             {

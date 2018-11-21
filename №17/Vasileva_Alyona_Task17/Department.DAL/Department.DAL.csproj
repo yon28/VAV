@@ -44,11 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseConfig.cs" />
-    <Compile Include="EmployeesAndRewardsDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EmployeesAndRewardsDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="IEmployeeDAO.cs" />
     <Compile Include="IRewardDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,13 +63,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="EmployeesAndRewardsDataSet.xsc">
       <DependentUpon>EmployeesAndRewardsDataSet.xsd</DependentUpon>
     </None>
     <None Include="EmployeesAndRewardsDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>EmployeesAndRewardsDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="EmployeesAndRewardsDataSet.xss">

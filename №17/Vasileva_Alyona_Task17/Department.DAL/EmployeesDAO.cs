@@ -14,21 +14,21 @@ namespace Department.DAL
             {
                 LastName = "Иванов ",
                 FirstName = "И.И.",
-                Birth = 1990,
+                Birth = DateTime.Now,
                 Rewards = "Награда1"
             });
             Add(new Employee()
             {
                 LastName = "Петров ",
                 FirstName = "И.И.",
-                Birth = 1991,
+                Birth = DateTime.Now,
                 Rewards = null
             });
             Add(new Employee()
             {
                 LastName = "Никитин ",
                 FirstName = "И.И.",
-                Birth = 1992,
+                Birth = DateTime.Now,
                 Rewards = null
             });
 

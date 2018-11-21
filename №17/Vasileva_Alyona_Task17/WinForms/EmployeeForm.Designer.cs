@@ -34,12 +34,12 @@
             this.lblFullName = new System.Windows.Forms.Label();
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.lblBirth = new System.Windows.Forms.Label();
-            this.txtBirst = new System.Windows.Forms.ComboBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.lbLastName = new System.Windows.Forms.Label();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.lbRewards = new System.Windows.Forms.Label();
             this.chRewards = new System.Windows.Forms.CheckedListBox();
+            this.dtBirth = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,25 +89,9 @@
             this.lblBirth.AutoSize = true;
             this.lblBirth.Location = new System.Drawing.Point(12, 71);
             this.lblBirth.Name = "lblBirth";
-            this.lblBirth.Size = new System.Drawing.Size(84, 13);
+            this.lblBirth.Size = new System.Drawing.Size(91, 13);
             this.lblBirth.TabIndex = 4;
-            this.lblBirth.Text = "Год рождения:";
-            // 
-            // txtBirst
-            // 
-            this.txtBirst.FormattingEnabled = true;
-            this.errorProvider.SetIconPadding(this.txtBirst, 2);
-            this.txtBirst.Items.AddRange(new object[] {
-            "2010",
-            "2011",
-            "2012"});
-            this.txtBirst.Location = new System.Drawing.Point(124, 71);
-            this.txtBirst.MaxLength = 4;
-            this.txtBirst.Name = "txtBirst";
-            this.txtBirst.Size = new System.Drawing.Size(121, 21);
-            this.txtBirst.TabIndex = 5;
-            this.txtBirst.Validating += new System.ComponentModel.CancelEventHandler(this.Birth_Validating);
-            this.txtBirst.Validated += new System.EventHandler(this.Birth_Validated);
+            this.lblBirth.Text = "Дата рождения:";
             // 
             // errorProvider
             // 
@@ -150,6 +134,13 @@
             this.chRewards.Size = new System.Drawing.Size(120, 84);
             this.chRewards.TabIndex = 8;
             // 
+            // dtBirth
+            // 
+            this.dtBirth.Location = new System.Drawing.Point(124, 71);
+            this.dtBirth.Name = "dtBirth";
+            this.dtBirth.Size = new System.Drawing.Size(120, 21);
+            this.dtBirth.TabIndex = 9;
+            // 
             // EmployeeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -157,8 +148,8 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(390, 265);
+            this.Controls.Add(this.dtBirth);
             this.Controls.Add(this.chRewards);
-            this.Controls.Add(this.txtBirst);
             this.Controls.Add(this.lblBirth);
             this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.lbLastName);
@@ -188,11 +179,11 @@
 		private System.Windows.Forms.Label lblFullName;
 		private System.Windows.Forms.TextBox txtFirstName;
 		private System.Windows.Forms.Label lblBirth;
-		private System.Windows.Forms.ComboBox txtBirst;
 		private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Label lbLastName;
         private System.Windows.Forms.Label lbRewards;
         public System.Windows.Forms.CheckedListBox chRewards;
+        private System.Windows.Forms.DateTimePicker dtBirth;
     }
 }

@@ -10,7 +10,7 @@ CREATE TABLE Employees(
 	[Id] int not null primary key identity(1,1),
 	[LastName] nvarchar(150),
 	[FirstName] nvarchar(150),
-	[Birth] datetime2
+	[Birth] DateTime2
 	)
 GO
 
@@ -77,7 +77,7 @@ GO
 CREATE PROCEDURE AddEmployee(
 	@lastname nvarchar(150),
 	@firstname nvarchar(150),
-	@birth datetime2,
+	@birth DateTime2,
 	@rewardIds RewardsIds readonly)
 AS
 BEGIN
@@ -110,7 +110,7 @@ GO
 CREATE PROCEDURE InsertEmployee(
 	@lastName nvarchar(100),
 	@firstName nvarchar(100),
-	@birth datetime)
+	@birth DateTime2)
 AS
 	DECLARE @insertedEmployee TABLE (EmployeeId int);
 	INSERT INTO [Employees](LastName, FirstName, Birth)
@@ -126,7 +126,7 @@ GO
 
 CREATE PROCEDURE GetRewards
 AS
-	RETURN SELECT *
+	RETURN SELECT [Id], [Title], [Description]
 		FROM [Rewards]
 GO
 

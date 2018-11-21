@@ -9,7 +9,7 @@ namespace WinForms
 	{
 		private string lastName;
         private string firstName;
-        private int birth;
+        private DateTime birth;
 		private int idNumber;
 
 		private bool createNew = true;
@@ -31,7 +31,7 @@ namespace WinForms
                 return firstName;
             }
         }
-        public int Birth
+        public DateTime Birth
 		{
 			get
 			{
@@ -68,7 +68,7 @@ namespace WinForms
 		{
 			txtLastName.Text = lastName;
             txtFirstName.Text = firstName;
-			txtBirst.Text = birth.ToString();
+		//	dtBirth.Text = birth.ToString();
 
 
 
@@ -149,24 +149,24 @@ namespace WinForms
 
     		private void Birth_Validating(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			string input = txtBirst.Text.Trim();
+			string input = dtBirth.Text.Trim();
 
 			int result;
 			if (Int32.TryParse(input, out result) == false)
 			{
-				errorProvider.SetError(txtBirst, "Некорректное значение!");
+				errorProvider.SetError(dtBirth, "Некорректное значение!");
 				e.Cancel = true;
 			}
 			else
 			{
-				errorProvider.SetError(txtBirst, String.Empty);
+				errorProvider.SetError(dtBirth, String.Empty);
 				e.Cancel = false;
 			}
 		}
 
 		private void Birth_Validated(object sender, EventArgs e)
 		{
-			birth = Int32.Parse(txtBirst.Text);
+			birth = DateTime.Parse(dtBirth.Text);
 		}
 
     }
