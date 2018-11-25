@@ -13,8 +13,8 @@ namespace Department.BLL
 
         public RewardsBL()
         {
-           rewardsDAO = new RewardDAO();
-            // rewardsDAO = new RewardDAOdb();
+            //  rewardsDAO = new RewardDAO();
+           rewardsDAO = new RewardDAOdb();
         }
 
         public IEnumerable<Reward> InitList()
@@ -22,14 +22,19 @@ namespace Department.BLL
             return rewardsDAO.InitListRewards();
         }
 
-        public IEnumerable<Reward> SortRewardsByFullNameAsc()
+        public IEnumerable<Reward> GetList()
+        {
+            return rewardsDAO.GetList();
+        }
+
+        public IEnumerable<Reward> SortRewardsByAsc()
         {
             return (from s in GetList()
                     orderby s.Title ascending
                     select s);
         }
 
-        public IEnumerable<Reward> SortRewardsByFullNameDesc()
+        public IEnumerable<Reward> SortRewardsByDesc()
         {
             return (from s in GetList()
                     orderby s.Title descending
@@ -73,13 +78,23 @@ namespace Department.BLL
             rewardsDAO.Remove(reward);
         }
 
-
-
-
-
-        public IEnumerable<Reward> GetList()
+        public void Edit(string title, string description)
         {
-            return rewardsDAO.GetList();
+            Reward reward = new Reward
+            {
+                Title = title,
+                Description = description,
+            };
+            this.Edit(reward);
         }
+
+        public void Edit(Reward reward)
+        {
+            if (reward == null)
+                throw new ArgumentException("пользователь");
+            rewardsDAO.Edit(reward);
+        }
+
+
     }
 }

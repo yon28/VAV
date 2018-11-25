@@ -53,8 +53,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RewardDAOdb.cs" />
     <Compile Include="RewardsDAO.cs" />
-    <Compile Include="SqlDAO.cs" />
+    <Compile Include="EmployeeDAOdb.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities\Entities.csproj">

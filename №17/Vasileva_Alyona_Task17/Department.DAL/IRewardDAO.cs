@@ -5,9 +5,10 @@ namespace Department.DAL
 {
     public interface IRewardDAO
     {
-        void Add(Entities.Reward reward);
-        System.Collections.Generic.IEnumerable<Entities.Reward> GetList();
-        void Remove(Entities.Reward reward);
+        void Add(Reward reward);
+        IEnumerable<Reward> GetList();
+        void Remove(Reward reward);
         IEnumerable<Reward> InitListRewards();
+        void Edit(Reward reward);
     }
 }

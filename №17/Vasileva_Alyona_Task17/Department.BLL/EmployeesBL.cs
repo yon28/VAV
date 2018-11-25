@@ -13,8 +13,8 @@ namespace Department.BLL
 
 		public EmployeesBL()
 		{
-			employeesDAO = new EmployeeDAO();
-            //employeesDAO = new EmployeeDAOdb();
+		  //   employeesDAO = new EmployeeDAO();
+          	 employeesDAO = new EmployeeDAOdb();
         }
         public IEnumerable<Employee> InitList()
         {
@@ -36,14 +36,16 @@ namespace Department.BLL
 						select s).ToList();
 		}
 
-		public void Add(string lastName, string firstName, DateTime birth, string rewardS)
+		public void Add(string lastName, string firstName, DateTime birth, string rewards, List<int> rewardsIdList)
 		{
-			Employee employee = new Employee
+
+            Employee employee = new Employee
 			{
                 FirstName = firstName,
                 LastName = lastName,
                 Birth = birth,
-                Rewards = rewardS
+                Rewards = rewards,
+                RewardsIdList = rewardsIdList
             };
 
 			this.Add(employee);
@@ -53,18 +55,18 @@ namespace Department.BLL
 		{
 			if (employee == null)
 				throw new ArgumentException("пользователь");
-
 			employeesDAO.Add(employee);
 		}
 
-        public void Remove(string lastName, string firstName, DateTime birth, string rewardS)
+        public void Remove(string lastName, string firstName, DateTime birth, string rewards, List<int> rewardsIdList)
         {
             Employee employee = new Employee
             {
                 FirstName = firstName,
                 LastName = lastName,
                 Birth = birth,
-                Rewards = rewardS
+                Rewards = rewards,
+                RewardsIdList = rewardsIdList
             };
 
             this.Remove(employee);
@@ -81,5 +83,25 @@ namespace Department.BLL
 		{
 			return employeesDAO.GetList();
 		}
+
+        public void Edit(string lastName, string firstName, DateTime birth, string rewards, List<int> rewardsIdList)
+        {
+            Employee employee = new Employee
+            {
+                LastName = lastName,
+                FirstName = firstName,
+                Birth =  birth,
+                Rewards = rewards,
+                RewardsIdList = rewardsIdList
+            };
+            this.Edit(employee);
+        }
+
+        public void Edit(Employee employee)
+        {
+            if (employee == null)
+                throw new ArgumentException("пользователь");
+            employeesDAO.Edit(employee);
+        }
     }
 }

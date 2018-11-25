@@ -1,6 +1,9 @@
-﻿using Entities;
+﻿using Department.BLL;
+using Entities;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace WinForms
@@ -14,37 +17,23 @@ namespace WinForms
 
 		private bool createNew = true;
 
-
 		#region Properties
 
 		public string LastName
 		{
-			get
-			{
-				return lastName;
-			}
+			get=> lastName;
 		}
         public string FirstName
         {
-            get
-            {
-                return firstName;
-            }
+            get=> firstName;
         }
         public DateTime Birth
 		{
-			get
-			{
-				return birth;
-			}
+			get=> birth;
 		}
-
 		public int ID
 		{
-			get
-			{
-				return idNumber;
-			}
+			get=> idNumber;
 		}
 
 		#endregion
@@ -53,28 +42,45 @@ namespace WinForms
 		{
 			InitializeComponent();
 		}
-
-		public EmployeeForm(Employee employee)
-		{
-			InitializeComponent();
+        EmployeeGridViewModel model; 
+        RewardsBL rewardsBl;
+        public EmployeeForm(Employee employee, RewardsBL rewardsBl)
+        {
+            InitializeComponent();
             this.lastName = employee.LastName;
             this.firstName = employee.FirstName;
-			this.birth = employee.Birth;
-			this.idNumber = employee.ID;
+            this.birth = employee.Birth;
+            this.idNumber = employee.ID;
+            this.rewardsBl = rewardsBl;//
+                                       //  rewardsBl.InitList();
+            model = EmployeeGridViewModel.CreateFromEmployee(employee);
+            InitializeRewards(employee, rewardsBl.GetList());//
             createNew = false;
-		}
 
-		private void Form_Load(object sender, EventArgs e)
+        }
+      
+        private void InitializeRewards(Employee employee, IEnumerable<Reward> enumerable)
+        {
+            var rewards = enumerable.ToList();
+            /* 
+                        for (int i = 0; i < rewards.Count; i++)
+                        {
+                            var index = chRewards.Items.Add(rewards[i].ID); //
+                            if (model.Rewards.FirstOrDefault(r => r.ID == rewards[i].ID) != null)
+                            {
+                                chRewards.SetSelected(index, true);
+                            }
+                        }*/
+
+        }
+
+
+
+        private void Form_Load(object sender, EventArgs e)
 		{
 			txtLastName.Text = lastName;
             txtFirstName.Text = firstName;
-		//	dtBirth.Text = birth.ToString();
-
-
-
-
-            // cbYear.SelectedIndex = 0;
-
+			
             if (createNew == true)
 			{
 				this.Text = "Регистрация нового пользователя";
@@ -84,16 +90,12 @@ namespace WinForms
 			{
 				this.Text = "Редактирование записи о пользователя";
 				btnOK.Text = "Обновить";
-			}
+                dtBirth.Value = birth;
+            }
 		}
 
 		private void OK_Click(object sender, EventArgs e)
 		{
-      /*      lastName = txtLastName.Text;
-            firstName = txtFirstName.Text;
-            idNumber = Int32.Parse(txtIDNumber.Text);
-            txtBirst.Text = birth.ToString();*/
-
             if (this.ValidateChildren() == true)
 			{
 				this.DialogResult = DialogResult.OK;
@@ -119,17 +121,14 @@ namespace WinForms
 				e.Cancel = false;
 			}
 		}
-
 		private void LastName_Validated(object sender, EventArgs e)
 		{
             lastName = txtLastName.Text.Trim();
 		}
 
-
         private void FirstName_Validating(object sender, CancelEventArgs e)
         {
             string input = txtFirstName.Text.Trim();
-
             if (String.IsNullOrEmpty(input) == true)
             {
                 errorProvider.SetError(txtFirstName, "Некорректное значение!");
@@ -141,33 +140,28 @@ namespace WinForms
                 e.Cancel = false;
             }
         }
-
         private void FirstName_Validated(object sender, EventArgs e)
         {
             firstName = txtFirstName.Text.Trim();
         }
 
-    		private void Birth_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Birth_Validating(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			string input = dtBirth.Text.Trim();
-
-			int result;
-			if (Int32.TryParse(input, out result) == false)
-			{
-				errorProvider.SetError(dtBirth, "Некорректное значение!");
-				e.Cancel = true;
-			}
-			else
-			{
-				errorProvider.SetError(dtBirth, String.Empty);
-				e.Cancel = false;
-			}
-		}
-
+            DateTime input = dtBirth.Value.Date;
+            if (input == null)
+            {
+                errorProvider.SetError(dtBirth, "Некорректное значение!");
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.SetError(dtBirth, null);
+                e.Cancel = false;
+            }
+        }
 		private void Birth_Validated(object sender, EventArgs e)
 		{
-			birth = DateTime.Parse(dtBirth.Text);
+			birth = dtBirth.Value.Date;
 		}
-
     }
 }

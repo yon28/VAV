@@ -140,6 +140,10 @@
             this.dtBirth.Name = "dtBirth";
             this.dtBirth.Size = new System.Drawing.Size(120, 21);
             this.dtBirth.TabIndex = 9;
+            this.dtBirth.Value = new System.DateTime(2010, 11, 22, 0, 0, 0, 0);
+            this.dtBirth.Validating += new System.ComponentModel.CancelEventHandler(this.Birth_Validating);
+            this.dtBirth.Validated += new System.EventHandler(this.Birth_Validated);
+            /////
             // 
             // EmployeeForm
             // 

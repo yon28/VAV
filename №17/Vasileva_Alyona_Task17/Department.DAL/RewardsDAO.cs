@@ -25,7 +25,6 @@ namespace Department.DAL
                 Title = "Награда3",
                 Description = "Описание3",
             });
-
             return GetList();
         }
 
@@ -33,7 +32,7 @@ namespace Department.DAL
         {
             if (reward == null)
                 throw new ArgumentException("награда");
-
+            reward.ID = Math.Abs(GetHashCode());
             rewards.Add(reward);
         }
 
@@ -49,7 +48,10 @@ namespace Department.DAL
 
             rewards.Remove(reward);
         }
-    }
+        public void Edit(Reward reward)
+        {
 
+        }
+    }
    
 }

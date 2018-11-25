@@ -8,7 +8,8 @@ namespace Entities
         public string Description { get; set; }
         public int ID
         {
-            get => Math.Abs(GetHashCode());
+            get;
+            set;
         }
         public override int GetHashCode()
         {

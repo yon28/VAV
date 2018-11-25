@@ -6,9 +6,10 @@ namespace Department.DAL
 {
 	public interface IEmployeeDAO
 	{
-		void Add(Entities.Employee employee);
-		System.Collections.Generic.IEnumerable<Entities.Employee> GetList();
+		void Add(Employee employee);
+        IEnumerable<Employee> GetList();
         void Remove(Employee employee);
         IEnumerable<Employee> InitList();
+        void Edit(Employee employee);
     }
 }

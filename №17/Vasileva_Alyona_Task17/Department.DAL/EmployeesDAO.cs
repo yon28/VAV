@@ -14,24 +14,26 @@ namespace Department.DAL
             {
                 LastName = "Иванов ",
                 FirstName = "И.И.",
-                Birth = DateTime.Now,
-                Rewards = "Награда1"
+                Birth = new DateTime(2000, 12, 12),
+                Rewards = "Награда1",
+                RewardsIdList = new List<int> {  }
             });
             Add(new Employee()
             {
                 LastName = "Петров ",
                 FirstName = "И.И.",
                 Birth = DateTime.Now,
-                Rewards = null
+                Rewards = null,
+                RewardsIdList = new List<int> { }
             });
             Add(new Employee()
             {
                 LastName = "Никитин ",
                 FirstName = "И.И.",
                 Birth = DateTime.Now,
-                Rewards = null
+                Rewards = null,
+                RewardsIdList = new List<int> { }
             });
-
             return GetList();
         }
 
@@ -39,9 +41,9 @@ namespace Department.DAL
 		{
 			if (employee == null)
 				throw new ArgumentException("пользователь");
-
-			employees.Add(employee);
-		}
+            employee.ID = Math.Abs(GetHashCode());
+            employees.Add(employee);
+        }
 
 		public IEnumerable<Employee> GetList()
 		{
@@ -54,6 +56,11 @@ namespace Department.DAL
                 throw new ArgumentException("пользователь");
 
             employees.Remove(employee);
+        }
+
+        public void Edit(Employee employee)
+        {
+
         }
     }
 
