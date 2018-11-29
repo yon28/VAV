@@ -42,7 +42,7 @@ namespace WinForms
         {
             InitializeComponent();
         }
-        EmployeeGridViewModel model;
+        public EmployeeGridViewModel model;
         public EmployeeForm(Employee employee, RewardsBL rewardsBl)
         {
             InitializeComponent();

@@ -233,11 +233,9 @@ namespace WinForms
         
         private void RegisterNewEmployee()
         {
-            EmployeeForm form = new EmployeeForm();
-            for (int i = 0; i < dgvRewards.RowCount; i++)
-            {
-                form.chRewards.Items.Add(dgvRewards[0, i].Value);
-            }
+            Employee employee = (Employee)dgvEmployees.SelectedCells[0].OwningRow.DataBoundItem;
+            EmployeeForm form = new EmployeeForm(employee, rewards);
+
 
             if (form.ShowDialog(this) == DialogResult.OK)
             {
@@ -246,7 +244,7 @@ namespace WinForms
             }
         }
 
-     /*   private string Checked_(EmployeeForm form)
+     /*  private string Checked(EmployeeForm form)
         {
             string text = "";
             for (int i = 0; i < form.chRewards.CheckedItems.Count; i++)
@@ -294,32 +292,12 @@ namespace WinForms
             {
                 Employee employee = (Employee)dgvEmployees.SelectedCells[0].OwningRow.DataBoundItem;
                 EmployeeForm form = new EmployeeForm(employee, rewards);
-
-                for (int i = 0; i < dgvRewards.RowCount; i++)
-                {
-                    bool b = true;
-                    if (employee.Rewards == null)
-                     //   if (employee.Rewards == null)
-                        {
-                        b = false;
-                    }
-                    else
-                    {
-                        //if (!employee.Rewards.Contains(dgvRewards[0, i].Value.ToString()))
-                            if (!RewardsToString(employee.Rewards).Contains(dgvRewards[0, i].Value.ToString()))
-                            {
-                            b = false;
-                        }
-                    }
-                    form.chRewards.Items.Add(dgvRewards[0, i].Value, b);
-                }
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     employee.LastName = form.LastName;
                     employee.FirstName = form.FirstName;
                     employee.Birth = form.Birth;
                     employee.Rewards = Checked(form);
-                    //employee.Rewards = Checked_(form);
                     employees.Edit(employee);
                     DisplayEmployee();
                 }

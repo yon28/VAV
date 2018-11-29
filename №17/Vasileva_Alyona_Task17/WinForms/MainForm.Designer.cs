@@ -353,7 +353,6 @@ namespace WinForms
             // dgvReward
             // 
             this.dgvReward.ContextMenuStrip = this.ctlContextMenuReward;
-            this.dgvReward.DataPropertyName = "Rewards";
             this.dgvReward.HeaderText = "Награды";
             this.dgvReward.Name = "dgvReward";
             this.dgvReward.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
