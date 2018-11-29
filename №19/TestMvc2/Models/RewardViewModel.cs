@@ -21,5 +21,17 @@ namespace TestMvc2.Models
 			model.Checked = userRewards.Any(r => r.Id == reward.Id);
 			return model;
 		}
-	}
+
+
+        public Reward ToReward()
+        {
+            return new Reward
+            {
+                Id = Id,
+                Title = Title,
+                Description = Description
+        };
+        }
+       
+    }
 }

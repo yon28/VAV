@@ -44,18 +44,17 @@ namespace TestMvc2.Controllers
             {
                 rewards.Remove(currentReward);
             }
-
             return RedirectToAction("Index");
         }
 
-        public ActionResult Save(UserViewModel rewardModel)
+        public ActionResult Save(RewardViewModel rewardModel)
         {
             if (rewardModel != null)
             {
                 if (rewardModel.Id == default(int))
                 {
                     // add
-  
+                    rewards.Add(rewardModel.ToReward());
                 }
                 else
                 {
@@ -63,7 +62,9 @@ namespace TestMvc2.Controllers
                     var currentReward = rewards.FirstOrDefault(u => u.Id == rewardModel.Id);
                     if (currentReward != null)
                     {
-
+                        var reward = rewardModel.ToReward();
+                        currentReward.Title = reward.Title;
+                        currentReward.Description = reward.Description;
                     }
                 }
             }

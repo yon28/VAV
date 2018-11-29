@@ -24,8 +24,8 @@
                 <td>@reward.Title</td>
                 <td>@reward.Description</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "Reward", new { UserId = @reward.Id }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Delete", "Delete", "Reward", new { UserId = @reward.Id }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Edit", "Edit", "Reward", new { RewardId = @reward.Id }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Delete", "Delete", "Reward", new { RewardId = @reward.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }
