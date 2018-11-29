@@ -6,6 +6,7 @@ CREATE DATABASE EmployeesAndRewards
 GO
 
 USE EmployeesAndRewards
+
 CREATE TABLE Employees(
 	[Id] int not null primary key identity(1,1),
 	[LastName] nvarchar(150),
@@ -28,7 +29,6 @@ INSERT INTO Employees
 VALUES(N'Employee 1','1', '2000-10-02'),
 (N'Employee 3','1', '2000-10-02'),
 (N'Employee 4','1', '2000-10-02')
-
 END
 GO
 
@@ -38,7 +38,6 @@ BEGIN
 INSERT INTO Rewards
 VALUES(N'nobel prize', N'epic reward'),
 (N'another prize', 'common reward')
-
 END
 GO
 
@@ -89,18 +88,6 @@ BEGIN
 END
 GO
 
-
-CREATE PROCEDURE AddEmployeeRewards( 
-	InsertedId  int, rewardIds RewardsIds readonly)
-AS
-BEGIN
-	DECLARE @employeeId AS TABLE(id int)
-	INSERT INTO @employeeId VALUES(InsertedId)
-	INSERT INTO Relations
-	SELECT [@employeeId].id, [@rewardIds].id FROM @rewardIds, @employeeId
-END
-GO
-
 CREATE PROCEDURE GetEmployees
 AS
 BEGIN	
@@ -126,13 +113,11 @@ AS
 		OUTPUT INSERTED.Id INTO @insertedEmployee(EmployeeId)
 			VALUES( @lastName, @firstName, @birth)
 	SELECT EmployeeId FROM @insertedEmployee
-
 GO
 
 CREATE PROCEDURE DeleteEmployee(@employeeId int)
 AS
 	DELETE FROM [Employees] WHERE Id = @employeeId;
-
 GO
 
 CREATE PROCEDURE GetRewards
@@ -151,18 +136,14 @@ GO
 CREATE PROCEDURE DeleteReward(@rewardId int)
 AS
 	DELETE FROM [Rewards] WHERE Id = @rewardId;
-
 GO
 
 CREATE PROCEDURE GetRewardsForEmployeeById(@idemployee int)
 AS
-	BEGIN
-	SELECT EmployeeId,Title 
-	FROM [Relations]
-	LEFT JOIN Rewards ON Relations.RewardId =  Rewards.ID
-	WHERE [Relations].EmployeeId = @idemployee;
-
-	END
+	SELECT Rewards.Id,Title,[Description]
+		FROM [Relations]
+			LEFT JOIN Rewards ON Relations.RewardId =  Rewards.Id
+				WHERE [Relations].EmployeeId = @idemployee;
 GO
 
 
@@ -177,7 +158,6 @@ CREATE PROCEDURE UpdateReward(@id int,@title nvarchar(150),@description nvarchar
 AS
 	UPDATE [Rewards] SET [Title] = @title, [Description] = @description
 		WHERE Id = @id
-
 GO
 
 CREATE PROCEDURE UpdateEmployeers
@@ -194,10 +174,10 @@ EXEC InitListReward
 EXEC InitListRelations
 EXEC AddEmployee N'Employee 123', N'1', N'2000-01-01', @Rewards
 EXEC GetRewardsForEmployeeById 1
-EXEC UpdateRewards 2,апрапррпба,прорпо
+EXEC UpdateReward 2,апрапррпба,прорпо
 --DELETE FROM dbo.Employees
 --WHERE id IN (SELECT TOP(2) id FROM dbo.Employees)
-SELECT * FROM dbo.Rewards 
-SELECT * FROM dbo.Employees
+--SELECT * FROM dbo.Rewards 
+--SELECT * FROM dbo.Employees
 END
 --ANN\SQLEXPRESS

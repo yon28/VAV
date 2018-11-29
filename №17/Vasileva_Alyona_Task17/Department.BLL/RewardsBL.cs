@@ -13,8 +13,8 @@ namespace Department.BLL
 
         public RewardsBL()
         {
-            //  rewardsDAO = new RewardDAO();
-           rewardsDAO = new RewardDAOdb();
+            rewardsDAO = new RewardDAO();
+            // rewardsDAO = new RewardDAOdb();
         }
 
         public IEnumerable<Reward> InitList()

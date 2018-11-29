@@ -15,24 +15,24 @@ namespace Department.DAL
                 LastName = "Иванов ",
                 FirstName = "И.И.",
                 Birth = new DateTime(2000, 12, 12),
-                Rewards = "Награда1",
-                RewardsIdList = new List<int> {  }
+          //      Rewards = "Награда1",
+                Rewards = new List<Reward> {  }
             });
             Add(new Employee()
             {
                 LastName = "Петров ",
                 FirstName = "И.И.",
                 Birth = DateTime.Now,
-                Rewards = null,
-                RewardsIdList = new List<int> { }
+            //    Rewards = null,
+                Rewards = new List<Reward> { }
             });
             Add(new Employee()
             {
                 LastName = "Никитин ",
                 FirstName = "И.И.",
                 Birth = DateTime.Now,
-                Rewards = null,
-                RewardsIdList = new List<int> { }
+           //     Rewards = null,
+                Rewards = new List<Reward> { }
             });
             return GetList();
         }

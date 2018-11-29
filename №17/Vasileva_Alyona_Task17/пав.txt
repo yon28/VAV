@@ -1,0 +1,33 @@
+
+CREATE PROCEDURE AddEmployeeRewards( 
+	InsertedId  int, rewardIds RewardsIds readonly)
+AS
+BEGIN
+	DECLARE @employeeId AS TABLE(id int)
+	INSERT INTO @employeeId VALUES(InsertedId)
+	INSERT INTO Relations
+	SELECT [@employeeId].id, [@rewardIds].id FROM @rewardIds, @employeeId
+END
+GO
+
+
+ /* DataTable tempRewardsTable = new DataTable();
+             tempRewardsTable.Columns.Add("RewardId", typeof(int));
+             if (employee.RewardsList != null)
+             {
+                 foreach (var RewardsId in employee.RewardsList)
+                 {
+                     tempRewardsTable.Rows.Add(RewardsId);
+                 }
+                 using (var command = new SqlCommand())
+                 {
+                     command.CommandType = CommandType.StoredProcedure;
+                     command.CommandText = "AddEmployeeRewards";
+                     command.Parameters.AddWithValue("@employeeId", employee.ID);
+                     var rewardsTableParameter = command.Parameters.AddWithValue("@rewardIds", tempRewardsTable);
+                     rewardsTableParameter.SqlDbType = SqlDbType.Structured;
+                     _connection.Open();
+                     var result = command.ExecuteNonQuery();
+                     _connection.Close();
+                 }
+             }*/

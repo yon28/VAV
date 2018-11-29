@@ -37,19 +37,25 @@ namespace Entities
                 }
             }
         }
+        //    public List<Reward> Rewards { get;set; }
+        public List<Reward> Rewards
+        {
+            get;
+            set;
+        }
 
         public List<int> RewardsIdList
         {
-            get;
-            set;
+            get
+            {
+                var rewardsIdList = new List<int>();
+                foreach (var reward in Rewards)
+                {
+                    rewardsIdList.Add(reward.ID);
+                }
+                return rewardsIdList;
+            }
         }
-
-        public string Rewards
-        {
-            get;
-            set;
-        }
-
 
         private DateTime birth;
         public DateTime Birth

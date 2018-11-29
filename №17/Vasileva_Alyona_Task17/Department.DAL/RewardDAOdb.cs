@@ -14,7 +14,6 @@ namespace Department.DAL
         public RewardDAOdb()
         {
             _connection = new SqlConnection(DatabaseConfig.GetConnectionString());
-            GetList();
         }
 
         public IEnumerable<Reward> GetList()

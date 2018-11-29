@@ -13,7 +13,6 @@ namespace Department.DAL
         public EmployeeDAOdb()
         {
             _connection = new SqlConnection(DatabaseConfig.GetConnectionString());
-            GetList();
         }
 
         public void Edit(Employee employee)
@@ -29,8 +28,8 @@ namespace Department.DAL
                 _connection.Open();
                 var result = command.ExecuteNonQuery();
                 _connection.Close();
-                // AddEmployeeRewards(employee);
-
+                AddEmployeeRewards(employee.ID);
+            
             }
         }
 
@@ -39,53 +38,75 @@ namespace Department.DAL
             using (SqlCommand command = _connection.CreateCommand())
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "InsertEmployee";
+                command.CommandText = "AddEmployee";
                 command.Parameters.AddWithValue("@lastName", employee.LastName);
                 command.Parameters.AddWithValue("@firstName", employee.FirstName);
                 command.Parameters.AddWithValue("@birth", employee.Birth);
+                command.Parameters.AddWithValue("@rewardIds", employee.RewardsIdList);
                 _connection.Open();
                 var result = command.ExecuteScalar();
                 var employeeId = (int)result;
                 employee.ID = employeeId;
                 _connection.Close();
-               // AddEmployeeRewards(employee);
-
             }
         }
 
-        public void AddEmployeeRewards(Employee employee)
+        public IEnumerable<Employee> GetList()
         {
-            DataTable tempRewardsTable = new DataTable();
-            tempRewardsTable.Columns.Add("RewardId", typeof(int));
-            if (employee.RewardsIdList != null)
+            var employees = new List<Employee>();
+            _connection.Open();
+            using (SqlCommand command = new SqlCommand("SELECT Id, LastName, FirstName, Birth FROM employees", _connection))
             {
-                foreach (var RewardsId in employee.RewardsIdList)
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    tempRewardsTable.Rows.Add(RewardsId);
+                    int id = (int)reader["Id"];
+                    string lastName = (string)reader["LastName"];
+                    string firstName = (string)reader["FirstName"];
+                    DateTime birth = (DateTime)reader["Birth"];
+                    employees.Add(new Employee()
+                    {
+                        ID = id,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        Birth = birth,
+                    });    
                 }
-                using (var command = new SqlCommand())
+                 _connection.Close();
+                foreach (var employee in employees)
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.CommandText = "AddEmployeeRewards";
-                    command.Parameters.AddWithValue("@employeeId", employee.ID);
-                    var rewardsTableParameter = command.Parameters.AddWithValue("@rewardIds", tempRewardsTable);
-                    rewardsTableParameter.SqlDbType = SqlDbType.Structured;
-                    _connection.Open();
-                    var result = command.ExecuteNonQuery();
-                    _connection.Close();
+                    AddEmployeeRewards(employee.ID);
                 }
+                return employees;
             }
         }
-        /*CREATE PROCEDURE AddEmployeeRewards( 
-            InsertedId  int, rewardIds RewardsIds readonly)
-        AS
-        BEGIN
-            DECLARE @employeeId AS TABLE(id int)
-            INSERT INTO @employeeId VALUES(InsertedId)
-            INSERT INTO Relations
-            SELECT [@employeeId].id, [@rewardIds].id FROM @rewardIds, @employeeId
-        END
-        GO*/
+
+        public List<Reward> AddEmployeeRewards(int ID)
+        {
+            List<Reward> rewards = new List<Reward>();
+            _connection.Open();
+            using (SqlCommand command2 = new SqlCommand("GetRewardsForEmployeeById", _connection))   ///////
+            {
+                command2.CommandType = CommandType.StoredProcedure;
+                command2.Parameters.AddWithValue("@idemployee", ID);
+                SqlDataReader reader2 = command2.ExecuteReader();
+                while (reader2.Read())
+                {
+                    int rewardsId = (int)reader2["Id"];
+                    string title = (string)reader2["Title"];
+                    string description = (string)reader2["Description"];
+                    rewards.Add(new Reward()
+                    {
+                        ID = rewardsId,
+                        Title = title,
+                        Description = description
+                    });
+                }
+            }
+            _connection.Close();
+            return rewards;
+        }
+
         public void Remove(Employee employee)
         {
             _connection.Open();
@@ -104,41 +125,10 @@ namespace Department.DAL
             return GetList();
         }
 
-        public IEnumerable<Employee> GetList()
-        {
-            _connection.Open();
-            using (SqlCommand command = new SqlCommand("SELECT Id, LastName, FirstName, Birth FROM employees", _connection))
-            {
-                SqlDataReader reader = command.ExecuteReader();
-                var employees = new List<Employee>();
-
-                while (reader.Read())
-                {
-                    int id = (int)reader["Id"];
-                    string lastName = (string)reader["LastName"];
-                    string firstName = (string)reader["FirstName"];
-                    DateTime birth = (DateTime)reader["Birth"];
-
-                    employees.Add(new Employee()
-                    {
-                        ID = id,
-                        FirstName = firstName,
-                        LastName = lastName,
-                        Birth = birth
-                    });
-
-                }
-                _connection.Close();
-                return employees;
-            }
-        }
-
         public void Dispose()
         {
             if (_connection != null)
                 _connection.Dispose();
         }
     }
-
-
 }

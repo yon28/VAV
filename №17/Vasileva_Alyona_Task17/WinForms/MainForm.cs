@@ -234,19 +234,19 @@ namespace WinForms
         private void RegisterNewEmployee()
         {
             EmployeeForm form = new EmployeeForm();
-          for (int i = 0; i < dgvRewards.RowCount; i++)
+            for (int i = 0; i < dgvRewards.RowCount; i++)
             {
                 form.chRewards.Items.Add(dgvRewards[0, i].Value);
-            }//////
+            }
 
             if (form.ShowDialog(this) == DialogResult.OK)
             {
-                employees.Add(form.LastName, form.FirstName, form.Birth, Checked_(form), Checked(form));///////
+                employees.Add(form.LastName, form.FirstName, form.Birth, Checked(form));///////
                 DisplayEmployee();
             }
         }
 
-        private string Checked_(EmployeeForm form)
+     /*   private string Checked_(EmployeeForm form)
         {
             string text = "";
             for (int i = 0; i < form.chRewards.CheckedItems.Count; i++)
@@ -254,28 +254,27 @@ namespace WinForms
                 text = text + " " + form.chRewards.CheckedItems[i].ToString();
             }
             return text;
-        }
+        }*/
 
-        private List<int> Checked(EmployeeForm form)
+        private List<Reward> Checked(EmployeeForm form)
         {
-            List<int> RewardsIdList = new List<int> { };
+            List<Reward> Rewards = new List<Reward> { };
             if (form.chRewards.CheckedItems.Count != 0)
             {
                 for (int i = 0; i < form.chRewards.CheckedItems.Count; i++)
                 {
-                //    Reward reward = (Reward)dgvRewards.SelectedCells[0].OwningRow.DataBoundItem;//////
+                    Reward reward = (Reward)dgvRewards.SelectedCells[0].OwningRow.DataBoundItem;//////
 
-                  //  RewardsIdList.Add(reward.ID);
+                    Rewards.Add(reward);
                 }
             }
-            //  return RewardsToString(RewardsList);
-            return RewardsIdList;
+            return Rewards;
         }
 
-        private string RewardsToString(List<int> RewardsIdList)
+        private string RewardsToString(List<Reward> Rewards)
         {
             List<string> RewardsTitleList = new List<string> { };
-            for (int i = 0; i < RewardsIdList.Count; i++)
+            for (int i = 0; i < Rewards.Count; i++)
             {
                 Reward reward = (Reward)dgvRewards.SelectedCells[0].OwningRow.DataBoundItem;
                 RewardsTitleList.Add(reward.Title);
@@ -300,13 +299,15 @@ namespace WinForms
                 {
                     bool b = true;
                     if (employee.Rewards == null)
-                    {
+                     //   if (employee.Rewards == null)
+                        {
                         b = false;
                     }
                     else
                     {
-                        if (!employee.Rewards.Contains(dgvRewards[0, i].Value.ToString()))
-                        {
+                        //if (!employee.Rewards.Contains(dgvRewards[0, i].Value.ToString()))
+                            if (!RewardsToString(employee.Rewards).Contains(dgvRewards[0, i].Value.ToString()))
+                            {
                             b = false;
                         }
                     }
@@ -317,9 +318,8 @@ namespace WinForms
                     employee.LastName = form.LastName;
                     employee.FirstName = form.FirstName;
                     employee.Birth = form.Birth;
-
-                    //employee.Rewards = RewardsToString(Checked(form); 
-                    employee.Rewards = Checked_(form);
+                    employee.Rewards = Checked(form);
+                    //employee.Rewards = Checked_(form);
                     employees.Edit(employee);
                     DisplayEmployee();
                 }
@@ -378,24 +378,27 @@ namespace WinForms
                     string del = reward.Title.ToString();
                     for (int i = 0; i < dgvEmployees.RowCount; i++)
                     {
+
+
                         if (dgvEmployees[4, i].Value != null)
                         {
                             if (dgvEmployees[4, i].Value.ToString().Contains(del))
                             {
                                 Employee employee = (Employee)dgvEmployees[4, i].OwningRow.DataBoundItem;
-                                employee.Rewards = employee.Rewards.Replace(del, "");
+                                // employee.Rewards = employee.Rewards.Replace(del, "");
+                                employee.Rewards.Remove(reward);
                                 DisplayEmployee();
                             }
+
                         }
+                        rewards.Remove(reward);
+                        DisplayReward();
+                        DisplayEmployee();
                     }
-                    rewards.Remove(reward);
-                    DisplayReward();
-                    DisplayEmployee();
                 }
             }
+
         }
-
-
     }
 }
 

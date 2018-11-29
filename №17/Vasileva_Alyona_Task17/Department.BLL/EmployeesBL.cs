@@ -13,8 +13,8 @@ namespace Department.BLL
 
 		public EmployeesBL()
 		{
-		  //   employeesDAO = new EmployeeDAO();
-          	 employeesDAO = new EmployeeDAOdb();
+		    employeesDAO = new EmployeeDAO();
+          	 // employeesDAO = new EmployeeDAOdb();
         }
         public IEnumerable<Employee> InitList()
         {
@@ -36,7 +36,7 @@ namespace Department.BLL
 						select s).ToList();
 		}
 
-		public void Add(string lastName, string firstName, DateTime birth, string rewards, List<int> rewardsIdList)
+		public void Add(string lastName, string firstName, DateTime birth, List<Reward> rewards)
 		{
 
             Employee employee = new Employee
@@ -44,8 +44,7 @@ namespace Department.BLL
                 FirstName = firstName,
                 LastName = lastName,
                 Birth = birth,
-                Rewards = rewards,
-                RewardsIdList = rewardsIdList
+                Rewards = rewards
             };
 
 			this.Add(employee);
@@ -58,15 +57,14 @@ namespace Department.BLL
 			employeesDAO.Add(employee);
 		}
 
-        public void Remove(string lastName, string firstName, DateTime birth, string rewards, List<int> rewardsIdList)
+        public void Remove(string lastName, string firstName, DateTime birth, List<Reward> rewards)
         {
             Employee employee = new Employee
             {
                 FirstName = firstName,
                 LastName = lastName,
                 Birth = birth,
-                Rewards = rewards,
-                RewardsIdList = rewardsIdList
+                Rewards = rewards
             };
 
             this.Remove(employee);
@@ -84,15 +82,14 @@ namespace Department.BLL
 			return employeesDAO.GetList();
 		}
 
-        public void Edit(string lastName, string firstName, DateTime birth, string rewards, List<int> rewardsIdList)
+        public void Edit(string lastName, string firstName, DateTime birth, List<Reward> rewards)
         {
             Employee employee = new Employee
             {
                 LastName = lastName,
                 FirstName = firstName,
                 Birth =  birth,
-                Rewards = rewards,
-                RewardsIdList = rewardsIdList
+                Rewards = rewards
             };
             this.Edit(employee);
         }

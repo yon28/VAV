@@ -8,42 +8,41 @@ using System.Windows.Forms;
 
 namespace WinForms
 {
-	public partial class EmployeeForm : Form
-	{
-		private string lastName;
+    public partial class EmployeeForm : Form
+    {
+        private string lastName;
         private string firstName;
         private DateTime birth;
-		private int idNumber;
+        private int idNumber;
 
-		private bool createNew = true;
+        private bool createNew = true;
 
-		#region Properties
+        #region Properties
 
-		public string LastName
-		{
-			get=> lastName;
-		}
+        public string LastName
+        {
+            get => lastName;
+        }
         public string FirstName
         {
-            get=> firstName;
+            get => firstName;
         }
         public DateTime Birth
-		{
-			get=> birth;
-		}
-		public int ID
-		{
-			get=> idNumber;
-		}
+        {
+            get => birth;
+        }
+        public int ID
+        {
+            get => idNumber;
+        }
 
-		#endregion
+        #endregion
 
-		public EmployeeForm()
-		{
-			InitializeComponent();
-		}
-        EmployeeGridViewModel model; 
-        RewardsBL rewardsBl;
+        public EmployeeForm()
+        {
+            InitializeComponent();
+        }
+        EmployeeGridViewModel model;
         public EmployeeForm(Employee employee, RewardsBL rewardsBl)
         {
             InitializeComponent();
@@ -51,80 +50,78 @@ namespace WinForms
             this.firstName = employee.FirstName;
             this.birth = employee.Birth;
             this.idNumber = employee.ID;
-            this.rewardsBl = rewardsBl;//
-                                       //  rewardsBl.InitList();
             model = EmployeeGridViewModel.CreateFromEmployee(employee);
             InitializeRewards(employee, rewardsBl.GetList());//
             createNew = false;
 
         }
-      
+
         private void InitializeRewards(Employee employee, IEnumerable<Reward> enumerable)
         {
             var rewards = enumerable.ToList();
-            /* 
-                        for (int i = 0; i < rewards.Count; i++)
-                        {
-                            var index = chRewards.Items.Add(rewards[i].ID); //
-                            if (model.Rewards.FirstOrDefault(r => r.ID == rewards[i].ID) != null)
-                            {
-                                chRewards.SetSelected(index, true);
-                            }
-                        }*/
+
+            for (int i = 0; i < rewards.Count; i++)
+            {
+                var index = chRewards.Items.Add(rewards[i].Title); //
+                if (model.Rewards.Contains(rewards[i].Title))
+                {
+                    chRewards.SetSelected(index, true);
+                }
+            }
 
         }
 
 
 
         private void Form_Load(object sender, EventArgs e)
-		{
-			txtLastName.Text = lastName;
+        {
+            txtLastName.Text = lastName;
             txtFirstName.Text = firstName;
-			
+
             if (createNew == true)
-			{
-				this.Text = "Регистрация нового пользователя";
-				btnOK.Text = "Создать";
-			}
-			else
-			{
-				this.Text = "Редактирование записи о пользователя";
-				btnOK.Text = "Обновить";
+            {
+                this.Text = "Регистрация нового пользователя";
+                btnOK.Text = "Создать";
+            }
+            else
+            {
+                this.Text = "Редактирование записи о пользователя";
+                btnOK.Text = "Обновить";
                 dtBirth.Value = birth;
             }
-		}
+        }
 
-		private void OK_Click(object sender, EventArgs e)
-		{
+        private void OK_Click(object sender, EventArgs e)
+        {
             if (this.ValidateChildren() == true)
-			{
-				this.DialogResult = DialogResult.OK;
-			}
-			else 
-			{
-				this.DialogResult = DialogResult.None;
-			}
-		}
+            {
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                this.DialogResult = DialogResult.None;
+            }
+        }
 
-		private void LastName_Validating(object sender, CancelEventArgs e)
-		{
-			string input = txtLastName.Text.Trim();
+        private void LastName_Validating(object sender, CancelEventArgs e)
+        {
+            string input = txtLastName.Text.Trim();
 
-			if (String.IsNullOrEmpty(input) == true)
-			{
-				errorProvider.SetError(txtLastName, "Некорректное значение!");
-				e.Cancel = true;
-			}
-			else
-			{
-				errorProvider.SetError(txtLastName, String.Empty);
-				e.Cancel = false;
-			}
-		}
-		private void LastName_Validated(object sender, EventArgs e)
-		{
+            if (String.IsNullOrEmpty(input) == true)
+            {
+                errorProvider.SetError(txtLastName, "Некорректное значение!");
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtLastName, String.Empty);
+                e.Cancel = false;
+            }
+        }
+        private void LastName_Validated(object sender, EventArgs e)
+        {
             lastName = txtLastName.Text.Trim();
-		}
+        }
 
         private void FirstName_Validating(object sender, CancelEventArgs e)
         {
@@ -146,7 +143,7 @@ namespace WinForms
         }
 
         private void Birth_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-		{
+        {
             DateTime input = dtBirth.Value.Date;
             if (input == null)
             {
@@ -159,9 +156,9 @@ namespace WinForms
                 e.Cancel = false;
             }
         }
-		private void Birth_Validated(object sender, EventArgs e)
-		{
-			birth = dtBirth.Value.Date;
-		}
+        private void Birth_Validated(object sender, EventArgs e)
+        {
+            birth = dtBirth.Value.Date;
+        }
     }
 }
