@@ -1,0 +1,20 @@
+﻿@using Entities;
+
+@model UserViewModel
+
+@{
+	ViewBag.Title = "Deleted";
+	var currentUser = Model;
+	if (currentUser == null)
+	{
+		currentUser = new UserViewModel();
+	}
+}
+
+<h2>Deleted User?</h2>
+<form action="Delete" method="post">
+	<div class="form-group">
+		@Html.ActionLink("Delete", "Delete", "User", new { UserId = @currentUser.ID }, new { @class = "btn btn-danger" })
+		@Html.ActionLink("Cancel", "Index", "User", new { }, new { @class = "btn btn-default" })
+	</div>
+</form>

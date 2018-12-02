@@ -1,0 +1,35 @@
+﻿@using Department.BLL;
+@using Entities;
+
+@model List<Reward>
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>Rewards</h2>
+@Html.ActionLink("Add", "Add", "Reward", new { }, new { @class = "btn btn-primary" })
+
+<table class="table table-bordered" style="margin-top: 50px;">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Description</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var reward in Model)
+		{
+			<tr>
+				<td>@reward.Title</td>
+				<td>@reward.Description</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", "Reward", new { RewardId = @reward.ID }, new { @class = "btn btn-default" })
+					@Html.ActionLink("Delete", "Del", "Reward", new { RewardId = @reward.ID }, new { @class = "btn btn-danger" })
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+

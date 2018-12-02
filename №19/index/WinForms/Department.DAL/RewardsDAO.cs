@@ -1,0 +1,58 @@
+﻿using Entities;
+using System;
+using System.Collections.Generic;
+
+namespace Department.DAL
+{
+    public class RewardDAO : IRewardDAO
+    {
+        private List<Reward> rewards = new List<Reward>();
+
+        public IEnumerable<Reward> InitListRewards()
+        {
+            Add(new Reward()
+            {
+                Title = "Награда1",
+                Description = "Описание1",
+
+            });
+            Add(new Reward()
+            {
+                Title = "Награда2",
+                Description = "Описание2",
+            });
+            Add(new Reward()
+            {
+                Title = "Награда3",
+                Description = "Описание3",
+            });
+            return GetList();
+        }
+
+        public void Add(Reward reward)
+        {
+            if (reward == null)
+                throw new ArgumentException("награда");
+            reward.ID = Math.Abs(GetHashCode());
+            rewards.Add(reward);
+        }
+
+        public List<Reward> GetList()
+        {
+            return rewards;
+        }
+
+        public void Remove(Reward reward)
+        {
+            if (reward == null)
+                throw new ArgumentException("пользователь");
+
+            rewards.Remove(reward);
+        }
+        public void Edit(Reward reward)
+        {
+
+        }
+    }
+   
+}
