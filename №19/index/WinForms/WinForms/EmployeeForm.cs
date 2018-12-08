@@ -47,39 +47,38 @@ namespace WinForms
         public EmployeeForm(Employee employee, RewardsBL rewardsBl)
         {
             InitializeComponent();
-            this.idNumber = employee.ID;
-            this.firstName = employee.FirstName;
-            this.lastName = employee.LastName;
-            this.birth = employee.Birth;
-            this.rewards = employee.Rewards;
-
-			var allRewards = rewardsBl.GetList();
-
-
-			employeemodel = UserViewModel.GetViewModel(employee, allRewards);
-            InitializeRewards(employeemodel, allRewards);
-            createNew = false;
+            var allRewards = rewardsBl.GetList();
+            if (employee != null)
+            {
+                this.idNumber = employee.ID;
+                this.firstName = employee.FirstName;
+                this.lastName = employee.LastName;
+                this.birth = employee.Birth;
+                this.rewards = employee.Rewards;
+                createNew = false;
+                employeemodel = UserViewModel.GetViewModel(employee, allRewards);
+                InitializeRewards(employeemodel);
+            }
+            else
+            {
+                for (int i = 0; i < allRewards.Count; i++)
+                {
+                    var index = chRewards.Items.Add(allRewards[i].Title);
+                }
+            }
         }
 
-        private void InitializeRewards(UserViewModel employeemodel, IEnumerable<Reward> enumerable)
+        private void InitializeRewards(UserViewModel employeemodel)
         {
-            var rewards = enumerable.ToList();
+            var rewards = employeemodel.AvailableRewards;
             for (int i = 0; i < rewards.Count; i++)
             {
-                var index = chRewards.Items.Add(rewards[i].Title);
-                //if (employeemodel.Rewards.FirstOrDefault(r => r.Title == rewards[i].Title) != null)
-                // if (employeemodel.Rewards.Contains(rewards[i]))
-                {
-                    chRewards.SetSelected(index, true);
-                }
+                var index = chRewards.Items.Add(rewards[i].Title, rewards[i].Checked);
             }
         }
 
         private void Form_Load(object sender, EventArgs e)
         {
-            txtLastName.Text = lastName;
-            txtFirstName.Text = firstName;
-
             if (createNew == true)
             {
                 this.Text = "Регистрация нового пользователя";
@@ -89,6 +88,8 @@ namespace WinForms
             {
                 this.Text = "Редактирование записи о пользователе";
                 btnOK.Text = "Обновить";
+                txtLastName.Text = lastName;
+                txtFirstName.Text = firstName;
                 dtBirth.Value = birth;
             }
         }

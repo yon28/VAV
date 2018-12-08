@@ -23,22 +23,20 @@ CREATE TABLE Rewards(
 GO
 
 CREATE PROCEDURE InitListEmployee
-AS
-BEGIN
+AS BEGIN
 INSERT INTO Employees
 VALUES(N'Employee 1','1', '2000-10-02'),
 (N'Employee 3','1', '2000-10-02'),
 (N'Employee 4','1', '2000-10-02')
-END
+END 
 GO
 
 CREATE PROCEDURE InitListReward
-AS
-BEGIN
+AS BEGIN
 INSERT INTO Rewards
 VALUES(N'nobel prize', N'epic reward'),
 (N'another prize', 'common reward')
-END
+END 
 GO
 
 CREATE TABLE Relations(
@@ -51,124 +49,95 @@ CREATE TABLE Relations(
 GO
 
 CREATE PROCEDURE InitListRelations
-AS
-BEGIN
-INSERT INTO Relations
-VALUES(1, 1), (1,2),(2,2)
-END
+AS INSERT INTO Relations VALUES(1, 1), (1,2),(2,2) 
 GO
 
 CREATE PROCEDURE AddRewards(
-	@title nvarchar(150),
-	@description nvarchar(150))
-AS
-BEGIN
+	@title nvarchar(150), 	@description nvarchar(150))
+AS BEGIN
 	INSERT INTO Rewards
 	VALUES(@title, @description)
-END
-GO
-
-CREATE TYPE RewardsIds
-AS TABLE(id int)
-GO
-
-CREATE PROCEDURE AddEmployee(
-	@lastname nvarchar(150),
-	@firstname nvarchar(150),
-	@birth DateTime2,
-	@rewardIds RewardsIds readonly)
-AS
-BEGIN
-	DECLARE @employeeId AS TABLE(id int)
-	INSERT INTO Employees
-	OUTPUT Inserted.Id INTO @employeeId
-	VALUES(@lastname,@firstname, @birth)
-	INSERT INTO Relations
-	SELECT [@employeeId].id, [@rewardIds].id FROM @rewardIds, @employeeId
-END
+END 
 GO
 
 CREATE PROCEDURE GetEmployees
-AS
-BEGIN	
-	SELECT [Id],[LastName],[FirstName],[Birth]
-		FROM [Employees]
-END
+AS	SELECT [Id],[LastName],[FirstName],[Birth] FROM [Employees] 
 GO
 
 CREATE PROCEDURE GetEmployeeById(@id int)
-AS
-	SELECT [Id],[LastName],[FirstName],[Birth]
-		FROM [Employees]
-			WHERE Id = @id
-GO
-
-CREATE PROCEDURE InsertEmployee(
-	@lastName nvarchar(100),
-	@firstName nvarchar(100),
-	@birth DateTime2)
-AS
-	DECLARE @insertedEmployee TABLE (EmployeeId int);
-	INSERT INTO [Employees](LastName, FirstName, Birth)
-		OUTPUT INSERTED.Id INTO @insertedEmployee(EmployeeId)
-			VALUES( @lastName, @firstName, @birth)
-	SELECT EmployeeId FROM @insertedEmployee
+AS	SELECT [Id],[LastName],[FirstName],[Birth]	FROM [Employees] WHERE Id = @id 
 GO
 
 CREATE PROCEDURE DeleteEmployee(@employeeId int)
-AS
-	DELETE FROM [Employees] WHERE Id = @employeeId;
+AS 	DELETE FROM [Employees] WHERE Id = @employeeId; 
 GO
 
 CREATE PROCEDURE GetRewards
-AS
-	SELECT [Id], [Title], [Description]
-		FROM [Rewards]
+AS	SELECT [Id], [Title], [Description] FROM [Rewards] 
 GO
 
 CREATE PROCEDURE GetRewardsById(@id int)
-AS
-	SELECT [Id], [Title], [Description]
-		FROM [Rewards]
-			WHERE Id = @id
+AS	SELECT [Id], [Title], [Description] FROM [Rewards] 	WHERE Id = @id 
 GO
 
 CREATE PROCEDURE DeleteReward(@rewardId int)
-AS
-	DELETE FROM [Rewards] WHERE Id = @rewardId;
+AS	DELETE FROM [Rewards] WHERE Id = @rewardId
 GO
 
 CREATE PROCEDURE GetRewardsForEmployeeById(@idemployee int)
-AS
-	SELECT Rewards.Id,Title,[Description]
-		FROM [Relations]
-			LEFT JOIN Rewards ON Relations.RewardId =  Rewards.Id
-				WHERE [Relations].EmployeeId = @idemployee;
+AS	SELECT Rewards.Id,Title,[Description]
+	FROM [Relations] 	LEFT JOIN Rewards ON Relations.RewardId =  Rewards.Id
+		WHERE [Relations].EmployeeId = @idemployee 
+		GO
+
+CREATE PROCEDURE UpdateEmployeers 
+AS SELECT * FROM dbo.Employees 
 GO
 
+CREATE TYPE RewardsIds
+AS TABLE(id int) 
+GO
 
-CREATE PROCEDURE UpdateEmployee(@id int,@lastName nvarchar(150),@firstName nvarchar(150),@birth DateTime2)
+CREATE PROCEDURE InsertEmployee(@lastName nvarchar(100),@firstName nvarchar(100),@birth DateTime2)
 AS
-	UPDATE [Employees] SET [LastName] = @lastName,[FirstName] = @firstName,[Birth] = @birth
-		WHERE Id = @id
+	DECLARE @insertedEmployee TABLE (EmployeeId int);
+	INSERT INTO [Employees](LastName, FirstName, Birth)	OUTPUT INSERTED.Id INTO @insertedEmployee(EmployeeId)	VALUES( @lastName, @firstName, @birth)
+	SELECT EmployeeId FROM @insertedEmployee
+GO
 
+CREATE PROCEDURE AddEmployee(@lastname nvarchar(150),@firstname nvarchar(150),@birth DateTime2,@rewardIds RewardsIds readonly)
+AS BEGIN
+	DECLARE @employeeId AS TABLE(id int)
+	INSERT INTO Employees 	OUTPUT Inserted.Id INTO @employeeId		VALUES(@lastname,@firstname, @birth)
+	INSERT INTO Relations SELECT [@employeeId].id, [@rewardIds].id FROM @employeeId,@rewardIds 
+END 
+GO
+
+CREATE PROCEDURE UpdateEmployee(@id int,@lastName nvarchar(150),@firstName nvarchar(150),
+@birth DateTime2, 	@rewardIds RewardsIds readonly)
+AS	BEGIN
+UPDATE [Employees] SET [LastName] = @lastName,[FirstName] = @firstName,[Birth] = @birth	WHERE Id = @id 
+EXEC UpdateRelationsById @id,@rewardIds
+END
 GO
 
 CREATE PROCEDURE UpdateReward(@id int,@title nvarchar(150),@description nvarchar(150))
-AS
-	UPDATE [Rewards] SET [Title] = @title, [Description] = @description
-		WHERE Id = @id
+AS	UPDATE [Rewards] SET [Title] = @title, [Description] = @description		WHERE Id = @id 
 GO
 
-CREATE PROCEDURE UpdateEmployeers
-AS
-SELECT * FROM dbo.Employees
+CREATE PROCEDURE UpdateRelationsById(@Idemployee int, @rewardIds RewardsIds readonly)
+AS BEGIN
+DELETE FROM [Relations] WHERE employeeId = @Idemployee;
+DECLARE @employeeId AS TABLE(id int)
+INSERT INTO @employeeId (id)  VALUES (@Idemployee)
+INSERT INTO Relations
+SELECT [@employeeId].id, [@rewardIds].id FROM @employeeId,@rewardIds 
+END 
 GO
 
 BEGIN
 DECLARE @Rewards RewardsIds;
 INSERT INTO @Rewards VALUES(1),(2)
-
 EXEC InitListEmployee
 EXEC InitListReward
 EXEC InitListRelations
@@ -180,4 +149,3 @@ EXEC UpdateReward 2,апрапррпба,прорпо
 --SELECT * FROM dbo.Rewards 
 --SELECT * FROM dbo.Employees
 END
---ANN\SQLEXPRESS

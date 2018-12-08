@@ -15,40 +15,49 @@ namespace Department.DAL
             _connection = new SqlConnection(DatabaseConfig.GetConnectionString());
         }
 
-        public void Edit(Employee employee)
+        public void EditOrAdd(Employee employee, string commandText)
         {
+            DataTable table = new DataTable();
+            table.Columns.Add(new DataColumn("ID", typeof(int)));
+            foreach (var id in employee.RewardsIdList)
+            {
+                table.Rows.Add(id);
+            }
             using (SqlCommand command = _connection.CreateCommand())
             {
+                if (commandText == "UpdateEmployee")
+                {
+                    command.Parameters.AddWithValue("@id", employee.ID);
+                }  
+                command.CommandText = commandText;
                 command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "UpdateEmployee";
-                command.Parameters.AddWithValue("@id", employee.ID);
                 command.Parameters.AddWithValue("@lastName", employee.LastName);
                 command.Parameters.AddWithValue("@firstName", employee.FirstName);
                 command.Parameters.AddWithValue("@birth", employee.Birth);
+                SqlParameter tvparam = command.Parameters.AddWithValue("@rewardIds" , table);
+                tvparam.SqlDbType = SqlDbType.Structured;
+               // tvparam.TypeName = "dbo.RewardsIds";
                 _connection.Open();
                 var result = command.ExecuteNonQuery();
                 _connection.Close();
-                AddEmployeeRewards(employee.ID);
-            
             }
+        }
+
+        public void Edit(Employee employee)
+        {
+             string  commandText = "UpdateEmployee";
+             EditOrAdd(employee, commandText);
         }
 
         public void Add(Employee employee)
         {
-            using (SqlCommand command = _connection.CreateCommand())
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "AddEmployee";
-                command.Parameters.AddWithValue("@lastName", employee.LastName);
-                command.Parameters.AddWithValue("@firstName", employee.FirstName);
-                command.Parameters.AddWithValue("@birth", employee.Birth);
-                command.Parameters.AddWithValue("@rewardIds", employee.RewardsIdList);
-                _connection.Open();
-                var result = command.ExecuteScalar();
-                var employeeId = (int)result;
-                employee.ID = employeeId;
-                _connection.Close();
-            }
+            string commandText = "AddEmployee";
+            EditOrAdd(employee, commandText);
+
+                //var result = command.ExecuteScalar();
+                //var employeeId = (int)result;
+                //employee.ID = employeeId;
+
         }
 
         public IEnumerable<Employee> GetList()

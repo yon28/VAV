@@ -5,8 +5,7 @@ namespace Entities
 {
     public class RewardViewModel
     {
-       public int ID { get; set; }
-
+        public int ID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public bool Checked { get; set; }
@@ -17,7 +16,7 @@ namespace Entities
             model.ID = reward.ID;
             model.Title = reward.Title;
             model.Description = reward.Description;
-            model.Checked = checkedRewards.Any(r => r.ID == reward.ID);
+            if (checkedRewards != null) { model.Checked = checkedRewards.Any(r => r.ID == reward.ID); }
             return model;
         }
 

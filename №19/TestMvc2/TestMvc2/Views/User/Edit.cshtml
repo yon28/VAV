@@ -9,34 +9,34 @@
 <h2>Details</h2>
 
 <form action="Save" method="post">
-	<input name="Id" style="display: none;" value="@Model.ID" />
-	<div class="form-group">
-		<label for="firstName">First Name</label>
-		<input name="FirstName" type="text" class="form-control" id="firstName" value="@Model.FirstName" />
-	</div>
-	<div class="form-group">
-		<label for="lastName">Last Name</label>
-		<input name="LastName" type="text" class="form-control" id="lastName" value="@Model.LastName" />
-	</div>
-	<div class="form-group">
-		<label for="birthdate">Birth</label>
-		<input name="Birth" type="date" class="form-control" id="birthdate" value="@Model.Birth.ToString("yyyy-MM-dd")" />
-	</div>
+    <input name="ID" style="display: none;" value="@Model.ID" />
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input name="FirstName" type="text" class="form-control" id="firstName" value="@Model.FirstName" />
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input name="LastName" type="text" class="form-control" id="lastName" value="@Model.LastName" />
+    </div>
+    <div class="form-group">
+        <label for="birthdate">Birth</label>
+        <input name="Birth" type="date" class="form-control" id="birthdate" value="@Model.Birth.ToString("yyyy-MM-dd")" />
+    </div>
 
-	<div class="form-group">
-		<p>Rewards</p>
-		@for (var i = 0; i < Model.AvailableRewards.Count; i++)
-		{
-			var r = base.Model.AvailableRewards[i];
-			<label>@r.Title</label>
-			<input type="number" name="AvailableRewards[@i].Id" style="display: none;" value="@r.ID" />
-			@Html.EditorFor(m => m.AvailableRewards[i].Checked)
-			<br />
-		}
-	</div>
+    <div class="form-group">
+        <p>Rewards</p>
+        @for (var i = 0; i < Model.AvailableRewards.Count; i++)
+        {
+            var r = base.Model.AvailableRewards[i];
+            <label>@r.Title</label>
+            <input type="number" name="AvailableRewards[@i].ID" style="display: none;" value="@r.ID" />
+            @Html.EditorFor(m => m.AvailableRewards[i].Checked)
+            <br />
+        }
+    </div>
 
-	<div class="form-group">
-		<button type="submit" class="btn btn-success">Save</button>
-		@Html.ActionLink("Cancel", "Index", "User", new { }, new { @class = "btn btn-warning" })
-	</div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Save</button>
+        @Html.ActionLink("Cancel", "Index", "User", new { }, new { @class = "btn btn-warning" })
+    </div>
 </form>

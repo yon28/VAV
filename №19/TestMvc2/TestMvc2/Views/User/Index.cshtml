@@ -21,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var user in Model)
+        @foreach (var user in Model)
         {
         <tr>
             <td>@user.FirstName</td>
@@ -29,7 +29,7 @@
             <td>@user.Birth.ToShortDateString()</td>
             <td>@user.Age</td>
             <td>
-                @if (user.Rewards != null) { string.Join(", ", user.Rewards); }
+                @user.RewardsToString
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", "User", new { UserId = @user.ID }, new { @class = "btn btn-default" })

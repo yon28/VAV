@@ -1,6 +1,7 @@
 ﻿using Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Department.DAL
 {
@@ -8,23 +9,25 @@ namespace Department.DAL
     {
         private List<Reward> rewards = new List<Reward>();
 
-        public IEnumerable<Reward> InitListRewards()
+        public IEnumerable <Reward> InitListRewards()
         {
-            Add(new Reward()
+            rewards.Add(new Reward()
             {
                 Title = "Награда1",
                 Description = "Описание1",
-
+                ID = 1
             });
-            Add(new Reward()
+            rewards.Add(new Reward()
             {
                 Title = "Награда2",
                 Description = "Описание2",
+                ID = 2
             });
-            Add(new Reward()
+            rewards.Add(new Reward()
             {
                 Title = "Награда3",
                 Description = "Описание3",
+                ID = 3
             });
             return GetList();
         }
@@ -37,11 +40,6 @@ namespace Department.DAL
             rewards.Add(reward);
         }
 
-        public List<Reward> GetList()
-        {
-            return rewards;
-        }
-
         public void Remove(Reward reward)
         {
             if (reward == null)
@@ -49,9 +47,20 @@ namespace Department.DAL
 
             rewards.Remove(reward);
         }
+
+        public List<Reward> GetList()
+        {
+            return rewards;
+        }
+
         public void Edit(Reward reward)
         {
-
+            var existingReward = rewards.FirstOrDefault(u => u.ID == reward.ID);
+            if (existingReward != null)
+            {
+                existingReward.Title = reward.Title;
+                existingReward.Description = reward.Description;
+            }
         }
     }
    

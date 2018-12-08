@@ -9,23 +9,23 @@ namespace Department.DAL
 	{
 		private List<Employee> employees = new List<Employee>();
 
-        public IEnumerable<Employee> InitList()
+        public IEnumerable<Employee> InitList()//
         {
-            Add(new Employee()
+            employees.Add(new Employee()
             {
                 LastName = "Иванов ",
                 FirstName = "И.И.",
                 Birth = new DateTime(2000, 12, 12),
                 Rewards = new List<Reward> { }
             });
-            Add(new Employee()
+            employees.Add(new Employee()
             {
                 LastName = "Петров ",
                 FirstName = "И.И.",
                 Birth = DateTime.Now,
                 Rewards = new List<Reward> { }
             });
-            Add(new Employee()
+            employees.Add(new Employee()
             {
                 LastName = "Никитин ",
                 FirstName = "И.И.",
@@ -35,6 +35,11 @@ namespace Department.DAL
             return GetList();
         }
 
+        public IEnumerable<Employee> GetList()
+        {
+            return employees;
+        }
+
         public void Add(Employee employee)
 		{
 			if (employee == null)
@@ -42,11 +47,6 @@ namespace Department.DAL
             employee.ID = Math.Abs(GetHashCode());
             employees.Add(employee);
         }
-
-		public IEnumerable<Employee> GetList()
-		{
-			return employees;
-		}
 
         public void Remove(Employee employee)
         {

@@ -8,26 +8,44 @@ using System.Web.Mvc;
 
 namespace TestMvc2.Controllers
 {
+    static class Wrapper
+    {
+        public static EmployeesBL employeesBL = new EmployeesBL();
+        public static RewardsBL rewardsBL = new RewardsBL();
+        static Wrapper()
+        {
+            rewardsBL.InitList();
+            employeesBL.InitList();
+        }
+    }
+
     public class RewardController : Controller
     {
 		EmployeesBL employeesBL;
-		RewardsBL rewardsBL;
-		//public static List<Reward> rewards = new List<Reward>
-  //      {
-  //          new Reward { Id = 1, Title = "reward1", Description = "first userovich"},
-  //          new Reward { Id = 2, Title = "reward2", Description = "second userovich"},
-  //          new Reward { Id = 3, Title = "reward3", Description = "third userovich"}
-  //      };
+        RewardsBL rewardsBL;
+        //public static List<Reward> rewards = //
+        //new List<Reward>  
+        //{
+        //    new Reward { ID = 1, Title = "reward1", Description = "first userovich"},
+        //    new Reward { ID = 2, Title = "reward2", Description = "second userovich"},
+        //    new Reward { ID = 3, Title = "reward3", Description = "third userovich"}
+        //};
 
-		public ActionResult Index()
+
+		public RewardController()
+        {
+             employeesBL = Wrapper.employeesBL;
+            rewardsBL = Wrapper.rewardsBL;
+
+           // rewardsBL.InitList();
+           // employeesBL.InitList();
+        }
+
+        public ActionResult Index()
 		{
 			return View(rewardsBL.GetList());
 		}
-		public RewardController()
-        {
-            employeesBL = new EmployeesBL();
-			rewardsBL = new RewardsBL();
-		}
+
         public ActionResult Cancel()
         {
             return View("Cancel");
@@ -37,13 +55,6 @@ namespace TestMvc2.Controllers
         {
             var currentReward = rewardsBL.GetList().FirstOrDefault(u => u.ID == rewardId);
 			return View("Del");
-        }
-
-        public ActionResult Edit(int rewardId)
-        {
-			var rewards = new List<Reward>();////    
-			var currentReward = rewardsBL.GetList().FirstOrDefault(u => u.ID == rewardId);
-            return View(Entities.RewardViewModel.GetViewModel(currentReward, rewards));
         }
 
         public ActionResult Add()
@@ -61,7 +72,14 @@ namespace TestMvc2.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Save(Entities.RewardViewModel rewardModel)
+        public ActionResult Edit(int rewardId)
+        {
+            var rewards = rewardsBL;
+            var currentReward = rewardsBL.GetList().FirstOrDefault(u => u.ID == rewardId);
+            return View(RewardViewModel.GetViewModel(currentReward, rewards.GetList()));
+        }
+
+        public ActionResult Save(RewardViewModel rewardModel)
         {
             if (rewardModel != null)
             {
@@ -73,13 +91,8 @@ namespace TestMvc2.Controllers
                 else
                 {
                     // update
-                    var currentReward = rewardsBL.GetList().FirstOrDefault(u => u.ID == rewardModel.ID);
-                    if (currentReward != null)
-                    {
-                        var reward = rewardModel.ToReward();
-                        currentReward.Title = reward.Title;
-                        currentReward.Description = reward.Description;
-                    }
+                    var reward = rewardModel.ToReward();
+                    rewardsBL.Edit(reward);
                 }
             }
 

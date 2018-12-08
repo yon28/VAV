@@ -1,4 +1,4 @@
-п»їusing Department.BLL;
+using Department.BLL;
 using Entities;
 using System;
 using System.Collections;
@@ -42,7 +42,7 @@ namespace WinForms
             {
                 CellTemplate = new DataGridViewTextBoxCell(),
                 DataPropertyName = "LastName",
-                HeaderText = "Р¤Р°РјРёР»РёСЏ",
+                HeaderText = "Фамилия",
                 Width = 100
             });
 
@@ -50,7 +50,7 @@ namespace WinForms
             {
                 CellTemplate = new DataGridViewTextBoxCell(),
                 DataPropertyName = "FirstName",
-                HeaderText = "РРјСЏ",
+                HeaderText = "Имя",
                 Width = 100
             });
 
@@ -58,7 +58,7 @@ namespace WinForms
             {
                 CellTemplate = new DataGridViewTextBoxCell(),
                 DataPropertyName = "Birth",
-                HeaderText = "Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ",
+                HeaderText = "Дата рождения",
                 Width = 120
             });
 
@@ -66,7 +66,7 @@ namespace WinForms
             {
                 CellTemplate = new DataGridViewTextBoxCell(),
                 DataPropertyName = "Age",
-                HeaderText = "Р’РѕР·СЂР°СЃС‚",
+                HeaderText = "Возраст",
                 Width = 70
             });
 
@@ -74,7 +74,7 @@ namespace WinForms
             {
                 CellTemplate = new DataGridViewTextBoxCell(),
                 DataPropertyName = "RewardsToString",
-                HeaderText = "РќР°РіСЂР°РґС‹",
+                HeaderText = "Награды",
                 Width = 200
             });
         }
@@ -85,7 +85,6 @@ namespace WinForms
             var employeesList = employees.GetList();
             dgvEmployees.DataSource = employeesList;
             CreateEmployeeGrid();
-          //  dgvID.Visible = false;
 
         }
         private void CreateRewardGrid()
@@ -97,7 +96,7 @@ namespace WinForms
             {
                 CellTemplate = new DataGridViewTextBoxCell(),
                 DataPropertyName = "Title",
-                HeaderText = "Р’РёРґ РЅР°РіСЂР°РґС‹",
+                HeaderText = "Вид награды",
                 Width = 170
             });
 
@@ -105,7 +104,7 @@ namespace WinForms
             {
                 CellTemplate = new DataGridViewTextBoxCell(),
                 DataPropertyName = "Description",
-                HeaderText = "РћРїРёСЃР°РЅРёРµ",
+                HeaderText = "Описание",
                 Width = 370
             });
         }
@@ -233,10 +232,7 @@ namespace WinForms
         
         private void RegisterNewEmployee()
         {
-            Employee employee = (Employee)dgvEmployees.SelectedCells[0].OwningRow.DataBoundItem;
-            EmployeeForm form = new EmployeeForm(employee, rewardsBl);
-
-
+            EmployeeForm form = new EmployeeForm(null, rewardsBl);
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 employees.Add(form.LastName, form.FirstName, form.Birth, Checked(form));
@@ -244,34 +240,22 @@ namespace WinForms
             }
         }
 
-     /*  private string Checked(EmployeeForm form)
-        {
-            string text = "";
-            for (int i = 0; i < form.chRewards.CheckedItems.Count; i++)
-            {
-                text = text + " " + form.chRewards.CheckedItems[i].ToString();
-            }
-            return text;
-        }*/
-
         private List<Reward> Checked(EmployeeForm form)
         {
 			Employee employee = (Employee)dgvEmployees.SelectedCells[0].OwningRow.DataBoundItem;
-			if (form.chRewards.CheckedItems.Count != 0)
+            var allRewards = rewardsBl.GetList();//
+            var  employeemodel = UserViewModel.GetViewModel(employee, allRewards);
+            if (form.chRewards.CheckedItems.Count != 0)
             {
-				var list = rewardsBl.GetList();
-
 				for (int i = 0; i < form.chRewards.CheckedItems.Count; i++)
                 {
 					string checkedItem = (string)form.chRewards.CheckedItems[i];
-					Reward reward = list.First(it => it.Title == checkedItem);
-					employee.Rewards.Add(reward);
-				}
+					Reward reward = rewardsBl.GetList().FirstOrDefault(it => it.Title == checkedItem);
+                    employee.Rewards.Add(reward);
+                }
             }
             return employee.Rewards;
         }
-
-        
 
         private void EditSelectedEmployee()
         {
@@ -328,6 +312,8 @@ namespace WinForms
                     reward.Description = form.txtDescription.Text;
                     rewardsBl.Edit(reward);
                     DisplayReward();
+ 			    DisplayEmployee();
+
                 }
             }
         }
