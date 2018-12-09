@@ -72,25 +72,12 @@ namespace Entities
             set;
         }
 
-        public List<int> RewardsIdList
-        {
-            get
-            {
-                var rewardsIdList = new List<int>();
-                foreach (var reward in Rewards)
-                {
-                    rewardsIdList.Add(reward.ID);
-                }
-                return rewardsIdList;
-            }
-        }
-        string RewardsToString_ = null;
 
+        string RewardsToString_ = null;
         public string RewardsToString
         {
             get
             {
-
                 List<string> RewardsTitleList = new List<string> { };
                 if (Rewards != null)
                 

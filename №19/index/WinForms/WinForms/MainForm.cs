@@ -242,19 +242,18 @@ namespace WinForms
 
         private List<Reward> Checked(EmployeeForm form)
         {
-			Employee employee = (Employee)dgvEmployees.SelectedCells[0].OwningRow.DataBoundItem;
             var allRewards = rewardsBl.GetList();//
-            var  employeemodel = UserViewModel.GetViewModel(employee, allRewards);
+            var rewards = new List<Reward> { };
             if (form.chRewards.CheckedItems.Count != 0)
             {
 				for (int i = 0; i < form.chRewards.CheckedItems.Count; i++)
                 {
 					string checkedItem = (string)form.chRewards.CheckedItems[i];
 					Reward reward = rewardsBl.GetList().FirstOrDefault(it => it.Title == checkedItem);
-                    employee.Rewards.Add(reward);
+                    rewards.Add(reward);
                 }
             }
-            return employee.Rewards;
+            return rewards;
         }
 
         private void EditSelectedEmployee()

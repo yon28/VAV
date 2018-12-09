@@ -28,9 +28,7 @@
             <td>@user.LastName</td>
             <td>@user.Birth.ToShortDateString()</td>
             <td>@user.Age</td>
-            <td>
-                @user.RewardsToString
-            </td>
+            <td>@user.RewardsToString</td>
             <td>
                 @Html.ActionLink("Edit", "Edit", "User", new { UserId = @user.ID }, new { @class = "btn btn-default" })
                 @Html.ActionLink("Delete", "Del", "User", new { UserId = @user.ID }, new { @class = "btn btn-danger" })

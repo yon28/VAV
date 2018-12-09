@@ -16,12 +16,14 @@ namespace Department.DAL
                 LastName = "Иванов ",
                 FirstName = "И.И.",
                 Birth = new DateTime(2000, 12, 12),
+                ID = 1,
                 Rewards = new List<Reward> { }
             });
             employees.Add(new Employee()
             {
                 LastName = "Петров ",
                 FirstName = "И.И.",
+                ID = 2,
                 Birth = DateTime.Now,
                 Rewards = new List<Reward> { }
             });
@@ -29,6 +31,7 @@ namespace Department.DAL
             {
                 LastName = "Никитин ",
                 FirstName = "И.И.",
+                ID = 3,
                 Birth = DateTime.Now,
                 Rewards = new List<Reward> { }
             });

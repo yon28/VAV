@@ -15,11 +15,21 @@ namespace Department.DAL
             _connection = new SqlConnection(DatabaseConfig.GetConnectionString());
         }
 
+        public List<int> EmployeeRewardsIdList(Employee employee)
+        {
+                var rewardsIdList = new List<int>();
+                foreach (var reward in employee.Rewards)
+                {
+                    rewardsIdList.Add(reward.ID);
+                }
+                return rewardsIdList;
+        }
+
         public void EditOrAdd(Employee employee, string commandText)
         {
             DataTable table = new DataTable();
             table.Columns.Add(new DataColumn("ID", typeof(int)));
-            foreach (var id in employee.RewardsIdList)
+            foreach (var id in EmployeeRewardsIdList(employee))
             {
                 table.Rows.Add(id);
             }

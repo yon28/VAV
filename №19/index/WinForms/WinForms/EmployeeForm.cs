@@ -57,25 +57,21 @@ namespace WinForms
                 this.rewards = employee.Rewards;
                 createNew = false;
                 employeemodel = UserViewModel.GetViewModel(employee, allRewards);
-                InitializeRewards(employeemodel);
+                var rewards = employeemodel.AvailableRewards;
+                for (int i = 0; i < rewards.Count; i++)
+                {
+                    var index = chRewards.Items.Add(rewards[i].Title, rewards[i].Checked);
+                }
             }
             else
             {
                 for (int i = 0; i < allRewards.Count; i++)
                 {
-                    var index = chRewards.Items.Add(allRewards[i].Title);
+                    var index = chRewards.Items.Add(allRewards[i].Title, false);
                 }
             }
         }
 
-        private void InitializeRewards(UserViewModel employeemodel)
-        {
-            var rewards = employeemodel.AvailableRewards;
-            for (int i = 0; i < rewards.Count; i++)
-            {
-                var index = chRewards.Items.Add(rewards[i].Title, rewards[i].Checked);
-            }
-        }
 
         private void Form_Load(object sender, EventArgs e)
         {
