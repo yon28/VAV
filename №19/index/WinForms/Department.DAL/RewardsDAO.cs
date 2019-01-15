@@ -43,8 +43,7 @@ namespace Department.DAL
         public void Remove(Reward reward)
         {
             if (reward == null)
-                throw new ArgumentException("пользователь");
-
+                throw new ArgumentException("награда");
             rewards.Remove(reward);
         }
 

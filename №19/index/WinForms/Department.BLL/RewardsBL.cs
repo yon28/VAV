@@ -3,7 +3,6 @@ using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Department.BLL
 {
@@ -48,7 +47,6 @@ namespace Department.BLL
                 Title = title,
                 Description = description,
             };
-
             this.Add(reward);
         }
 
@@ -56,7 +54,6 @@ namespace Department.BLL
         {
             if (reward == null)
                 throw new ArgumentException("награда");
-
              rewardsDAO.Add(reward);
         }
 
@@ -67,7 +64,6 @@ namespace Department.BLL
                 Title = title,
                 Description = description,
             };
-
             this.Remove(reward);
         }
 
@@ -94,8 +90,5 @@ namespace Department.BLL
                 throw new ArgumentException("пользователь");
             rewardsDAO.Edit(reward);
         }
-
-        
-
     }
 }

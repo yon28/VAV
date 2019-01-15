@@ -10,7 +10,6 @@ namespace Department.BLL
     public class EmployeesBL
     {
 		private readonly IEmployeeDAO employeesDAO;
-
 		public EmployeesBL()
 		{
 		     // employeesDAO = new EmployeeDAO();
@@ -20,7 +19,6 @@ namespace Department.BLL
         {
             return employeesDAO.InitList();
         }
-        //
      
         public IEnumerable<Employee> SortEmployeesByLastNameAsc()
 		{
@@ -38,7 +36,6 @@ namespace Department.BLL
 
 		public void Add(string lastName, string firstName, DateTime birth, List<Reward> rewards)
 		{
-
             Employee employee = new Employee
 			{
                 FirstName = firstName,
@@ -46,7 +43,6 @@ namespace Department.BLL
                 Birth = birth,
                 Rewards = rewards
             };
-
 			this.Add(employee);
 		}
 

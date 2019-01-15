@@ -72,7 +72,6 @@ namespace Entities
             set;
         }
 
-
         string RewardsToString_ = null;
         public string RewardsToString
         {

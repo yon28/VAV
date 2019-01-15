@@ -4,7 +4,6 @@ using System.Data;
 using Entities;
 using System.Data.SqlClient;
 
-
 namespace Department.DAL
 {
     public class RewardDAOdb : IRewardDAO, IDisposable
@@ -41,47 +40,40 @@ namespace Department.DAL
             }
         }
 
-        public void Add(Reward reward)
-        {   
+        public void ChangeReward(Reward reward, string commandText)
+        {
             using (SqlCommand command = _connection.CreateCommand())
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.CommandText ="AddRewards";
-                command.Parameters.AddWithValue("@title", reward.Title);
-                command.Parameters.AddWithValue("@description", reward.Description);
+                command.CommandText = commandText;
+                if (commandText != "AddRewards")
+                {
+                    command.Parameters.AddWithValue("@id", reward.ID);
+                }
+                if (commandText != "DeleteReward")
+                {
+                    command.Parameters.AddWithValue("@title", reward.Title);
+                    command.Parameters.AddWithValue("@description", reward.Description);
+                }
                 _connection.Open();
                 var result = command.ExecuteNonQuery();
                 _connection.Close();
-            } 
+            }
         }
-
 
         public void Edit(Reward reward)
         {
-            using (SqlCommand command = _connection.CreateCommand())
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "UpdateReward";
-                command.Parameters.AddWithValue("@id", reward.ID);
-                command.Parameters.AddWithValue("@title", reward.Title);
-                command.Parameters.AddWithValue("@description", reward.Description);
-                _connection.Open();
-                var result = command.ExecuteNonQuery();
-                _connection.Close();
-            }
+            ChangeReward(reward, "UpdateReward");
         }
 
+        public void Add(Reward reward)
+        {
+            ChangeReward(reward, "AddRewards");
+        }
+        
         public void Remove(Reward reward)
         {
-            using (SqlCommand command = _connection.CreateCommand())
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = String.Format("DeleteReward");
-                command.Parameters.AddWithValue("@rewardId", reward.ID);
-                _connection.Open();
-                var result = command.ExecuteNonQuery();
-                _connection.Close();
-            }
+            ChangeReward(reward, "DeleteReward");
         }
 
         public IEnumerable<Reward> InitListRewards()

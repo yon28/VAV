@@ -51,6 +51,5 @@ namespace Entities
         {
             return !(p1 == p2);
         }
-
     }
 }

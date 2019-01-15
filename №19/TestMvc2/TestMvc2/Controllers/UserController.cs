@@ -1,10 +1,8 @@
 ﻿using Department.BLL;
 using Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-//using TestMvc2.Models;
 
 namespace TestMvc2.Controllers
 {
@@ -31,6 +29,28 @@ namespace TestMvc2.Controllers
             return View(employeesBL.GetList());
         }
 
+        public ActionResult Cancel()
+        {
+            return View("Cancel");
+        }
+
+        public ActionResult Save(UserViewModel userModel)
+        {
+            if (userModel != null)
+            {
+                if (userModel.ID == default(int))  // add
+                {
+                    employeesBL.Add(userModel.ToUser());
+                }
+                else // update
+                {
+                    var user = userModel.ToUser();
+                    employeesBL.Edit(user);
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Edit(int userId)
         {
             var rewards = rewardsBL;
@@ -48,54 +68,20 @@ namespace TestMvc2.Controllers
             return View("Edit", new UserViewModel() { AvailableRewards = rewards });
         }
 
-        public ActionResult Cancel()
+        public ActionResult Del(int userId)
         {
-            return View("Cancel");
-        }
+            var currentUser = employeesBL.GetList().FirstOrDefault(u => u.ID == userId);
 
-        public ActionResult Del()
-        {
             return View("Del");
         }
 
-        public ActionResult Delete(int userId)
+        public ActionResult DelOK(int userId)
         {
-            var users = employeesBL.GetList();
-            var currentUser = users.FirstOrDefault(u => u.ID == userId);
+            var currentUser = employeesBL.GetList().FirstOrDefault(u => u.ID == userId);
             if (currentUser != null)
             {
                 employeesBL.Remove(currentUser);
-
             }
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Save(UserViewModel userModel)
-        {
-            if (userModel != null)
-            {
-                if (userModel.ID == default(int))
-                {
-                    // add
-
-                    employeesBL.Add(userModel.ToUser());
-                }
-                else
-                {
-                    // update
-                    var currentUser = employeesBL.GetList().FirstOrDefault(u => u.ID == userModel.ID);
-                    if (currentUser != null)
-                    {
-                        var user = userModel.ToUser();
-                        currentUser.FirstName = user.FirstName;
-                        currentUser.LastName = user.LastName;
-                        currentUser.Birth = user.Birth;
-                        currentUser.Rewards = user.Rewards;
-                    }
-
-                }
-            }
-
             return RedirectToAction("Index");
         }
     }

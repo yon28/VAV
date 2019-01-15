@@ -9,7 +9,7 @@ namespace Department.DAL
 	{
 		private List<Employee> employees = new List<Employee>();
 
-        public IEnumerable<Employee> InitList()//
+        public IEnumerable<Employee> InitList()
         {
             employees.Add(new Employee()
             {
@@ -64,6 +64,4 @@ namespace Department.DAL
 
         }
     }
-
-	
 }

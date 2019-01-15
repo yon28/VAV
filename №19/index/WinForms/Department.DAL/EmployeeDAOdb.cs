@@ -63,11 +63,9 @@ namespace Department.DAL
         {
             string commandText = "AddEmployee";
             EditOrAdd(employee, commandText);
-
                 //var result = command.ExecuteScalar();
                 //var employeeId = (int)result;
                 //employee.ID = employeeId;
-
         }
 
         public IEnumerable<Employee> GetList()

@@ -80,8 +80,8 @@ CREATE PROCEDURE GetRewardsById(@id int)
 AS	SELECT [Id], [Title], [Description] FROM [Rewards] 	WHERE Id = @id 
 GO
 
-CREATE PROCEDURE DeleteReward(@rewardId int)
-AS	DELETE FROM [Rewards] WHERE Id = @rewardId
+CREATE PROCEDURE DeleteReward(@id int)
+AS	DELETE FROM [Rewards] WHERE Id = @id
 GO
 
 CREATE PROCEDURE GetRewardsForEmployeeById(@idemployee int)
