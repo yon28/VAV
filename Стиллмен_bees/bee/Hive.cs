@@ -39,7 +39,7 @@ namespace bee
             locations.Add("Entrance", new Point(440, 80));
             locations.Add("Nursery", new Point(30, 80));
             locations.Add("HoneyFactory", new Point(130, 48));
-            locations.Add("Exit", new Point(140, 125));
+            locations.Add("Exit", new Point(135, 130));
         }
 
         public Point GetLocation(string location)
@@ -77,7 +77,7 @@ namespace bee
         private void AddBee(Random random)
         {
             beeCount++;
-            int r1 = random.Next(100)-50;
+            int r1 = random.Next(40);
             int r2 = random.Next(40);
             Point startPoint = new Point(locations["Nursery"].X + r1, locations["Nursery"].Y + r2);
             Bee newBee = new Bee(beeCount, startPoint,world,this);

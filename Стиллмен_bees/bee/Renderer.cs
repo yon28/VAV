@@ -55,11 +55,12 @@ namespace bee
                     {
                         Width = 45,
                         Height = 55,
+                        BackColor = Color.Transparent,
                         Image = Properties.Resources._8,
-                        BackColor = System.Drawing.Color.Transparent,
                         SizeMode = PictureBoxSizeMode.StretchImage,
                         Location = flower.Location
                     };
+                    flowerControl.BackColor = Color.Transparent;
                     flowerLookup.Add(flower, flowerControl);
                     fieldForm.Controls.Add(flowerControl);
                 }

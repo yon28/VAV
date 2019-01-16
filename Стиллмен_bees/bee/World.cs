@@ -15,11 +15,11 @@ namespace bee
         public List<Bee> Bees;
         public List<Flower> Flowers;
 
-        public World(BeeMessage MessageSender)
+        public World(BeeMessage messageSender)
         {
             Bees = new List<Bee>();
             Flowers = new List<Flower>();
-            Hive = new Hive(this, MessageSender);
+            Hive = new Hive(this, messageSender);
             Random random = new Random();
             for (int i = 0; i < 20; i++) //20 цветов
             {

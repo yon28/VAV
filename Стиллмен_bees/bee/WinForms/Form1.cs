@@ -22,15 +22,15 @@ namespace bee
         public Form1()
         {
             InitializeComponent();
-            //world = new World(new BeeMessage(SendMessage));
+            world = new World(new BeeMessage(SendMessage));
             MoveChildForms();
             hiveForm.Show(this);
             fieldForm.Show(this);
             ResetSimulator();
 
-            timer1.Interval = 50; //миллисекунд
+            timer1.Interval = 70; //миллисекунд
             timer1.Tick += new EventHandler(RunFrame);
-            timer1.Enabled = false;
+            timer1.Enabled = true;
             UpdateStats(new TimeSpan());//новый отсчет времени
 
             Worker[] workers = new Worker[4];
@@ -71,7 +71,7 @@ namespace bee
             double milliseconds = frameDuration.TotalMilliseconds;
             if (milliseconds != 0.0)
             {
-                FrameRate.Text = string.Format("{0:f0}({1:f1}ms)", 1000 / milliseconds, milliseconds);
+                FrameRate.Text = string.Format("{0:f0}({1:f1}ms)", 800 / milliseconds, milliseconds);
             }
             else
             {
@@ -121,7 +121,9 @@ namespace bee
             //framesRun = 0;
             //world = new World(new BeeMessage(SendMessage));
             if (!timer1.Enabled)
+            {
                 toolStrip1.Items[0].Text = "Start simulation";
+            }
         }
 
         private void SendMessage(int ID, string Message)//557,561

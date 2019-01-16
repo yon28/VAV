@@ -46,6 +46,7 @@ namespace bee
             {
                 return true;
             }
+            else
             if (destination.X > location.X)
             {
                 location.X += MoveRate;
@@ -54,6 +55,7 @@ namespace bee
             {
                 location.X -= MoveRate;
             }
+
             if (destination.Y > location.Y)
             {
                 location.Y += MoveRate;
@@ -99,24 +101,24 @@ namespace bee
                     }
                     break;
 
-                case BeeState.FlyingToFlower:
-                    if (!world.Flowers.Contains(destinationFlower))
+                case BeeState.FlyingToFlower://546
+                    if (!world.Flowers.Contains(destinationFlower))//есть ли цветок, который ещё не завянет?
                     {
                         CurrentState = BeeState.ReturningToHive;
                     }
-                    else if (InsideHive)//цветок ещё не завянет
+                    else if (InsideHive)
                     {
                         if (MoveTowardsLocation(hive.GetLocation("Exit")))
                         {
-                            InsideHive = false;
+                            InsideHive = false;//не в улье
                             location = hive.GetLocation("Entrance");
                         }
-                        else
+                    }
+                    else
+                    {
+                        if (MoveTowardsLocation(destinationFlower.Location))
                         {
-                            if (MoveTowardsLocation(destinationFlower.Location))
-                            {
-                                CurrentState = BeeState.GatheringNectar;
-                            }
+                            CurrentState = BeeState.GatheringNectar;
                         }
                     }
                     break;
