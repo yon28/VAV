@@ -61,7 +61,6 @@ namespace bee
             Flowers.Text = world.Flowers.Count.ToString();
             HoneyInHive.Text = String.Format("{0:f3}", world.Hive.Honey);
             FramesRun.Text = framesRun.ToString();
-
             double nectar = 0;
             foreach (Flower flower in world.Flowers)
             {
@@ -71,9 +70,18 @@ namespace bee
 
             double milliseconds = frameDuration.TotalMilliseconds;
             if (milliseconds != 0.0)
+            {
                 FrameRate.Text = string.Format("{0:f0}({1:f1}ms)", 1000 / milliseconds, milliseconds);
+            }
             else
+            {
                 FrameRate.Text = "N/A";
+            }
+            //listBox1.Items.Clear();
+            //foreach (var bee in world.Bees)
+            //{
+            //    listBox1.Items.Add(bee.Location.X.ToString() + "," + bee.Location.Y.ToString());
+            //}
         }
 
         private void timer1_Tick(object sender, EventArgs e) //550

@@ -19,7 +19,7 @@ namespace bee
 
         private void HiveForm_MouseClick(object sender, MouseEventArgs e)
         {
-           // MessageBox.Show(e.Location.ToString());
+            MessageBox.Show(e.Location.ToString());
         }
 
 

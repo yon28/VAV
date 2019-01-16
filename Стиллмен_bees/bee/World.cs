@@ -8,8 +8,8 @@ namespace bee
     {
         private const double NectarHarvestedPerNewFlower = 50.0;
         private const int FieldMinX = 15;  //цветочное поле
-        private const int FieldMinY = 77;
-        private const int FieldMaxX = 390;
+        private const int FieldMinY = 7;
+        private const int FieldMaxX = 450;
         private const int FieldMaxY = 290;
         public Hive Hive;
         public List<Bee> Bees;

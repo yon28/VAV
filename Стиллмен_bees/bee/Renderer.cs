@@ -75,7 +75,7 @@ namespace bee
             }
         }
 
-        private void DrawBees()
+        private void DrawBees()//587
         {
             BeeControl beeControl;
             foreach (Bee bee in world.Bees)
@@ -88,15 +88,11 @@ namespace bee
                         MoveBeeFromFieldToHive(beeControl);
                     }
                 }
-                else
-                {
-                    if (hiveForm.Controls.Contains(beeControl))
+                else if (hiveForm.Controls.Contains(beeControl))
                     {
                         MoveBeeFromHiveToField(beeControl);
                     }
-                    beeControl.Location = bee.Location;
-
-                }
+                beeControl.Location = bee.Location;
             }
             foreach (Bee bее in beeLookup.Keys)
             {
@@ -122,7 +118,7 @@ namespace bee
             BeeControl beeControl;
             if (!beeLookup.ContainsKey(bee))
             {
-                beeControl = new BeeControl() { Width = 40, Height = 40 };
+                beeControl = new BeeControl() { Width = 20, Height = 20 };
                 beeLookup.Add(bee, beeControl);
                 hiveForm.Controls.Add(beeControl);
                 beeControl.BringToFront();
@@ -132,7 +128,6 @@ namespace bee
                 beeControl = beeLookup[bee];
             }
             return beeControl;
-
         }
 
         private void MoveBeeFromHiveToField(BeeControl beeControl)
@@ -146,7 +141,7 @@ namespace bee
         private void MoveBeeFromFieldToHive(BeeControl beeControl)
         {
             fieldForm.Controls.Remove(beeControl);
-            beeControl.Size = new Size(40, 40);
+            beeControl.Size = new Size(20, 20);
             hiveForm.Controls.Add(beeControl);
             beeControl.BringToFront();
         }

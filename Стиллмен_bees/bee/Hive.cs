@@ -6,7 +6,7 @@ using System.Linq;
 namespace bee
 {
     [Serializable]
-    class Hive
+    class Hive//533
     {
         private const int InitialBees = 6;
         private const double InitialHoney = 3.2;
@@ -36,10 +36,10 @@ namespace bee
         private void InitializeLocations()
         {
             locations = new Dictionary<string, Point>();
-            locations.Add("Entrance", new Point(600, 100));
-            locations.Add("Nursery", new Point(95, 174));
-            locations.Add("HoneyFactory", new Point(157, 98));
-            locations.Add("Exit", new Point(194, 213));
+            locations.Add("Entrance", new Point(440, 80));
+            locations.Add("Nursery", new Point(30, 80));
+            locations.Add("HoneyFactory", new Point(130, 48));
+            locations.Add("Exit", new Point(140, 125));
         }
 
         public Point GetLocation(string location)
@@ -77,8 +77,8 @@ namespace bee
         private void AddBee(Random random)
         {
             beeCount++;
-            int r1 = random.Next(100) - 50;
-            int r2 = random.Next(100) - 50;
+            int r1 = random.Next(100)-50;
+            int r2 = random.Next(40);
             Point startPoint = new Point(locations["Nursery"].X + r1, locations["Nursery"].Y + r2);
             Bee newBee = new Bee(beeCount, startPoint,world,this);
             newBee.MessageSender += this.MessageSender;
@@ -86,7 +86,8 @@ namespace bee
         }
         public void Go(Random random)
         {
-            if ( world.Bees.Count< MaximumBees && Honey > MinimumHoneyForCreatingBees && random.Next(10) == 1)
+            if ( world.Bees.Count< MaximumBees &&
+                Honey > MinimumHoneyForCreatingBees && random.Next(10) != 1)
             {
                 AddBee(random);
             }

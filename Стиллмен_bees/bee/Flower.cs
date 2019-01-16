@@ -3,7 +3,7 @@ using System.Drawing;
 namespace bee
 {
     [Serializable]//563
-    class Flower
+    class Flower //524
     {
         private const int LifeSpanMin = 15000;
         private const int LifeSpanMax = 30000;

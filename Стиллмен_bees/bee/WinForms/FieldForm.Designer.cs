@@ -1,4 +1,6 @@
-﻿namespace bee
+﻿using System.Drawing;
+
+namespace bee
 {
     partial class FieldForm
     {
