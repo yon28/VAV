@@ -58,6 +58,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.shifts)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -349,6 +350,12 @@
             this.listBox1.Size = new System.Drawing.Size(134, 121);
             this.listBox1.TabIndex = 8;
             // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 150;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -410,6 +417,7 @@
         private System.Windows.Forms.ToolStripButton Open;
         private System.Windows.Forms.ToolStripButton сохранитьToolStripButton;
         private System.Windows.Forms.ToolStripButton печатьToolStripButton;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

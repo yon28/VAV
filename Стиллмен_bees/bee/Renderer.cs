@@ -166,6 +166,7 @@ namespace bee
             Bitmap resizedPicture = new Bitmap(width, height);
             using (Graphics graphics = Graphics.FromImage(resizedPicture))
             {
+                graphics.InterpolationMode=  System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 graphics.DrawImage(picture, 0, 0, width, height);
             }
             return resizedPicture;

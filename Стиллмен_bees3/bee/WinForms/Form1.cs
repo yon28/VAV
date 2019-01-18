@@ -93,11 +93,12 @@ namespace bee
         {
             framesRun++;//увеличить количество кадров
             world.Go(random);
-            renderer.Render();
             end = DateTime.Now;
             TimeSpan frameDuration = end - start;
             start = end;
             UpdateStats(frameDuration);
+            hiveForm.Invalidate();
+            fieldForm.Invalidate();
         }
 
         private void StartSimulation_Click(object sender, EventArgs e) //554
@@ -116,7 +117,7 @@ namespace bee
 
         private void Reset_Click(object sender, EventArgs e) //557
         {
-            renderer.Reset();
+           // renderer.Reset();
             ResetSimulator();
             //framesRun = 0;
             //world = new World(new BeeMessage(SendMessage));
@@ -144,7 +145,7 @@ namespace bee
                     s = "s";
                 listBox1.Items.Add(group.Key.ToString() + ":"
                 + group.Count() + " bee" + s);
-                if (group.Key == Bee.BeeState.Idle
+                if (group.Key == BeeState.Idle
                 && group.Count() == world.Bees.Count()
                 && framesRun > 0)
                 {
@@ -253,7 +254,7 @@ namespace bee
             {
                 timer1.Start();
             }
-            renderer.Reset();
+           // renderer.Reset();
             renderer = new Renderer(world, hiveForm, fieldForm);//689
 
         }
@@ -287,8 +288,11 @@ namespace bee
         private void Form1_Paint(object sender, PaintEventArgs e)//616
         {
             Graphics g = e.Graphics;
+        }
 
-
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            renderer.AnimateBees();
         }
     }
 }
