@@ -46,29 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bee.cs" />
-    <Compile Include="BeeControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="BeeControl.Designer.cs">
-      <DependentUpon>BeeControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="BeeMessage.cs" />
-    <Compile Include="BeeState.cs" />
+    <Compile Include="Entities\Ant.cs" />
+    <Compile Include="Entities\Bee.cs" />
+    <Compile Include="Entities\BeeMessage.cs" />
+    <Compile Include="Entities\BeeState.cs" />
     <Compile Include="WinForms\FieldForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForms\FieldForm.Designer.cs">
       <DependentUpon>FieldForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Flower.cs" />
+    <Compile Include="Entities\Flower.cs" />
     <Compile Include="WinForms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Hive.cs" />
+    <Compile Include="Entities\Hive.cs" />
     <Compile Include="Beehive1\Nectar.cs" />
     <Compile Include="Beehive1\NectarCollector.cs" />
     <Compile Include="Program.cs" />
@@ -88,10 +83,7 @@
       <DependentUpon>HiveForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Beehive1\Worker.cs" />
-    <Compile Include="World.cs" />
-    <EmbeddedResource Include="BeeControl.resx">
-      <DependentUpon>BeeControl.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="Entities\World.cs" />
     <EmbeddedResource Include="WinForms\FieldForm.resx">
       <DependentUpon>FieldForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -144,6 +136,8 @@
   <ItemGroup>
     <None Include="Resources\8.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\ant.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

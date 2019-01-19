@@ -67,9 +67,9 @@
             // 
             // assignJob
             // 
-            this.assignJob.Location = new System.Drawing.Point(10, 230);
+            this.assignJob.Location = new System.Drawing.Point(367, 192);
             this.assignJob.Name = "assignJob";
-            this.assignJob.Size = new System.Drawing.Size(75, 23);
+            this.assignJob.Size = new System.Drawing.Size(64, 23);
             this.assignJob.TabIndex = 0;
             this.assignJob.Text = "assignJob";
             this.assignJob.UseVisualStyleBackColor = true;
@@ -77,7 +77,7 @@
             // 
             // nextShift
             // 
-            this.nextShift.Location = new System.Drawing.Point(118, 230);
+            this.nextShift.Location = new System.Drawing.Point(309, 221);
             this.nextShift.Name = "nextShift";
             this.nextShift.Size = new System.Drawing.Size(75, 23);
             this.nextShift.TabIndex = 1;
@@ -96,14 +96,14 @@
             "Baby bee tutoring",
             "Hive maintenance",
             "Sting patrol"});
-            this.workerBeeJob.Location = new System.Drawing.Point(10, 203);
+            this.workerBeeJob.Location = new System.Drawing.Point(224, 194);
             this.workerBeeJob.Name = "workerBeeJob";
-            this.workerBeeJob.Size = new System.Drawing.Size(87, 21);
+            this.workerBeeJob.Size = new System.Drawing.Size(137, 21);
             this.workerBeeJob.TabIndex = 2;
             // 
             // shifts
             // 
-            this.shifts.Location = new System.Drawing.Point(118, 203);
+            this.shifts.Location = new System.Drawing.Point(224, 221);
             this.shifts.Name = "shifts";
             this.shifts.Size = new System.Drawing.Size(75, 20);
             this.shifts.TabIndex = 3;
@@ -115,10 +115,10 @@
             // 
             // report
             // 
-            this.report.Location = new System.Drawing.Point(10, 261);
+            this.report.Location = new System.Drawing.Point(16, 194);
             this.report.Multiline = true;
             this.report.Name = "report";
-            this.report.Size = new System.Drawing.Size(183, 114);
+            this.report.Size = new System.Drawing.Size(202, 104);
             this.report.TabIndex = 4;
             // 
             // toolStrip1
@@ -131,7 +131,7 @@
             this.печатьToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(336, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(466, 25);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -191,7 +191,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 25);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(336, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(466, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -347,7 +347,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(199, 51);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(134, 121);
+            this.listBox1.Size = new System.Drawing.Size(229, 121);
             this.listBox1.TabIndex = 8;
             // 
             // timer2
@@ -360,7 +360,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(336, 383);
+            this.ClientSize = new System.Drawing.Size(466, 319);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);

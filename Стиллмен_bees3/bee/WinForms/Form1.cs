@@ -44,8 +44,7 @@ namespace bee
         private void MoveChildForms()
         {
             hiveForm.Location = new Point(Location.X + Width + 10, Location.Y);
-            fieldForm.Location = new Point(Location.X,
-            Location.Y + Math.Max(Height, hiveForm.Height) + 10);
+            fieldForm.Location = new Point(Location.X, Location.Y + Math.Max(Height, hiveForm.Height) + 10);
         }
 
         private void ResetSimulator()

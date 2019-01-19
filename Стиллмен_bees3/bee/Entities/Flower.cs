@@ -27,7 +27,6 @@ namespace bee
             Nectar = InitialNectar;
             NectarHarvested = 0;
             lifeSpan = random.Next(LifeSpanMin, LifeSpanMax + 1);
-            
         }
 
         public double HarvestNectar()

@@ -16,7 +16,7 @@ namespace bee
         private const int MaximumBees = 8;
         private Dictionary<string, Point> locations;
         private int beeCount = 0;
-        public double Honey { get; private set; }
+        public double Honey { get; set; }
         private World world;
         [NonSerialized] public BeeMessage MessageSender;
 
@@ -84,10 +84,10 @@ namespace bee
             newBee.MessageSender += this.MessageSender;
             world.Bees.Add(newBee);
         }
+
         public void Go(Random random)
         {
-            if ( world.Bees.Count< MaximumBees &&
-                Honey > MinimumHoneyForCreatingBees && random.Next(10) != 1)
+            if ( world.Bees.Count< MaximumBees && Honey > MinimumHoneyForCreatingBees && random.Next(10) == 1)
             {
                 AddBee(random);
             }

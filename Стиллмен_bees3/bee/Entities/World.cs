@@ -11,10 +11,11 @@ namespace bee
         private const int FieldMinX = 15;  //цветочное поле
         private const int FieldMinY = 77;
         private const int FieldMaxX = 450;
-        private const int FieldMaxY = 290;
+        private const int FieldMaxY = 240;
         public Hive Hive;
-        public List<Bee> Bees;
+        public List<Bee> Bees { get; set; }
         public List<Flower> Flowers;
+        public Ant ant;
 
         public World(BeeMessage messageSender)
         {
@@ -22,15 +23,17 @@ namespace bee
             Flowers = new List<Flower>();
             Hive = new Hive(this, messageSender);
             Random random = new Random();
-            for (int i = 0; i < 20; i++) //20 цветов
+            for (int i = 0; i < 15; i++) //15 цветов
             {
                 AddFlower(random);
             }
+            ant = new Ant(1, new Point(0, 200), this);
         }
 
         public void Go(Random random)
         {
             Hive.Go(random); //добавит и пчёл
+            ant.Go(random);
 
             for (int і = Bees.Count - 1; і >= 0; і--)
             {
@@ -67,5 +70,6 @@ namespace bee
             Flower newFlower = new Flower(location, random);
             Flowers.Add(newFlower);
         }
+
     }
 }

@@ -16,7 +16,7 @@ namespace bee
         enum Job
         {
             NectarCollector,
-            HoneyManufacturing,
+            MakingHoney_,
             EggCare,
             BabyBeeTutoring,
             HiveMaintenance,

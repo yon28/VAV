@@ -7,6 +7,7 @@
         GatheringNectar,
         ReturningToHive,
         MakingHoney,
-        Retired
+        Retired,
+        LookForEnemiesAndSting,
     }
 }

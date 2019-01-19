@@ -9,47 +9,49 @@ namespace bee
         void ReturnToHive();
     }
 
-    class NectarStinger : Worker, INectarCollector, IStingPatrol
-    {
-        public NectarStinger(string[] jobslCanDo, int weight) : base(jobslCanDo, weight)
-        {
-            this.jobslCanDo = jobslCanDo;
-        }
+    //class NectarStinger : Worker, INectarCollector, IStingPatrol
+    //{
 
-        private int alertLevel;
-        public int AlertLevel
-        {
-            get { return alertLevel; }
-        }
+    //    //public NectarStinger(string[] jobslCanDo, int weight) : base(jobslCanDo, weight)
+    //    //{
+    //    //    this.jobslCanDo = jobslCanDo;
+    //    //    this.weight = weight;
+    //    //}
 
-        public int StingerLength
-        {
-            get
-            {
-                return StingerLength;
-            }
-            set
-            {
-                StingerLength = value;
-            }
-        }
+    //    private int alertLevel;
+    //    public int AlertLevel
+    //    {
+    //        get { return alertLevel; }
+    //    }
 
-        public string Job => throw new System.NotImplementedException();
+    //    public int StingerLength
+    //    {
+    //        get
+    //        {
+    //            return StingerLength;
+    //        }
+    //        set
+    //        {
+    //            StingerLength = value;
+    //        }
+    //    }
 
-        public bool LookForEnemies() { return true; }//
-        public int SharpenStinger(int length) { return 0; }//
-        public void FindFlowers() { }
-        public void GatherNectar() { }
-        public void ReturnToHive() { }
+    //    public string Job => throw new System.NotImplementedException();
 
-        void IWorker.DoThisJob(string job, int shifts)
-        {
-            throw new System.NotImplementedException();
-        }
+    //    public bool LookForEnemies() { return true; }//
+    //    public int SharpenStinger(int length) { return 0; }//
+    //    public void FindFlowers() { }
+    //    public void GatherNectar() { }
+    //    public void ReturnToHive() { }
 
-        void IWorker.WorkOneShift()
-        {
-            throw new System.NotImplementedException();
-        }
-    }
+    //    void IWorker.DoThisJob(string job, int shifts)
+    //    {
+    //        throw new System.NotImplementedException();
+    //    }
+
+    //    void IWorker.WorkOneShift()
+    //    {
+    //        throw new System.NotImplementedException();
+    //    }
+   // }
 }

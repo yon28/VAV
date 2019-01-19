@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace bee
 {
@@ -7,18 +9,18 @@ namespace bee
     public class Bee
     {
         private const double HoneyConsumed = 0.5;  //528
-        private const int MoveRate = 3;
+        private const int MoveRate = 4;
         private const double MinimumFlowerNectar = 1.5;//цветок пригоден для сбора нектара
         private const int CareerSpan = 1000;
 
-        public BeeState CurrentState { get; private set; }
+        public BeeState CurrentState { get; set; }
         public int Age { get; private set; }
         public bool InsideHive { get; private set; }
         public double NectarCollected { get; private set; }
 
         private Point location;
         public Point Location { get => location; }//местоположение
-
+        public bool antAlive = true;
         private int ID;
         private Flower destinationFlower;
 
@@ -41,8 +43,9 @@ namespace bee
 
         private bool MoveTowardsLocation(Point destination)//599
         {
-            if (Math.Abs(destination.X - location.X) <= MoveRate 
-                && Math.Abs(destination.Y - location.Y) <= MoveRate)
+            if  (CurrentState == BeeState.LookForEnemiesAndSting &&  Math.Abs(destination.X - location.X) <= MoveRate +5
+                && Math.Abs(destination.Y - location.Y) <= MoveRate +5 || Math.Abs(destination.X - location.X) <= MoveRate 
+                && Math.Abs(destination.Y - location.Y) <= MoveRate )
             {
                 return true;
             }
@@ -67,10 +70,17 @@ namespace bee
             return false;
         }
 
-       
+
         public void Go(Random random)
         {
             Age++;
+            GoNectarCollectorAndMakingHoney(random);
+
+        }
+
+        public void GoNectarCollectorAndMakingHoney(Random random)
+        {
+          
             BeeState oldState = CurrentState;
             switch (CurrentState)
             {
@@ -89,6 +99,15 @@ namespace bee
                                 destinationFlower = flower;
                                 CurrentState = BeeState.FlyingToFlower;
                             }
+                        }
+                    }
+                    break;
+
+                case BeeState.LookForEnemiesAndSting:
+                    {
+                        if (MoveTowardsLocation(world.ant.GetLocation("AntLocation")))
+                        {
+                            antAlive = false;
                         }
                     }
                     break;
@@ -171,11 +190,11 @@ namespace bee
                     //Работа закончена
                     break;  
             }
-
-            if (oldState != CurrentState && MessageSender!= null) //556
+            if (oldState != CurrentState && MessageSender != null) //556
             {
                 MessageSender(ID, CurrentState.ToString());
             }
+
         }
 
         public virtual int ShiftsLeft { get => 0; }
