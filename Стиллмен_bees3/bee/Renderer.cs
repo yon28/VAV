@@ -28,7 +28,7 @@ namespace bee
         private void InitializeImages()
         {
             HiveOutside = ResizeImage(Properties.Resources._6, 45,60);
-            Flower = ResizeImage(Properties.Resources._8, 45, 55);
+            Flower = ResizeImage(Properties.Resources._8, 25, 35);
             HiveInside = ResizeImage(Properties.Resources._5, hiveForm.ClientRectangle.Width, hiveForm.ClientRectangle.Height);
             Ant = ResizeImage(Properties.Resources.ant, 15, 15);
 
@@ -83,8 +83,9 @@ namespace bee
             foreach (Bee bee in world.Bees)
             {
                 if (bee.InsideHive)
-                    g.DrawImageUnscaled(BeeAnimationLarge[cell],
-                    bee.Location.X, bee.Location.Y);
+                {
+                    g.DrawImageUnscaled(BeeAnimationLarge[cell], bee.Location.X, bee.Location.Y);
+                }
             }
         }
 
@@ -95,7 +96,6 @@ namespace bee
                 g.FillRectangle(Brushes.SkyBlue, 0, 0, fieldForm.ClientSize.Width, fieldForm.ClientSize.Height / 4);
                 g.FillEllipse(Brushes.Yellow, new RectangleF(50, 15, 30, 30));
                 g.FillRectangle(Brushes.Green, 0, fieldForm.ClientSize.Height /4, fieldForm.ClientSize.Width, fieldForm.ClientSize.Height /4* 3);
-                g.DrawLine(brownPen, new Point(593, 0), new Point(593, 30));
                 g.DrawImageUnscaled(HiveOutside, 420, 30);
                 foreach (Flower flower in world.Flowers)
                 {
@@ -109,7 +109,6 @@ namespace bee
                         g.DrawImageUnscaled(BeeAnimationSmall[cell], bee.Location.X, bee.Location.Y);
                     }
                 }
-
             }
         }
     }

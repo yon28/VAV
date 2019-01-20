@@ -7,11 +7,11 @@ namespace bee
     [Serializable]
     public class World
     {
-        private const double NectarHarvestedPerNewFlower = 50.0;
-        private const int FieldMinX = 15;  //цветочное поле
-        private const int FieldMinY = 77;
-        private const int FieldMaxX = 450;
-        private const int FieldMaxY = 240;
+        private const double NectarHarvestedPerNewFlower = 20.0;
+        private const int FieldMinX = 10;  //цветочное поле
+        private const int FieldMinY = 70;
+        private const int FieldMaxX = 450;//520
+        private const int FieldMaxY = 235;//280
         public Hive Hive;
         public List<Bee> Bees { get; set; }
         public List<Flower> Flowers;
@@ -23,11 +23,11 @@ namespace bee
             Flowers = new List<Flower>();
             Hive = new Hive(this, messageSender);
             Random random = new Random();
-            for (int i = 0; i < 15; i++) //15 цветов
+            for (int i = 0; i < 10; i++) //10 цветов
             {
                 AddFlower(random);
             }
-            ant = new Ant(1, new Point(0, 200), this);
+            ant = new Ant(1, new Point(0, 200), this, this.Hive);
         }
 
         public void Go(Random random)
@@ -70,6 +70,5 @@ namespace bee
             Flower newFlower = new Flower(location, random);
             Flowers.Add(newFlower);
         }
-
     }
 }

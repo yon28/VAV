@@ -30,11 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.assignJob = new System.Windows.Forms.Button();
-            this.nextShift = new System.Windows.Forms.Button();
-            this.workerBeeJob = new System.Windows.Forms.ComboBox();
-            this.shifts = new System.Windows.Forms.NumericUpDown();
-            this.report = new System.Windows.Forms.TextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.StartSimulation = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -59,67 +54,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.shifts)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // assignJob
-            // 
-            this.assignJob.Location = new System.Drawing.Point(367, 192);
-            this.assignJob.Name = "assignJob";
-            this.assignJob.Size = new System.Drawing.Size(64, 23);
-            this.assignJob.TabIndex = 0;
-            this.assignJob.Text = "assignJob";
-            this.assignJob.UseVisualStyleBackColor = true;
-            this.assignJob.Click += new System.EventHandler(this.assignJob_Click);
-            // 
-            // nextShift
-            // 
-            this.nextShift.Location = new System.Drawing.Point(309, 221);
-            this.nextShift.Name = "nextShift";
-            this.nextShift.Size = new System.Drawing.Size(75, 23);
-            this.nextShift.TabIndex = 1;
-            this.nextShift.Text = "nextShift";
-            this.nextShift.UseVisualStyleBackColor = true;
-            this.nextShift.Click += new System.EventHandler(this.nextShift_Click);
-            // 
-            // workerBeeJob
-            // 
-            this.workerBeeJob.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.workerBeeJob.FormattingEnabled = true;
-            this.workerBeeJob.Items.AddRange(new object[] {
-            "Nectar collector",
-            "Honey manufacturing",
-            "Egg care",
-            "Baby bee tutoring",
-            "Hive maintenance",
-            "Sting patrol"});
-            this.workerBeeJob.Location = new System.Drawing.Point(224, 194);
-            this.workerBeeJob.Name = "workerBeeJob";
-            this.workerBeeJob.Size = new System.Drawing.Size(137, 21);
-            this.workerBeeJob.TabIndex = 2;
-            // 
-            // shifts
-            // 
-            this.shifts.Location = new System.Drawing.Point(224, 221);
-            this.shifts.Name = "shifts";
-            this.shifts.Size = new System.Drawing.Size(75, 20);
-            this.shifts.TabIndex = 3;
-            this.shifts.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            // 
-            // report
-            // 
-            this.report.Location = new System.Drawing.Point(16, 194);
-            this.report.Multiline = true;
-            this.report.Name = "report";
-            this.report.Size = new System.Drawing.Size(202, 104);
-            this.report.TabIndex = 4;
             // 
             // toolStrip1
             // 
@@ -131,7 +69,7 @@
             this.печатьToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(466, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(414, 25);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -191,7 +129,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 25);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(466, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(414, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -347,7 +285,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(199, 51);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(229, 121);
+            this.listBox1.Size = new System.Drawing.Size(209, 121);
             this.listBox1.TabIndex = 8;
             // 
             // timer2
@@ -360,22 +298,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 319);
+            this.ClientSize = new System.Drawing.Size(414, 184);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.report);
-            this.Controls.Add(this.shifts);
-            this.Controls.Add(this.workerBeeJob);
-            this.Controls.Add(this.nextShift);
-            this.Controls.Add(this.assignJob);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.Move += new System.EventHandler(this.Form1_Move);
-            ((System.ComponentModel.ISupportInitialize)(this.shifts)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -388,12 +320,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button assignJob;
-        private System.Windows.Forms.Button nextShift;
-        private System.Windows.Forms.ComboBox workerBeeJob;
-        private System.Windows.Forms.NumericUpDown shifts;
-        private System.Windows.Forms.TextBox report;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton StartSimulation;
         private System.Windows.Forms.ToolStripButton toolStripButton2;

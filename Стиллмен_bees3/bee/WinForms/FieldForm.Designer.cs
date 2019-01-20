@@ -36,7 +36,7 @@ namespace bee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(504, 240);
+            this.ClientSize = new System.Drawing.Size(504, 242);
             this.DoubleBuffered = true;
             this.Name = "FieldForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

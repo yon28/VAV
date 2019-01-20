@@ -9,14 +9,14 @@ namespace bee
 {
     public partial class Form1 : Form
     {
-        Queen queen;
+        //Queen queen;
         World world;
         private Random random = new Random();
         private DateTime start = DateTime.Now;
         private DateTime end;
         private int framesRun = 0; //сколько кадров уже показано
-        private HiveForm hiveForm = new HiveForm();
         private FieldForm fieldForm = new FieldForm();
+        private HiveForm hiveForm = new HiveForm();
         private Renderer renderer;
 
         public Form1()
@@ -24,21 +24,21 @@ namespace bee
             InitializeComponent();
             world = new World(new BeeMessage(SendMessage));
             MoveChildForms();
-            hiveForm.Show(this);
             fieldForm.Show(this);
+            hiveForm.Show(this);
             ResetSimulator();
-
             timer1.Interval = 70; //миллисекунд
             timer1.Tick += new EventHandler(RunFrame);
             timer1.Enabled = true;
             UpdateStats(new TimeSpan());//новый отсчет времени
+      
 
-            Worker[] workers = new Worker[4];
-            workers[0] = new Worker(new string[] { "Nectar collector", "Honey manufacturing" }, 175);
-            workers[1] = new Worker(new string[] { "Eggcare", "Baby bee tutoring" }, 114);
-            workers[2] = new Worker(new string[] { "Hive maintenance", "Sting patrol" }, 149);
-            workers[3] = new Worker(new string[] { "Nectar collector", "Honey manufacturing", "Egg care", "Baby bee tutoring", "Hive maintenance", "Sting patrol" }, 155);
-            queen = new Queen(workers);
+            //Worker[] workers = new Worker[4];
+            //workers[0] = new Worker(new string[] { "Nectar collector", "Honey manufacturing" }, 175);
+            //workers[1] = new Worker(new string[] { "Eggcare", "Baby bee tutoring" }, 114);
+            //workers[2] = new Worker(new string[] { "Hive maintenance", "Sting patrol" }, 149);
+            //workers[3] = new Worker(new string[] { "Nectar collector", "Honey manufacturing", "Egg care", "Baby bee tutoring", "Hive maintenance", "Sting patrol" }, 155);
+            // queen = new Queen(workers);
         }
 
         private void MoveChildForms()
@@ -66,7 +66,6 @@ namespace bee
                 nectar += flower.Nectar;
             }
             NectarInFlowers.Text = String.Format("{0:f3}", nectar);
-
             double milliseconds = frameDuration.TotalMilliseconds;
             if (milliseconds != 0.0)
             {
@@ -76,11 +75,6 @@ namespace bee
             {
                 FrameRate.Text = "N/A";
             }
-            //listBox1.Items.Clear();
-            //foreach (var bee in world.Bees)
-            //{
-            //    listBox1.Items.Add(bee.Location.X.ToString() + "," + bee.Location.Y.ToString());
-            //}
         }
 
         private void timer1_Tick(object sender, EventArgs e) //550
@@ -116,10 +110,7 @@ namespace bee
 
         private void Reset_Click(object sender, EventArgs e) //557
         {
-           // renderer.Reset();
             ResetSimulator();
-            //framesRun = 0;
-            //world = new World(new BeeMessage(SendMessage));
             if (!timer1.Enabled)
             {
                 toolStrip1.Items[0].Text = "Start simulation";
@@ -144,12 +135,9 @@ namespace bee
                     s = "s";
                 listBox1.Items.Add(group.Key.ToString() + ":"
                 + group.Count() + " bee" + s);
-                if (group.Key == BeeState.Idle
-                && group.Count() == world.Bees.Count()
-                && framesRun > 0)
+                if (group.Key == BeeState.Idle && group.Count() == world.Bees.Count() && framesRun > 0)
                 {
                     listBox1.Items.Add("Simulation ended: all bees are idle");
-
                     toolStrip1.Items[0].Text = "Simulation ended";
                     statusStrip1.Items[0].Text = "Simulation ended";
                     timer1.Enabled = false;
@@ -157,26 +145,10 @@ namespace bee
             }
         }
 
-        private void assignJob_Click(object sender, EventArgs e)
-        {
-            if (queen.AssignWork(workerBeeJob.Text, (int)shifts.Value) == false)
-                MessageBox.Show("Для этого задания рабочих нет "
-                + workerBeeJob.Text + "Матка говорит...");
-            else
-                MessageBox.Show("Задание " + workerBeeJob.Text + " будет закончено через "
-                + shifts.Value + " смен ", " Матка говорит...");
-        }
-
-        private void nextShift_Click(object sender, EventArgs e)
-        {
-            report.Text = queen.WorkTheNextShift();
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             //  Worker nanny = new Worker(Job.EggCare, 454);
         }
-
 
         private void Save_Click(object sender, EventArgs e)
         {
@@ -233,7 +205,6 @@ namespace bee
                     {
                         world = (World)bf.Deserialize(input);
                         framesRun = (int)bf.Deserialize(input);
-
                     }
                 }
                 catch (Exception ex)
@@ -253,36 +224,13 @@ namespace bee
             {
                 timer1.Start();
             }
-           // renderer.Reset();
             renderer = new Renderer(world, hiveForm, fieldForm);//689
-
         }
-
-        //BeeControl control = null;
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    if (control == null)
-        //    {
-        //        control = new BeeControl()
-        //        {
-        //            Location = new Point(100, 100)
-        //        };
-        //        Controls.Add(control);
-        //    }
-        //    else
-        //    {
-        //        using (control)
-        //        {
-        //            Controls.Remove(control);
-        //        }
-        //    }
-        //}
 
         private void Form1_Move(object sender, EventArgs e)
         {
             MoveChildForms();
         }
-
 
         private void Form1_Paint(object sender, PaintEventArgs e)//616
         {

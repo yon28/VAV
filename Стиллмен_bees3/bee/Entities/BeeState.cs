@@ -2,12 +2,13 @@
 {
     public enum BeeState
     {
-        Idle,
-        FlyingToFlower,
-        GatheringNectar,
-        ReturningToHive,
-        MakingHoney,
-        Retired,
         LookForEnemiesAndSting,
+        EggCareAndBabyBeeTutoring,
+        FlyingToFlower,
+        Retired,
+        Idle,
+        GatheringNectar,
+        FlyToHoneyFactory,
+        MakingHoney,
     }
 }
