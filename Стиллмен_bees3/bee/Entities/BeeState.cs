@@ -3,7 +3,8 @@
     public enum BeeState
     {
         LookForEnemiesAndSting,
-        EggCareAndBabyBeeTutoring,
+        Sting,
+        EggCare_BabyBeeTutoring_HiveMaintenance,
         FlyingToFlower,
         Retired,
         Idle,

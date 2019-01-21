@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Ant.cs" />
+    <Compile Include="Entities\Enemy.cs" />
     <Compile Include="Entities\Bee.cs" />
     <Compile Include="Entities\BeeMessage.cs" />
     <Compile Include="Entities\BeeState.cs" />
@@ -72,7 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Beehive1\Queen.cs" />
+    <Compile Include="Entities\Queen.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="WinForms\HiveForm.cs">
       <SubType>Form</SubType>
@@ -135,6 +135,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ant.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\44.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Beehive1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

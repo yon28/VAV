@@ -13,7 +13,7 @@ namespace bee
         Bitmap HiveOutside;
         Bitmap Flower;
         Bitmap[] BeeAnimationLarge;
-        Bitmap[] BeeAnimationSmall;
+        Bitmap[] BeeAnimationEnemy;
         Bitmap Ant;
         public Renderer(World world, HiveForm hiveForm, FieldForm fieldForm)
         {
@@ -37,11 +37,11 @@ namespace bee
             BeeAnimationLarge[1] = ResizeImage(Properties.Resources._2, 20, 20);
             BeeAnimationLarge[2] = ResizeImage(Properties.Resources._3, 20, 20);
             BeeAnimationLarge[3] = ResizeImage(Properties.Resources._4, 20, 20);
-            BeeAnimationSmall = new Bitmap[4];
-            BeeAnimationSmall[0] = ResizeImage(Properties.Resources._1, 20, 20);
-            BeeAnimationSmall[1] = ResizeImage(Properties.Resources._2, 20, 20);
-            BeeAnimationSmall[2] = ResizeImage(Properties.Resources._3, 20, 20);
-            BeeAnimationSmall[3] = ResizeImage(Properties.Resources._4, 20, 20);
+            BeeAnimationEnemy = new Bitmap[4];
+            BeeAnimationEnemy[0] = ResizeImage(Properties.Resources._11, 20, 20);
+            BeeAnimationEnemy[1] = ResizeImage(Properties.Resources._22, 20, 20);
+            BeeAnimationEnemy[2] = ResizeImage(Properties.Resources._33, 20, 20);
+            BeeAnimationEnemy[3] = ResizeImage(Properties.Resources._44, 20, 20);
         }
 
         public static Bitmap ResizeImage(Bitmap picture, int width, int height)
@@ -101,12 +101,12 @@ namespace bee
                 {
                     g.DrawImageUnscaled(Flower, flower.Location.X, flower.Location.Y);
                 }
-                g.DrawImageUnscaled(Ant, world.ant.Location.X, world.ant.Location.Y);
+                g.DrawImageUnscaled(BeeAnimationEnemy[cell], world.enemy.Location.X, world.enemy.Location.Y);
                 foreach (Bee bee in world.Bees)
                 {
                     if (!bee.InsideHive)
                     {
-                        g.DrawImageUnscaled(BeeAnimationSmall[cell], bee.Location.X, bee.Location.Y);
+                        g.DrawImageUnscaled(BeeAnimationLarge[cell], bee.Location.X, bee.Location.Y);
                     }
                 }
             }

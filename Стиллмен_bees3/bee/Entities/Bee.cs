@@ -47,7 +47,7 @@ namespace bee
                 case BeeState.Idle:
                     if (Age > CareerSpan)
                     {
-                        CurrentState = BeeState.Retired;
+                        CurrentState = BeeState.Retired; //а другие бессмертные?
                     }
                     else if (Age > 150||ID<4)//взрослая особь
                     {
@@ -62,7 +62,7 @@ namespace bee
                         }
                     }
                     break;
-                case BeeState.EggCareAndBabyBeeTutoring:
+                case BeeState.EggCare_BabyBeeTutoring_HiveMaintenance:
                     if (!InsideHive)
                     {
                         GetInOrGetOut();
@@ -72,14 +72,28 @@ namespace bee
                     }
                     break;
                 case BeeState.LookForEnemiesAndSting:
-                    if (InsideHive)
+                    Point pEnemy = world.enemy.GetLocation("EnemyLocation");
+                    Point phive = hive.GetLocation("Entrance");
+                    if (InsideHive || Math.Abs(Location.X - phive.X) >= 25 && Math.Abs(phive.Y - Location.Y) >= 25)
                     {
                         GetInOrGetOut();
                     }
-                    else if (MoveTowardsLocation(world.ant.GetLocation("AntLocation")))
+                    else 
+                    if (Math.Abs(pEnemy.X - phive.X) <= 45 && Math.Abs(pEnemy.Y - phive.Y) <= 45)
                     {
-                        world.ant.alive = false;
+                        if (MoveTowardsLocation(world.enemy.GetLocation("EnemyLocation")))
+                        {
+                            world.enemy.intrusion = false;
+                            if (random.Next(10) == 1)
+                            {
+                                CurrentState = BeeState.Sting;
+                            }
+                        }
                     }
+                    break;
+                case BeeState.Sting:
+                    world.queen.FindBee(BeeState.LookForEnemiesAndSting);
+                    CurrentState = BeeState.Retired;
                     break;
                 case BeeState.FlyingToFlower://546
                     if (!world.Flowers.Contains(destinationFlower))//есть ли цветок, который ещё не завянет?
@@ -133,14 +147,6 @@ namespace bee
                     }
                     break;
                 case BeeState.Retired:  //Работа закончена
-                    if (CurrentState == BeeState.LookForEnemiesAndSting)
-                    {
-                        hive.FindBee(BeeState.LookForEnemiesAndSting);
-                    }
-                    if (CurrentState == BeeState.EggCareAndBabyBeeTutoring)
-                    {
-                        hive.FindBee(BeeState.EggCareAndBabyBeeTutoring);
-                    }
                     break;
             }
             if (oldState != CurrentState && MessageSender != null) //556
@@ -176,7 +182,7 @@ namespace bee
         //    this.weight = weight;
         //}
 
-        //protected int weight;
+        //private int weight;
         //public virtual double GetHoneyConsumption()
         //{
         //    double consumption;

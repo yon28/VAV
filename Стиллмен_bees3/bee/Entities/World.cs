@@ -15,25 +15,27 @@ namespace bee
         public Hive Hive;
         public List<Bee> Bees { get; set; }
         public List<Flower> Flowers;
-        public Ant ant;
+        public Enemy enemy;
+        public Queen queen;
 
         public World(BeeMessage messageSender)
         {
             Bees = new List<Bee>();
             Flowers = new List<Flower>();
-            Hive = new Hive(this, messageSender);
+            Hive = new Hive(this);
+            queen = new Queen(this,Hive, messageSender);
             Random random = new Random();
             for (int i = 0; i < 10; i++) //10 цветов
             {
                 AddFlower(random);
             }
-            ant = new Ant(1, new Point(0, 200), this, this.Hive);
+            enemy = new Enemy(1, new Point(0, 200), this, this.Hive);
         }
 
         public void Go(Random random)
         {
-            Hive.Go(random); //добавит и пчёл
-            ant.Go(random);
+            queen.Go(random); //добавит и пчёл
+            enemy.Go(random);
 
             for (int і = Bees.Count - 1; і >= 0; і--)
             {
