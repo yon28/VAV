@@ -3,6 +3,7 @@ using System.Drawing;
 
 namespace bee
 {
+    [Serializable]
     public class Queen 
     {
         private World world;

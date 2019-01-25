@@ -45,13 +45,11 @@
             this.HoneyInHive = new System.Windows.Forms.Label();
             this.NectarInFlowers = new System.Windows.Forms.Label();
             this.FramesRun = new System.Windows.Forms.Label();
-            this.FrameRate = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.toolStrip1.SuspendLayout();
@@ -69,7 +67,7 @@
             this.печатьToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(414, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(430, 25);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -95,6 +93,7 @@
             // 
             // Open
             // 
+            this.Open.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.Open.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.Open.Image = ((System.Drawing.Image)(resources.GetObject("Open.Image")));
             this.Open.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -105,6 +104,7 @@
             // 
             // сохранитьToolStripButton
             // 
+            this.сохранитьToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.сохранитьToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.сохранитьToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("сохранитьToolStripButton.Image")));
             this.сохранитьToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -115,6 +115,7 @@
             // 
             // печатьToolStripButton
             // 
+            this.печатьToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.печатьToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.печатьToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("печатьToolStripButton.Image")));
             this.печатьToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -124,12 +125,11 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Top;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 25);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 131);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(414, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(430, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -146,36 +146,33 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.99454F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.00546F));
             this.tableLayoutPanel1.Controls.Add(this.Bees, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.Flowers, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.HoneyInHive, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.NectarInFlowers, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.FramesRun, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.FrameRate, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 5);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 50);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 29);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(183, 122);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(183, 96);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // Bees
             // 
             this.Bees.AutoSize = true;
-            this.Bees.Location = new System.Drawing.Point(94, 0);
+            this.Bees.Location = new System.Drawing.Point(89, 0);
             this.Bees.Name = "Bees";
             this.Bees.Size = new System.Drawing.Size(31, 13);
             this.Bees.TabIndex = 8;
@@ -184,7 +181,7 @@
             // Flowers
             // 
             this.Flowers.AutoSize = true;
-            this.Flowers.Location = new System.Drawing.Point(94, 21);
+            this.Flowers.Location = new System.Drawing.Point(89, 18);
             this.Flowers.Name = "Flowers";
             this.Flowers.Size = new System.Drawing.Size(43, 13);
             this.Flowers.TabIndex = 8;
@@ -193,7 +190,7 @@
             // HoneyInHive
             // 
             this.HoneyInHive.AutoSize = true;
-            this.HoneyInHive.Location = new System.Drawing.Point(94, 42);
+            this.HoneyInHive.Location = new System.Drawing.Point(89, 36);
             this.HoneyInHive.Name = "HoneyInHive";
             this.HoneyInHive.Size = new System.Drawing.Size(69, 13);
             this.HoneyInHive.TabIndex = 8;
@@ -202,7 +199,7 @@
             // NectarInFlowers
             // 
             this.NectarInFlowers.AutoSize = true;
-            this.NectarInFlowers.Location = new System.Drawing.Point(94, 62);
+            this.NectarInFlowers.Location = new System.Drawing.Point(89, 56);
             this.NectarInFlowers.Name = "NectarInFlowers";
             this.NectarInFlowers.Size = new System.Drawing.Size(84, 13);
             this.NectarInFlowers.TabIndex = 8;
@@ -211,20 +208,11 @@
             // FramesRun
             // 
             this.FramesRun.AutoSize = true;
-            this.FramesRun.Location = new System.Drawing.Point(94, 82);
+            this.FramesRun.Location = new System.Drawing.Point(89, 76);
             this.FramesRun.Name = "FramesRun";
             this.FramesRun.Size = new System.Drawing.Size(61, 13);
             this.FramesRun.TabIndex = 8;
             this.FramesRun.Text = "FramesRun";
-            // 
-            // FrameRate
-            // 
-            this.FrameRate.AutoSize = true;
-            this.FrameRate.Location = new System.Drawing.Point(94, 102);
-            this.FrameRate.Name = "FrameRate";
-            this.FrameRate.Size = new System.Drawing.Size(59, 13);
-            this.FrameRate.TabIndex = 8;
-            this.FrameRate.Text = "FrameRate";
             // 
             // label1
             // 
@@ -238,7 +226,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 21);
+            this.label2.Location = new System.Drawing.Point(3, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 13);
             this.label2.TabIndex = 8;
@@ -247,7 +235,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 42);
+            this.label3.Location = new System.Drawing.Point(3, 36);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 8;
@@ -256,36 +244,27 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 62);
+            this.label4.Location = new System.Drawing.Point(3, 56);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 13);
+            this.label4.Size = new System.Drawing.Size(79, 20);
             this.label4.TabIndex = 8;
             this.label4.Text = "NectarInFlowers";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 82);
+            this.label5.Location = new System.Drawing.Point(3, 76);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "FramesRun";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 102);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 13);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "FrameRate";
-            // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(199, 51);
+            this.listBox1.Location = new System.Drawing.Point(155, 30);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(209, 121);
+            this.listBox1.Size = new System.Drawing.Size(270, 95);
             this.listBox1.TabIndex = 8;
             // 
             // timer2
@@ -298,7 +277,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(414, 184);
+            this.ClientSize = new System.Drawing.Size(430, 153);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
@@ -332,13 +311,11 @@
         private System.Windows.Forms.Label HoneyInHive;
         private System.Windows.Forms.Label NectarInFlowers;
         private System.Windows.Forms.Label FramesRun;
-        private System.Windows.Forms.Label FrameRate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ToolStripButton Open;
         private System.Windows.Forms.ToolStripButton сохранитьToolStripButton;

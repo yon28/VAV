@@ -28,7 +28,7 @@ namespace bee
         private void InitializeImages()
         {
             HiveOutside = ResizeImage(Properties.Resources._6, 45,60);
-            Flower = ResizeImage(Properties.Resources._8, 25, 35);
+            Flower = ResizeImage(Properties.Resources._8, 35, 45);
             HiveInside = ResizeImage(Properties.Resources._5, hiveForm.ClientRectangle.Width, hiveForm.ClientRectangle.Height);
             Ant = ResizeImage(Properties.Resources.ant, 15, 15);
 

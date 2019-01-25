@@ -1,0 +1,32 @@
+﻿@using bee;
+
+@model List<string>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Bees</h2>
+
+<table class="table table-bordered" style="margin-top: 50px;">
+    <thead>
+        <tr>
+            <th>BeesCount </th>
+            <th>HoneyInHive </th>
+            <th>FlowersCount </th>
+            <th>NectarInFlowers </th>
+            <th> FramesRun </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @foreach (var str in Model)
+            {
+                <td>@str</td>
+            }
+        </tr>
+    </tbody>
+</table>
+
+
+

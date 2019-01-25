@@ -1,20 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using Entities;
+using System.Linq;
 
 namespace bee
 {
     public partial class Form1 : Form
     {
         //Queen queen;
-        World world;
-        private Random random = new Random();
-        private DateTime start = DateTime.Now;
-        private DateTime end;
-        private int framesRun = 0; //сколько кадров уже показано
+        World world;//+
+        private int framesRun = 0; //сколько кадров уже показано//+
         private FieldForm fieldForm = new FieldForm();
         private HiveForm hiveForm = new HiveForm();
         private Renderer renderer;
@@ -22,23 +21,65 @@ namespace bee
         public Form1()
         {
             InitializeComponent();
-            world = new World(new BeeMessage(SendMessage));
+            world = new World(new BeeMessage(SendMessage));//--
             MoveChildForms();
             fieldForm.Show(this);
             hiveForm.Show(this);
-            ResetSimulator();
+            ResetSimulator();//+
             timer1.Interval = 70; //миллисекунд
             timer1.Tick += new EventHandler(RunFrame);
             timer1.Enabled = true;
-            UpdateStats(new TimeSpan());//новый отсчет времени
-      
+            UpdateStats();// new TimeSpan());//новый отсчет времени//+
+            framesRun = world.framesRun;
+        }
 
-            //Worker[] workers = new Worker[4];
-            //workers[0] = new Worker(new string[] { "Nectar collector", "Honey manufacturing" }, 175);
-            //workers[1] = new Worker(new string[] { "Eggcare", "Baby bee tutoring" }, 114);
-            //workers[2] = new Worker(new string[] { "Hive maintenance", "Sting patrol" }, 149);
-            //workers[3] = new Worker(new string[] { "Nectar collector", "Honey manufacturing", "Egg care", "Baby bee tutoring", "Hive maintenance", "Sting patrol" }, 155);
-            // queen = new Queen(workers);
+        private void SendMessage(int ID, string Message)//557,561
+        {
+            listBox1.Items.Clear();
+            world.SendMessage1(ID, Message);
+            foreach (var message in world.listBox1Items)
+            {
+                listBox1.Items.Add(message);
+            }
+            statusStrip1.Items[0].Text = world.statusStrip1Items0Text;
+        }
+
+        public void RunFrame(object sender, EventArgs e) //552
+        {
+            world.RunFrame(sender);
+            UpdateStats();
+            hiveForm.Invalidate();
+            fieldForm.Invalidate();
+        }
+
+        private void ResetSimulator()
+        {
+            world.framesRun = 0;//+
+            framesRun = world.framesRun;
+            world = new World(new BeeMessage(SendMessage));//+
+            renderer = new Renderer(world, hiveForm, fieldForm);
+        }
+        public List<string> Facts = new List<string>();
+
+        private void UpdateStats()//TimeSpan frameDuration) //стр.549      
+        {
+            Facts = world.GetList();
+
+            Bees.Text = Facts[0];
+            HoneyInHive.Text = Facts[1];
+            Flowers.Text = Facts[2];
+            NectarInFlowers.Text = Facts[3];
+            FramesRun.Text = Facts[4];
+
+            //double milliseconds = frameDuration.TotalMilliseconds;
+            //if (milliseconds != 0.0)
+            //{
+            //   // FrameRate.Text = string.Format("{0:f0}({1:f1}ms)", 800 / milliseconds, milliseconds);
+            //}
+            //else
+            //{
+            //   // FrameRate.Text = "N/A";
+            //}
         }
 
         private void MoveChildForms()
@@ -47,51 +88,14 @@ namespace bee
             fieldForm.Location = new Point(Location.X, Location.Y + Math.Max(Height, hiveForm.Height) + 10);
         }
 
-        private void ResetSimulator()
+        private void Form1_Paint(object sender, PaintEventArgs e)//616
         {
-            framesRun = 0;
-            world = new World(new BeeMessage(SendMessage));
-            renderer = new Renderer(world, hiveForm, fieldForm);
+            Graphics g = e.Graphics;
         }
 
-        private void UpdateStats(TimeSpan frameDuration) //стр.549
+        private void timer2_Tick(object sender, EventArgs e)
         {
-            Bees.Text = world.Bees.Count.ToString();
-            Flowers.Text = world.Flowers.Count.ToString();
-            HoneyInHive.Text = String.Format("{0:f3}", world.Hive.Honey);
-            FramesRun.Text = framesRun.ToString();
-            double nectar = 0;
-            foreach (Flower flower in world.Flowers)
-            {
-                nectar += flower.Nectar;
-            }
-            NectarInFlowers.Text = String.Format("{0:f3}", nectar);
-            double milliseconds = frameDuration.TotalMilliseconds;
-            if (milliseconds != 0.0)
-            {
-                FrameRate.Text = string.Format("{0:f0}({1:f1}ms)", 800 / milliseconds, milliseconds);
-            }
-            else
-            {
-                FrameRate.Text = "N/A";
-            }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e) //550
-        {
-            //  Console.WriteLine(DateTime.Now.ToString());
-        }
-
-        public void RunFrame(object sender, EventArgs e) //552
-        {
-            framesRun++;//увеличить количество кадров
-            world.Go(random);
-            end = DateTime.Now;
-            TimeSpan frameDuration = end - start;
-            start = end;
-            UpdateStats(frameDuration);
-            hiveForm.Invalidate();
-            fieldForm.Invalidate();
+            renderer.AnimateBees();
         }
 
         private void StartSimulation_Click(object sender, EventArgs e) //554
@@ -117,32 +121,11 @@ namespace bee
             }
         }
 
-        private void SendMessage(int ID, string Message)//557,561
+
+
+        private void timer1_Tick(object sender, EventArgs e) //550
         {
-            statusStrip1.Items[0].Text = "Bee №" + ID + ":" + Message;
-            var beeGroups =
-                            from bee in world.Bees
-                            group bee by bee.CurrentState into beeGroup
-                            orderby beeGroup.Key
-                            select beeGroup;
-            listBox1.Items.Clear();
-            foreach (var group in beeGroups)
-            {
-                string s;
-                if (group.Count() == 1)
-                    s = "";
-                else
-                    s = "s";
-                listBox1.Items.Add(group.Key.ToString() + ":"
-                + group.Count() + " bee" + s);
-                if (group.Key == BeeState.Idle && group.Count() == world.Bees.Count() && framesRun > 0)
-                {
-                    listBox1.Items.Add("Simulation ended: all bees are idle");
-                    toolStrip1.Items[0].Text = "Simulation ended";
-                    statusStrip1.Items[0].Text = "Simulation ended";
-                    timer1.Enabled = false;
-                }
-            }
+            //  Console.WriteLine(DateTime.Now.ToString());
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -204,7 +187,8 @@ namespace bee
                     using (Stream input = File.OpenRead(openDialog.FileName))
                     {
                         world = (World)bf.Deserialize(input);
-                        framesRun = (int)bf.Deserialize(input);
+                        world.framesRun = (int)bf.Deserialize(input);//
+                        framesRun = world.framesRun;
                     }
                 }
                 catch (Exception ex)
@@ -212,7 +196,8 @@ namespace bee
                     MessageBox.Show("Unable to read the simulator file\r\n" + ex.Message,
                     "Bee Simulator Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     world = currentWorld;
-                    framesRun = currentFramesRun;
+                    world.framesRun = currentFramesRun;//
+                    framesRun = world.framesRun;
                 }
             }
             world.Hive.MessageSender = new BeeMessage(SendMessage);
@@ -232,14 +217,6 @@ namespace bee
             MoveChildForms();
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)//616
-        {
-            Graphics g = e.Graphics;
-        }
 
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            renderer.AnimateBees();
-        }
     }
 }

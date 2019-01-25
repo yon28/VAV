@@ -49,9 +49,9 @@ namespace bee
             {
                 Location = GetLocation("Start");
 
-                if (world.Hive.Honey > 0.2)
+                if (world.Hive.Honey > 0.4)
                 {
-                    world.Hive.Honey -= 0.2;
+                    world.Hive.Honey -= 0.4;
                 }
             }
         }

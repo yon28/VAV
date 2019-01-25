@@ -3,6 +3,7 @@ using System.Drawing;
 
 namespace bee
 {
+    [Serializable]
     public class Сharacter
     {
         protected int MoveRate;
