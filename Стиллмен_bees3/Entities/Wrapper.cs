@@ -1,30 +1,53 @@
 ﻿using bee;
-//http://www.cyberguru.ru/microsoft-net/asp-net/ajax-timer.html?showall=1 Таймер
+using System.Collections.Generic;
+//using System.Threading;
+//http://qaru.site/questions/516837/how-to-call-function-on-timer-aspnet-mvc
 namespace Entities
 {
     public class Wrapper
     {
         public static World world;
-     //   public static TimerCallback tm = new TimerCallback(RunFrame);
-     //   public static Timer timer= new Timer(tm, framesRun, 0, 100);
+        private static int framesRun = 0;
+        public static System.Timers.Timer timer1 = new System.Timers.Timer(100);
 
         static Wrapper()
         {
             world = new World(new BeeMessage(SendMessage));
             ResetSimulator();
-           // UpdateStats(new TimeSpan());//новый отсчет времени
+            framesRun = world.framesRun;
+            ResetSimulator();//+
+            timer1.Enabled = true;
+            timer1.Elapsed += new System.Timers.ElapsedEventHandler(RunFrame); 
+            UpdateStats();
+        }
+
+        private static void SendMessage(int ID, string Message)//557,561
+        {
+            //listBox1.Items.Clear();
+            world.SendMessage1(ID, Message);
+            //foreach (var message in world.listBox1Items)
+            //{
+            //    listBox1.Items.Add(message);
+            //}
+            //statusStrip1.Items[0].Text = world.statusStrip1Items0Text;
+        }
+
+        public static void RunFrame(object sender, System.Timers.ElapsedEventArgs e) //552
+        {
+            world.RunFrame(sender);
+            UpdateStats();
+        }
+
+        public static List<string> Facts = new List<string>();
+        private static  void UpdateStats() //стр.549      
+        {
+            Facts = world.GetList();
+
         }
 
         private static void ResetSimulator()
         {
-            //framesRun = 0;
             world = new World(new BeeMessage(SendMessage));
-            //renderer
-        }
-        
-        private static void SendMessage(int ID, string Message)//557,561--
-        {
-          //  facts = world.GetList();
         }
     }
 }

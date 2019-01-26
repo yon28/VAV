@@ -98,6 +98,9 @@ namespace bee
             }
             Facts.Add(String.Format("{0:f3}", nectar));
             Facts.Add(framesRun.ToString());
+
+            string join = string.Join(", ", listBox1Items);
+            Facts.Add(join);
             return Facts;
         }
 

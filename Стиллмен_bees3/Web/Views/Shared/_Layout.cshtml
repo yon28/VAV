@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="refresh" content="1">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - BeeHive</title>
@@ -25,7 +26,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year</p>
+            <p>&copy; @DateTime.Now.Date.ToShortDateString()</p>
         </footer>
     </div>
 

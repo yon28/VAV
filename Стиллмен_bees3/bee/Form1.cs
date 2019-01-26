@@ -4,15 +4,12 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
-using Entities;
-using System.Linq;
 
 namespace bee
 {
     public partial class Form1 : Form
     {
-        //Queen queen;
-        World world;//+
+        World world;
         private int framesRun = 0; //сколько кадров уже показано//+
         private FieldForm fieldForm = new FieldForm();
         private HiveForm hiveForm = new HiveForm();
@@ -25,12 +22,13 @@ namespace bee
             MoveChildForms();
             fieldForm.Show(this);
             hiveForm.Show(this);
+
+            framesRun = world.framesRun;
             ResetSimulator();//+
             timer1.Interval = 70; //миллисекунд
             timer1.Tick += new EventHandler(RunFrame);
             timer1.Enabled = true;
             UpdateStats();// new TimeSpan());//новый отсчет времени//+
-            framesRun = world.framesRun;
         }
 
         private void SendMessage(int ID, string Message)//557,561
@@ -52,15 +50,7 @@ namespace bee
             fieldForm.Invalidate();
         }
 
-        private void ResetSimulator()
-        {
-            world.framesRun = 0;//+
-            framesRun = world.framesRun;
-            world = new World(new BeeMessage(SendMessage));//+
-            renderer = new Renderer(world, hiveForm, fieldForm);
-        }
         public List<string> Facts = new List<string>();
-
         private void UpdateStats()//TimeSpan frameDuration) //стр.549      
         {
             Facts = world.GetList();
@@ -82,6 +72,18 @@ namespace bee
             //}
         }
 
+
+
+
+
+        private void ResetSimulator()
+        {
+            world.framesRun = 0;//+
+            framesRun = world.framesRun;
+            world = new World(new BeeMessage(SendMessage));//+
+            renderer = new Renderer(world, hiveForm, fieldForm);
+        }
+
         private void MoveChildForms()
         {
             hiveForm.Location = new Point(Location.X + Width + 10, Location.Y);
@@ -96,6 +98,21 @@ namespace bee
         private void timer2_Tick(object sender, EventArgs e)
         {
             renderer.AnimateBees();
+        }
+
+        private void Form1_Move(object sender, EventArgs e)
+        {
+            MoveChildForms();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e) //550
+        {
+            //  Console.WriteLine(DateTime.Now.ToString());
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //  Worker nanny = new Worker(Job.EggCare, 454);
         }
 
         private void StartSimulation_Click(object sender, EventArgs e) //554
@@ -119,18 +136,6 @@ namespace bee
             {
                 toolStrip1.Items[0].Text = "Start simulation";
             }
-        }
-
-
-
-        private void timer1_Tick(object sender, EventArgs e) //550
-        {
-            //  Console.WriteLine(DateTime.Now.ToString());
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //  Worker nanny = new Worker(Job.EggCare, 454);
         }
 
         private void Save_Click(object sender, EventArgs e)
@@ -212,10 +217,7 @@ namespace bee
             renderer = new Renderer(world, hiveForm, fieldForm);//689
         }
 
-        private void Form1_Move(object sender, EventArgs e)
-        {
-            MoveChildForms();
-        }
+
 
 
     }
