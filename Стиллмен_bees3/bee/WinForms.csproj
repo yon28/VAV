@@ -65,7 +65,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Renderer.cs" />
+    <Compile Include="RendererForWinForm.cs" />
     <Compile Include="HiveForm.cs">
       <SubType>Form</SubType>
     </Compile>

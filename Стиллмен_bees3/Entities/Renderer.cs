@@ -1,47 +1,39 @@
 ﻿using System.Drawing;
 
-//471
 namespace bee
 {
-    public class Renderer//визуализатор
+    public class Renderer//471
     {
         private World world;
-        private HiveForm hiveForm;
-        private FieldForm fieldForm;
-
         Bitmap HiveInside;
         Bitmap HiveOutside;
         Bitmap Flower;
         Bitmap[] BeeAnimationLarge;
         Bitmap[] BeeAnimationEnemy;
         Bitmap Ant;
-        public Renderer(World world, HiveForm hiveForm, FieldForm fieldForm)
+
+        public Renderer(World world)
         {
             this.world = world;
-            this.hiveForm = hiveForm;
-            this.fieldForm = fieldForm;
-            hiveForm.Renderer = this;
-            fieldForm.Renderer = this;
             InitializeImages();
         }
 
-        private void InitializeImages()
+        protected void InitializeImages()
         {
-            HiveOutside = ResizeImage(Properties.Resources._6, 45,60);
-            Flower = ResizeImage(Properties.Resources._8, 35, 45);
-            HiveInside = ResizeImage(Properties.Resources._5, hiveForm.ClientRectangle.Width, hiveForm.ClientRectangle.Height);
-            Ant = ResizeImage(Properties.Resources.ant, 15, 15);
-
+            HiveInside = ResizeImage(new Bitmap("I:/1/5.png"), 175, 150);
+            HiveOutside = ResizeImage(new Bitmap("I:/1/6.png"), 45, 60);
+            Flower = ResizeImage(new Bitmap("I:/1/8.png"), 35, 45);
+            Ant = ResizeImage(new Bitmap("I:/1/ant.png"), 15, 15);
             BeeAnimationLarge = new Bitmap[4];
-            BeeAnimationLarge[0] = ResizeImage(Properties.Resources._1, 20, 20);
-            BeeAnimationLarge[1] = ResizeImage(Properties.Resources._2, 20, 20);
-            BeeAnimationLarge[2] = ResizeImage(Properties.Resources._3, 20, 20);
-            BeeAnimationLarge[3] = ResizeImage(Properties.Resources._4, 20, 20);
+            BeeAnimationLarge[0] = ResizeImage(new Bitmap("I:/1/1.png"), 20, 20);
+            BeeAnimationLarge[1] = ResizeImage(new Bitmap("I:/1/2.png"), 20, 20);
+            BeeAnimationLarge[2] = ResizeImage(new Bitmap("I:/1/3.png"), 20, 20);
+            BeeAnimationLarge[3] = ResizeImage(new Bitmap("I:/1/4.png"), 20, 20);
             BeeAnimationEnemy = new Bitmap[4];
-            BeeAnimationEnemy[0] = ResizeImage(Properties.Resources._11, 20, 20);
-            BeeAnimationEnemy[1] = ResizeImage(Properties.Resources._22, 20, 20);
-            BeeAnimationEnemy[2] = ResizeImage(Properties.Resources._33, 20, 20);
-            BeeAnimationEnemy[3] = ResizeImage(Properties.Resources._44, 20, 20);
+            BeeAnimationEnemy[0] = ResizeImage(new Bitmap("I:/1/11.png"), 20, 20);
+            BeeAnimationEnemy[1] = ResizeImage(new Bitmap("I:/1/22.png"), 20, 20);
+            BeeAnimationEnemy[2] = ResizeImage(new Bitmap("I:/1/33.png"), 20, 20);
+            BeeAnimationEnemy[3] = ResizeImage(new Bitmap("I:/1/44.png"), 20, 20);
         }
 
         public static Bitmap ResizeImage(Bitmap picture, int width, int height)
@@ -49,7 +41,6 @@ namespace bee
             Bitmap resizedPicture = new Bitmap(width, height);
             using (Graphics graphics = Graphics.FromImage(resizedPicture))
             {
-                // graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 graphics.DrawImage(picture, 0, 0, width, height);
             }
             return resizedPicture;
@@ -57,6 +48,7 @@ namespace bee
 
         private int cell = 0;
         private int frame = 0;
+
         public void AnimateBees()
         {
             frame++;
@@ -72,13 +64,11 @@ namespace bee
                 case 5: cell = 1; break;
                 default: cell = 0; break;
             }
-            hiveForm.Invalidate();
-            fieldForm.Invalidate();
         }
 
         public void PaintHive(Graphics g)
         {
-            g.FillRectangle(Brushes.SkyBlue, hiveForm.ClientRectangle);
+            g.FillRectangle(Brushes.SkyBlue, 0,0,175,150);
             g.DrawImageUnscaled(HiveInside, 0, 0);
             foreach (Bee bee in world.Bees)
             {
@@ -93,9 +83,9 @@ namespace bee
         {
             using (Pen brownPen = new Pen(Color.Brown, 6.0F))
             {
-                g.FillRectangle(Brushes.SkyBlue, 0, 0, fieldForm.ClientSize.Width, fieldForm.ClientSize.Height / 4);
+                g.FillRectangle(Brushes.SkyBlue, 0, 0,520,280 / 4);
                 g.FillEllipse(Brushes.Yellow, new RectangleF(50, 15, 30, 30));
-                g.FillRectangle(Brushes.Green, 0, fieldForm.ClientSize.Height /4, fieldForm.ClientSize.Width, fieldForm.ClientSize.Height /4* 3);
+                g.FillRectangle(Brushes.Green, 0,280 / 4, 520, 280 / 4 * 3);
                 g.DrawImageUnscaled(HiveOutside, 420, 30);
                 foreach (Flower flower in world.Flowers)
                 {

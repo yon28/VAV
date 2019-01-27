@@ -46,6 +46,7 @@
     <Compile Include="BeeMessage.cs" />
     <Compile Include="BeeState.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="Renderer.cs" />
     <Compile Include="Wrapper.cs" />
     <Compile Include="Flower.cs" />
     <Compile Include="Hive.cs" />

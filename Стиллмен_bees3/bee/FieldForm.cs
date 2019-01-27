@@ -6,7 +6,7 @@ namespace bee
 {
     public partial class FieldForm : Form
     {
-        public Renderer Renderer { get; set; }
+        public RendererForWinForm Renderer { get; set; }
         public FieldForm()
         {
             InitializeComponent();

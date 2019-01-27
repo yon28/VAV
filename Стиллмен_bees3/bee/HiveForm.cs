@@ -6,12 +6,10 @@ namespace bee
 {
     public partial class HiveForm : Form
     { 
-        public Renderer Renderer { get; set; }
+        public RendererForWinForm Renderer { get; set; }
         public HiveForm()
         {
-            InitializeComponent();//594
-            BackgroundImage = Renderer.ResizeImage(Properties.Resources._5,ClientRectangle.Width, ClientRectangle.Height);
-           
+            InitializeComponent();//594          
         }
 
         private void The_Hive_Load(object sender, EventArgs e)

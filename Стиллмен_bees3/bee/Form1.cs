@@ -13,7 +13,7 @@ namespace bee
         private int framesRun = 0; //сколько кадров уже показано//+
         private FieldForm fieldForm = new FieldForm();
         private HiveForm hiveForm = new HiveForm();
-        private Renderer renderer;
+        private RendererForWinForm renderer;
 
         public Form1()
         {
@@ -81,7 +81,7 @@ namespace bee
             world.framesRun = 0;//+
             framesRun = world.framesRun;
             world = new World(new BeeMessage(SendMessage));//+
-            renderer = new Renderer(world, hiveForm, fieldForm);
+            renderer = new RendererForWinForm(world, hiveForm, fieldForm);
         }
 
         private void MoveChildForms()
@@ -214,7 +214,7 @@ namespace bee
             {
                 timer1.Start();
             }
-            renderer = new Renderer(world, hiveForm, fieldForm);//689
+            renderer = new RendererForWinForm(world, hiveForm, fieldForm);//689
         }
 
 

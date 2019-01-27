@@ -90,6 +90,19 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\1.png" />
+    <Content Include="Content\img\11.png" />
+    <Content Include="Content\img\2.png" />
+    <Content Include="Content\img\22.png" />
+    <Content Include="Content\img\3.png" />
+    <Content Include="Content\img\33.png" />
+    <Content Include="Content\img\4.png" />
+    <Content Include="Content\img\44.png" />
+    <Content Include="Content\img\5.png" />
+    <Content Include="Content\img\6.png" />
+    <Content Include="Content\img\7.png" />
+    <Content Include="Content\img\8.png" />
+    <Content Include="Content\img\ant.png" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -132,7 +145,6 @@
       <Name>Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
