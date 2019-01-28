@@ -11,25 +11,60 @@ namespace WinForms
 {
     public partial class MainForm : Form
     {
-        private enum EmployeeSortMode { Asceding, Desceding };
-        private enum RewardSortMode { Asceding, Desceding };
         private readonly EmployeesBL employees;
-        private readonly RewardsBL rewardsBl;
-        private EmployeeSortMode sortMode = EmployeeSortMode.Asceding;
-        private RewardSortMode sortMode1 = RewardSortMode.Asceding;
+        private readonly RewardsBL rewards;
+
+        private enum SortMode { Asceding, Desceding };
+        private SortMode sortMode = SortMode.Asceding;
+        private SortMode sortModeRewards = SortMode.Asceding;
+
+        private void Employees_ColumnClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex >= 0)
+            {
+                if (sortMode == SortMode.Asceding)
+                {
+                    employees.SortByLastName("descending");
+                    sortMode = SortMode.Desceding;
+                }
+                else
+                {
+                    employees.SortByLastName("ascending");
+                    sortMode = SortMode.Asceding;
+                }
+                DisplayEmployee();
+            }
+        }
+
+        private void Rewards_ColumnClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (sortModeRewards == SortMode.Asceding)
+            {
+                rewards.SortRewards("descending");
+                sortModeRewards = SortMode.Desceding;
+            }
+            else
+            {
+                rewards.SortRewards("ascending");
+                sortModeRewards = SortMode.Asceding;
+            }
+            DisplayReward();
+
+        }
 
         public MainForm()
         {
             employees = new EmployeesBL();
-            rewardsBl = new RewardsBL();
+            rewards = new RewardsBL();
             InitializeComponent();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            employees.SortEmployeesByLastNameAsc();
+            employees.SortByLastName("ascending");
             dgvEmployees.DataSource = employees.InitList();
-            dgvRewards.DataSource = rewardsBl.InitList();
+
+            dgvRewards.DataSource = rewards.InitList();
             CreateEmployeeGrid();
             CreateRewardGrid();
         }
@@ -111,7 +146,7 @@ namespace WinForms
         private void DisplayReward()
         {
             dgvRewards.DataSource = null;
-            dgvRewards.DataSource = rewardsBl.GetList();
+            dgvRewards.DataSource = rewards.GetList();
             CreateRewardGrid();
         }
 
@@ -186,40 +221,6 @@ namespace WinForms
             RemoveSelectedReward();
         }
 
-
-        private void Employees_ColumnClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.ColumnIndex >= 0)
-            {
-                if (sortMode == EmployeeSortMode.Asceding)
-                {
-                    employees.SortEmployeesByLastNameDesc();
-                    sortMode = EmployeeSortMode.Desceding;
-                }
-                else
-                {
-                    employees.SortEmployeesByLastNameAsc();
-                    sortMode = EmployeeSortMode.Asceding;
-                }
-                DisplayEmployee();
-            }
-        }
-
-        private void Rewards_ColumnClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (sortMode1 == RewardSortMode.Asceding)
-            {
-                rewardsBl.SortRewardsByDesc();
-                sortMode1 = RewardSortMode.Desceding;
-            }
-            else
-            {
-                rewardsBl.SortRewardsByAsc();
-                sortMode1 = RewardSortMode.Asceding;
-            }
-            DisplayReward();
-        }
-
         private void SplashTimer_Tick(object sender, EventArgs e)
         {
             this.Visible = true;
@@ -232,7 +233,7 @@ namespace WinForms
         
         private void RegisterNewEmployee()
         {
-            EmployeeForm form = new EmployeeForm(null, rewardsBl);
+            EmployeeForm form = new EmployeeForm(null, rewards);
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 employees.Add(form.LastName, form.FirstName, form.Birth, Checked(form));
@@ -242,18 +243,18 @@ namespace WinForms
 
         private List<Reward> Checked(EmployeeForm form)
         {
-            var allRewards = rewardsBl.GetList();//
-            var rewards = new List<Reward> { };
+            var allRewards = rewards.GetList();//
+            var rewards_ = new List<Reward> { };
             if (form.chRewards.CheckedItems.Count != 0)
             {
 				for (int i = 0; i < form.chRewards.CheckedItems.Count; i++)
                 {
 					string checkedItem = (string)form.chRewards.CheckedItems[i];
-					Reward reward = rewardsBl.GetList().FirstOrDefault(it => it.Title == checkedItem);
-                    rewards.Add(reward);
+					Reward reward = rewards.GetList().FirstOrDefault(it => it.Title == checkedItem);
+                    rewards_.Add(reward);
                 }
             }
-            return rewards;
+            return rewards_;
         }
 
         private void EditSelectedEmployee()
@@ -261,7 +262,7 @@ namespace WinForms
             if (dgvEmployees.SelectedCells.Count > 0)
             {
                 Employee employee = (Employee)dgvEmployees.SelectedCells[0].OwningRow.DataBoundItem;
-                EmployeeForm form = new EmployeeForm(employee, rewardsBl);
+                EmployeeForm form = new EmployeeForm(employee, rewards);
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     employee.LastName = form.LastName;
@@ -294,7 +295,7 @@ namespace WinForms
 
             if (form.ShowDialog(this) == DialogResult.OK)
             {
-                rewardsBl.Add(form.Title, form.Description);
+                rewards.Add(form.Title, form.Description);
                 DisplayReward();
             }
         }
@@ -309,7 +310,7 @@ namespace WinForms
                 {
                     reward.Title = form.txtTitle.Text;
                     reward.Description = form.txtDescription.Text;
-                    rewardsBl.Edit(reward);
+                    rewards.Edit(reward);
                     DisplayReward();
  			    DisplayEmployee();
 
@@ -341,7 +342,7 @@ namespace WinForms
                             }
 
                         }
-                        rewardsBl.Remove(reward);
+                        rewards.Remove(reward);
                         DisplayReward();
                         DisplayEmployee();
                     }

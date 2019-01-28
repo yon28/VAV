@@ -20,20 +20,21 @@ namespace bee
 
         protected void InitializeImages()
         {
-            HiveInside = ResizeImage(new Bitmap("I:/1/5.png"), 175, 150);
-            HiveOutside = ResizeImage(new Bitmap("I:/1/6.png"), 45, 60);
-            Flower = ResizeImage(new Bitmap("I:/1/8.png"), 35, 45);
-            Ant = ResizeImage(new Bitmap("I:/1/ant.png"), 15, 15);
+            string path = "I:/VAV/Стиллмен_bees3/bee/Resources/";
+            HiveInside = ResizeImage(new Bitmap(path+"5.png"), 175, 150);
+            HiveOutside = ResizeImage(new Bitmap(path + "6.png"), 45, 60);
+            Flower = ResizeImage(new Bitmap(path + "8.png"), 35, 45);
+            Ant = ResizeImage(new Bitmap(path + "ant.png"), 15, 15);
             BeeAnimationLarge = new Bitmap[4];
-            BeeAnimationLarge[0] = ResizeImage(new Bitmap("I:/1/1.png"), 20, 20);
-            BeeAnimationLarge[1] = ResizeImage(new Bitmap("I:/1/2.png"), 20, 20);
-            BeeAnimationLarge[2] = ResizeImage(new Bitmap("I:/1/3.png"), 20, 20);
-            BeeAnimationLarge[3] = ResizeImage(new Bitmap("I:/1/4.png"), 20, 20);
+            BeeAnimationLarge[0] = ResizeImage(new Bitmap(path + "1.png"), 20, 20);
+            BeeAnimationLarge[1] = ResizeImage(new Bitmap(path + "2.png"), 20, 20);
+            BeeAnimationLarge[2] = ResizeImage(new Bitmap(path + "3.png"), 20, 20);
+            BeeAnimationLarge[3] = ResizeImage(new Bitmap(path + "4.png"), 20, 20);
             BeeAnimationEnemy = new Bitmap[4];
-            BeeAnimationEnemy[0] = ResizeImage(new Bitmap("I:/1/11.png"), 20, 20);
-            BeeAnimationEnemy[1] = ResizeImage(new Bitmap("I:/1/22.png"), 20, 20);
-            BeeAnimationEnemy[2] = ResizeImage(new Bitmap("I:/1/33.png"), 20, 20);
-            BeeAnimationEnemy[3] = ResizeImage(new Bitmap("I:/1/44.png"), 20, 20);
+            BeeAnimationEnemy[0] = ResizeImage(new Bitmap(path + "11.png"), 20, 20);
+            BeeAnimationEnemy[1] = ResizeImage(new Bitmap(path + "22.png"), 20, 20);
+            BeeAnimationEnemy[2] = ResizeImage(new Bitmap(path + "33.png"), 20, 20);
+            BeeAnimationEnemy[3] = ResizeImage(new Bitmap(path + "44.png"), 20, 20);
         }
 
         public static Bitmap ResizeImage(Bitmap picture, int width, int height)

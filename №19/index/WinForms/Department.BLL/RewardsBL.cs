@@ -26,18 +26,30 @@ namespace Department.BLL
             return rewardsDAO.GetList();
         }
 
-        public IEnumerable<Reward> SortRewardsByAsc()
+        public IEnumerable<Reward> SortRewards(string ascendingORdescending)
         {
-            return (from s in GetList()
-                    orderby s.Title ascending
-                    select s);
-        }
-
-        public IEnumerable<Reward> SortRewardsByDesc()
-        {
-            return (from s in GetList()
-                    orderby s.Title descending
-                    select s).ToList();
+            IEnumerable<Reward> rewards;
+            if (ascendingORdescending == "ascending")
+            {
+                rewards = (from s in GetList()
+                             orderby s.Title ascending
+                             select s).ToList();
+            }
+            else
+            {
+                rewards = (from s in GetList()
+                             orderby s.Title descending
+                             select s).ToList();
+            }
+            foreach (Reward reward in rewardsDAO.GetList())
+            {
+                Remove(reward);
+            }
+            foreach (Reward reward in rewards)
+            {
+                Add(reward);
+            }
+            return rewards;
         }
 
         public void Add(string title, string description)

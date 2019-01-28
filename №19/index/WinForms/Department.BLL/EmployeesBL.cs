@@ -20,19 +20,32 @@ namespace Department.BLL
             return employeesDAO.InitList();
         }
      
-        public IEnumerable<Employee> SortEmployeesByLastNameAsc()
+		public IEnumerable<Employee> SortByLastName( string ascendingORdescending)
 		{
-			return (from s in GetList()
-						orderby s.LastName ascending
-						select s);
-		}
+            IEnumerable<Employee> employees;
+            if (ascendingORdescending == "ascending")
+            {
+                employees = (from s in GetList()
+                             orderby s.LastName ascending
+                             select s).ToList();
+            }
+            else
+            {
+                employees = (from s in GetList()
+                             orderby s.LastName descending
+                             select s).ToList();
+            }
+            foreach (Employee employee in employeesDAO.GetList())
+            {
+                Remove(employee);
+            }
+            foreach (Employee employee in employees)
+            {
+                Add(employee);
+            }
+            return employees;
+        }
 
-		public IEnumerable<Employee> SortEmployeesByLastNameDesc()
-		{
-			return (from s in GetList()
-						orderby s.LastName descending
-						select s).ToList();
-		}
 
 		public void Add(string lastName, string firstName, DateTime birth, List<Reward> rewards)
 		{
