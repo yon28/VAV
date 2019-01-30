@@ -90,7 +90,6 @@ namespace Entities
             return deckToReturn;
         }
 
-
         public bool HasBook(Values value)
         {
             int NumberOfCards = 0;

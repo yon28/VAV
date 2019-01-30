@@ -16,7 +16,8 @@ namespace Entities
 
         private Random random;
         private Deck cards;
-        private TextBox textBoxOnForm;
+        private TextBox textBoxOnForm;
+
 
         public Player(String name, Random random, TextBox textBoxOnForm)
         {
@@ -26,6 +27,12 @@ namespace Entities
             this.cards = new Deck(new Card[] { });
             textBoxOnForm.Text += name + "has just joined the game" + Environment.NewLine;
         }
+
+        public int CardCount { get { return cards.Count; } }
+        public void TakeCard(Card card) { cards.Add(card); }
+        public IEnumerable<string> GetCardNames() { return cards.GetCardNames(); }
+        public Card Peek(int cardNumber) { return cards.Peek(cardNumber); }
+        public void SortHand() { cards.SortByValue(); }
 
         public Values GetRandomValue()
         {
@@ -68,5 +75,26 @@ namespace Entities
 
             }
         }
+
+        public IEnumerable<Values> PullOutBooks()
+        {
+            List<Values> books = new List<Values>();
+            for (int i = 1; i <= 13; i++)
+            {
+                Values value = (Values)i;
+                int howMany = 0;
+                for (int card = 0; card < cards.Count; card++)
+                    if (cards.Peek(card).Value == value)
+                        howMany++;
+                if (howMany == 4)
+                {
+                    books.Add(value);
+                    for (int card = cards.Count - 1; card >= 0; card--)
+                        cards.Deal(card);
+                }
+            }
+            return books;
+        }
+
     }
 }
