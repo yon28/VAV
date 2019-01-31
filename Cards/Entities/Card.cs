@@ -12,10 +12,7 @@
 
         public string Name
         {
-            get
-            {
-                return Value.ToString() + "of" + Suit.ToString();
-            }
+            get => Value.ToString() + " of " + Suit.ToString();
         }
         public override string ToString()//360
         {

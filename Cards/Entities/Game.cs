@@ -1,16 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/*★Используется колода из 52 карт.Игрокам раздается по пять
+карт. Карты, оставшиеся после раздачи, называются запасом.
+Игроки поочереди спрашивают про наличие карт («Есть ли
+у кого семерки?»). Игрок, имеющий нужную карту, отдает ее.
+Если такой карты ни у кого нет, берется одна карта из запаса.
+★Целью игры является сборв зяток. Взяткой считается набор из
+четырех одинаковых карт. Для выигрыша нужно собрать максимальное
+количество взяток. Собранный набор из четырех карт
+выкладывается на стол.
+★Если выложенная взятка оставляет игрока без карт, он берет пять
+карт из запаса. Если в запасе осталось меньше пяти карт, игрок
+берет их все. Игра заканчивается как только запас иссякает. 
+По­бедитель определяется по максимальному количеству взяток.
+★В нашей версии человек выступает против двух компьютерных
+игроков. Каждая партия начинается с выбора человеком карты,
+о наличии которой он будет спрашивать. Затем два компьютер­ных
+игрока спрашивают про свои карты. Результаты каждой
+партии отображаются в текстовом поле.
+★Процедуры сдачи карт и взяток автоматизированы. Как только
+кто-то побеждает, игра заканчивается, и выводится имя победителя
+(или победителей в случае ничьей).Больше никаких действий
+ выполнить нельзя. Игроку остается только перезагрузить
+программу, чтобы начать новую партию.*/
+
 namespace Entities
 {
-    class Game//378
+    public class Game//378
     {
         private List<Player> players;
         private Dictionary<Values, Player> books;
         private Deck stock;
-        private TextBox textBoxOnForm;
+        public List<string> textBoxOnForm;
 
-        public Game(string playerName, IEnumerable<string> opponentNames, TextBox textBoxOnForm)
+        public Game(string playerName, IEnumerable<string> opponentNames, List<string> textBoxOnForm)
         {
             Random random = new Random();
             this.textBoxOnForm = textBoxOnForm;
@@ -20,6 +44,15 @@ namespace Entities
                 players.Add(new Player(player, random, textBoxOnForm));
             books = new Dictionary<Values, Player>();
             stock = new Deck();
+            Deal();
+            players[0].SortHand();
+            //List<Card> cards = new List<Card>();//358
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    cards.Add(new Card((Suits)random.Next(4),
+            //    (Values)random.Next(1, 14)));
+            //}
+            //cards.Sort(new CardComparer_byValue());
         }
 
         public IEnumerable<string> GetPlayerCardNames()
@@ -32,13 +65,13 @@ namespace Entities
             string description = "";
             for (int i = 0; i < players.Count; i++)
             {
-                description += players[i].Name + "has" + players[i].CardCount;
+                description += players[i].Name + " has " + players[i].CardCount;
                 if (players[i].CardCount == 1)
-                    description += "card." + Environment.NewLine;
+                    description += " card. " + Environment.NewLine;
                 else
-                    description += "cards." + Environment.NewLine;
+                    description += " cards. " + Environment.NewLine;
             }
-            description += "Thestockhas" + stock.Count + "cardsleft.";
+            description += "The stock has " + stock.Count + " cardsleft.";
             return description;
         }
 
@@ -62,16 +95,18 @@ namespace Entities
                 else
                     players[i].AskForACard(players, i, stock);
                 if (PullOutBooks(players[i]))
-                    textBoxOnForm.Text += players[i].Name + "drew a new hand" + Environment.NewLine;
-                int card = 1;
-                while (card <= 5 && stock.Count > 0)
-                    players[i].TakeCard(stock.Deal());//
-                card++;
+                {
+                    textBoxOnForm.Add (players[i].Name + "drew a new hand" + Environment.NewLine);
+                    int card = 1;
+                    while (card <= 5 && stock.Count > 0)
+                        players[i].TakeCard(stock.Deal());
+                    card++;
+                }
             }
             players[0].SortHand();
             if (stock.Count == 0)
             {
-                textBoxOnForm.Text += "The stock is outof cards.Game over! " + Environment.NewLine;
+                textBoxOnForm.Add( " The stock is out of cards. Game over! " + Environment.NewLine);
                 return true;
             }
             return false;
@@ -87,20 +122,18 @@ namespace Entities
             return false;
         }
 
-
-
-
         public string DescribeBooks()
         {
             string whoHasWhichBooks = "";
             foreach (Values value in books.Keys)
             {
-                whoHasWhichBooks += books[value].Name + "has a book of"
+                whoHasWhichBooks += books[value].Name + " has a book of "
                 + Card.Plural(value) + Environment.NewLine;
             }
             return whoHasWhichBooks;
 
         }
+
         public string GetWinnerName()
         {
             Dictionary<string, int> winners = new Dictionary<string, int>();
@@ -123,12 +156,12 @@ namespace Entities
                 {
                     if (!String.IsNullOrEmpty(winnerList))
                     {
-                        winnerList += "and ";
+                        winnerList += " and ";
                         tie = true;
                     }
             winnerList += name;
                 }
-            winnerList += "with " + mostBooks + "books";
+            winnerList += " with " + mostBooks + " books ";
             if (tie)
                 return "A tie between " + winnerList;
             else

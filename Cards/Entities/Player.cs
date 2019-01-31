@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Entities
 {
-    class Player//376,382
+    public class Player//376,382
     {
+        public List<string> textBoxOnForm;
         private string name;
         public string Name
         {
@@ -16,16 +18,15 @@ namespace Entities
 
         private Random random;
         private Deck cards;
-        private TextBox textBoxOnForm;
 
 
-        public Player(String name, Random random, TextBox textBoxOnForm)
+        public Player(String name, Random random, List<string> textBoxOnForm)
         {
             this.name = name;
             this.random = random;
             this.textBoxOnForm = textBoxOnForm;
             this.cards = new Deck(new Card[] { });
-            textBoxOnForm.Text += name + "has just joined the game" + Environment.NewLine;
+            textBoxOnForm.Add(name + " has just joined the game" + Environment.NewLine);
         }
 
         public int CardCount { get { return cards.Count; } }
@@ -40,10 +41,11 @@ namespace Entities
 
             return randomCard.Value;
         }
+
         public Deck DoYouHaveAny(Values value)
         {
             Deck cardsIHave = cards.PullOutValues(value);
-            textBoxOnForm.Text += Name + "has" + cardsIHave.Count + Card.Plural(value) + Environment.NewLine;
+            textBoxOnForm.Add( Name + " has " + cardsIHave.Count + Card.Plural(value) + Environment.NewLine);
             return cardsIHave;
         }
 
@@ -55,8 +57,10 @@ namespace Entities
 
         public void AskForACard(List<Player> players, int myIndex, Deck stock, Values value)
         {
-            //textBoxOnForm.Text+=Name+"asks if anyone has a" +value+Environment.NewLine;
+            textBoxOnForm.Add(Environment.NewLine);//
+            textBoxOnForm.Add(Name +" asks if anyone has a " +value+Environment.NewLine);////
             int totalCardsGiven = 0;
+
             for (int i = 0; i < players.Count; i++)
             {
                 if (i != myIndex)
@@ -70,9 +74,8 @@ namespace Entities
             }
             if (totalCardsGiven == 0)
             {
-                //textBoxOnForm.Text+=Name+"mustdrawfromthestock."+ Environment.NewLine;
+                textBoxOnForm.Add(Name +" must draw from the stock."+ Environment.NewLine);////
                 cards.Add(stock.Deal());
-
             }
         }
 
