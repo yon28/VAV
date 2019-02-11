@@ -1,0 +1,38 @@
+﻿@using Entities;
+@model List<string>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Cards</h2>
+<form action="Ask" method="post">
+    <div class="form-group">
+        @Html.ActionLink("Clik_Ask", "Ask", "Cards", new { }, new { @class = "btn btn-default" })
+    </div>
+</form>
+
+<h2> </h2>
+<table class="table table-bordered" style="margin-top: 50px;">
+    <thead>
+        <tr>
+            <th>List </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var str in Model)
+        {
+            <tr>
+
+
+                <td>@str</td>
+
+            </tr>
+        }
+
+
+    </tbody>
+    
+</table>
+
+
+
+
